@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e77418a74815422fa212b2e1f379a2e1" Name="Diagram1">
+        <EntityTypeShape EntityType="thuctapModel.BenhNen" Width="1.5" PointX="7.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.BenhNhan" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.BuoiDieuTri" Width="1.5" PointX="7.5" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.CaTruc" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.Chi" Width="1.5" PointX="5.25" PointY="21.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.ChiTietDonThuoc" Width="1.5" PointX="12" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.CuocHen" Width="1.5" PointX="10.5" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.DichVu" Width="1.5" PointX="9.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.DonThuoc" Width="1.5" PointX="9.75" PointY="26.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.HinhAnhDieuTri" Width="1.5" PointX="9.75" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.Khoanchi" Width="1.5" PointX="3" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.Khoanthu" Width="1.5" PointX="6" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.NhaCungCap" Width="1.5" PointX="5.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.NhapVatLieu" Width="1.5" PointX="10.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.NhomVatLieu" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.Role" Width="1.5" PointX="0.75" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.Thu" Width="1.5" PointX="8.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.TraLuong" Width="1.5" PointX="5.25" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.User" Width="1.5" PointX="3" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.VatLieu" Width="1.5" PointX="8" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.XuatVatLieu" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.YeuCauNhap" Width="1.5" PointX="10.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="thuctapModel.YeuCauXuat" Width="1.5" PointX="11.25" PointY="20.375" IsExpanded="true" />
+        <AssociationConnector Association="thuctapModel.FK__BenhNhan__NguoiT__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__BuoiDieuT__BenhN__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__CuocHen__BenhNha__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__BuoiDieuT__BacSi__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__DonThuoc__BuoiDi__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__HinhAnhDi__BDT_i__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__CaTruc__NguoiTru__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__Chi__KhoanChi__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__Chi__NguoiChi__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__ChiTietDo__Donth__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__CuocHen__BacSi__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__Thu__KhoanThu__656C112C" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__NhapVatLi__VatLi__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__VatLieu__NhomVat__693CA210" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__Users__Chucvu__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__Thu__NguoiDong__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__TraLuong__NguoiD__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__YeuCauNha__Nguoi__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__YeuCauXua__Nguoi__6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__XuatVatLi__VatLi__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__YeuCauNha__VatLi__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.FK__YeuCauXua__VatLi__6E01572D" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.BDT_DichVu" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.BenhNen_BenhNhan" ManuallyRouted="false" />
+        <AssociationConnector Association="thuctapModel.DonGia_VatLieu" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="thuctapModelStoreContainer" CdmEntityContainer="thuctapEntities">
+    <EntitySetMapping Name="BenhNens">
+      <EntityTypeMapping TypeName="thuctapModel.BenhNen">
+        <MappingFragment StoreEntitySet="BenhNen">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BenhNen1" ColumnName="BenhNen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BenhNhans">
+      <EntityTypeMapping TypeName="thuctapModel.BenhNhan">
+        <MappingFragment StoreEntitySet="BenhNhan">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+          <ScalarProperty Name="NgheNghiep" ColumnName="NgheNghiep" />
+          <ScalarProperty Name="LienHe" ColumnName="LienHe" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="AnhChup" ColumnName="AnhChup" />
+          <ScalarProperty Name="NguoiTiepNhan" ColumnName="NguoiTiepNhan" />
+          <ScalarProperty Name="NgayTiepNhan" ColumnName="NgayTiepNhan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuoiDieuTris">
+      <EntityTypeMapping TypeName="thuctapModel.BuoiDieuTri">
+        <MappingFragment StoreEntitySet="BuoiDieuTri">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
+          <ScalarProperty Name="ChuanDoan" ColumnName="ChuanDoan" />
+          <ScalarProperty Name="ChiPhi" ColumnName="ChiPhi" />
+          <ScalarProperty Name="BacSi" ColumnName="BacSi" />
+          <ScalarProperty Name="BenhNhan" ColumnName="BenhNhan" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CaTrucs">
+      <EntityTypeMapping TypeName="thuctapModel.CaTruc">
+        <MappingFragment StoreEntitySet="CaTruc">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NguoiTruc" ColumnName="NguoiTruc" />
+          <ScalarProperty Name="NgayTruc" ColumnName="NgayTruc" />
+          <ScalarProperty Name="Ca" ColumnName="Ca" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chis">
+      <EntityTypeMapping TypeName="thuctapModel.Chi">
+        <MappingFragment StoreEntitySet="Chi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NguoiChi" ColumnName="NguoiChi" />
+          <ScalarProperty Name="KhoanChi" ColumnName="KhoanChi" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="NgayChi" ColumnName="NgayChi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChiTietDonThuocs">
+      <EntityTypeMapping TypeName="thuctapModel.ChiTietDonThuoc">
+        <MappingFragment StoreEntitySet="ChiTietDonThuoc">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="Donvi" ColumnName="Donvi" />
+          <ScalarProperty Name="Donthuoc_id" ColumnName="Donthuoc_id" />
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+          <ScalarProperty Name="HuongDan" ColumnName="HuongDan" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuocHens">
+      <EntityTypeMapping TypeName="thuctapModel.CuocHen">
+        <MappingFragment StoreEntitySet="CuocHen">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BacSi" ColumnName="BacSi" />
+          <ScalarProperty Name="BenhNhan" ColumnName="BenhNhan" />
+          <ScalarProperty Name="NgayHen" ColumnName="NgayHen" />
+          <ScalarProperty Name="Ca" ColumnName="Ca" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+          <ScalarProperty Name="DaGuiEmail" ColumnName="DaGuiEmail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DichVus">
+      <EntityTypeMapping TypeName="thuctapModel.DichVu">
+        <MappingFragment StoreEntitySet="DichVu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenDichVu" ColumnName="TenDichVu" />
+          <ScalarProperty Name="GiaDichVu" ColumnName="GiaDichVu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonThuocs">
+      <EntityTypeMapping TypeName="thuctapModel.DonThuoc">
+        <MappingFragment StoreEntitySet="DonThuoc">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
+          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HinhAnhDieuTris">
+      <EntityTypeMapping TypeName="thuctapModel.HinhAnhDieuTri">
+        <MappingFragment StoreEntitySet="HinhAnhDieuTri">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+          <ScalarProperty Name="BDT_id" ColumnName="BDT_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Khoanchis">
+      <EntityTypeMapping TypeName="thuctapModel.Khoanchi">
+        <MappingFragment StoreEntitySet="Khoanchi">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenKhoanChi" ColumnName="TenKhoanChi" />
+          <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Khoanthus">
+      <EntityTypeMapping TypeName="thuctapModel.Khoanthu">
+        <MappingFragment StoreEntitySet="Khoanthu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenKhoanThu" ColumnName="TenKhoanThu" />
+          <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhaCungCaps">
+      <EntityTypeMapping TypeName="thuctapModel.NhaCungCap">
+        <MappingFragment StoreEntitySet="NhaCungCap">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenNhaCungCap" ColumnName="TenNhaCungCap" />
+          <ScalarProperty Name="QuocGia" ColumnName="QuocGia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhapVatLieux">
+      <EntityTypeMapping TypeName="thuctapModel.NhapVatLieu">
+        <MappingFragment StoreEntitySet="NhapVatLieu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+          <ScalarProperty Name="VatLieu_id" ColumnName="VatLieu_id" />
+          <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhomVatLieux">
+      <EntityTypeMapping TypeName="thuctapModel.NhomVatLieu">
+        <MappingFragment StoreEntitySet="NhomVatLieu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="thuctapModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="MucLuong" ColumnName="MucLuong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Thus">
+      <EntityTypeMapping TypeName="thuctapModel.Thu">
+        <MappingFragment StoreEntitySet="Thu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NguoiDong" ColumnName="NguoiDong" />
+          <ScalarProperty Name="KhoanThu" ColumnName="KhoanThu" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="NgayThu" ColumnName="NgayThu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TraLuongs">
+      <EntityTypeMapping TypeName="thuctapModel.TraLuong">
+        <MappingFragment StoreEntitySet="TraLuong">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+          <ScalarProperty Name="SoTienTra" ColumnName="SoTienTra" />
+          <ScalarProperty Name="ThangLuong" ColumnName="ThangLuong" />
+          <ScalarProperty Name="NguoiDuocTra" ColumnName="NguoiDuocTra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="thuctapModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="Chucvu" ColumnName="Chucvu" />
+          <ScalarProperty Name="AnhChup" ColumnName="AnhChup" />
+          <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="NgayVaoLam" ColumnName="NgayVaoLam" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VatLieux">
+      <EntityTypeMapping TypeName="thuctapModel.VatLieu">
+        <MappingFragment StoreEntitySet="VatLieu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenVatLieu" ColumnName="TenVatLieu" />
+          <ScalarProperty Name="DonVi" ColumnName="DonVi" />
+          <ScalarProperty Name="TongNhap" ColumnName="TongNhap" />
+          <ScalarProperty Name="TongXuat" ColumnName="TongXuat" />
+          <ScalarProperty Name="TonKho" ColumnName="TonKho" />
+          <ScalarProperty Name="NhomVatLieu" ColumnName="NhomVatLieu" />
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="XuatVatLieux">
+      <EntityTypeMapping TypeName="thuctapModel.XuatVatLieu">
+        <MappingFragment StoreEntitySet="XuatVatLieu">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NgayXuat" ColumnName="NgayXuat" />
+          <ScalarProperty Name="VatLieu_id" ColumnName="VatLieu_id" />
+          <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YeuCauNhaps">
+      <EntityTypeMapping TypeName="thuctapModel.YeuCauNhap">
+        <MappingFragment StoreEntitySet="YeuCauNhap">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="VatLieu_id" ColumnName="VatLieu_id" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="NguoiYeuCau" ColumnName="NguoiYeuCau" />
+          <ScalarProperty Name="NgayYeuCau" ColumnName="NgayYeuCau" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="YeuCauXuats">
+      <EntityTypeMapping TypeName="thuctapModel.YeuCauXuat">
+        <MappingFragment StoreEntitySet="YeuCauXuat">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="VatLieu_id" ColumnName="VatLieu_id" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="NguoiYeuCau" ColumnName="NguoiYeuCau" />
+          <ScalarProperty Name="NgayYeuCau" ColumnName="NgayYeuCau" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="BDT_DichVu" TypeName="thuctapModel.BDT_DichVu" StoreEntitySet="BDT_DichVu">
+      <EndProperty Name="BuoiDieuTri">
+        <ScalarProperty Name="id" ColumnName="BDT_id" />
+      </EndProperty>
+      <EndProperty Name="DichVu">
+        <ScalarProperty Name="id" ColumnName="DichVu_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BenhNen_BenhNhan" TypeName="thuctapModel.BenhNen_BenhNhan" StoreEntitySet="BenhNen_BenhNhan">
+      <EndProperty Name="BenhNhan">
+        <ScalarProperty Name="id" ColumnName="BenhNhan_id" />
+      </EndProperty>
+      <EndProperty Name="BenhNen">
+        <ScalarProperty Name="id" ColumnName="BenhNen_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="DonGia_VatLieu" TypeName="thuctapModel.DonGia_VatLieu" StoreEntitySet="DonGia_VatLieu">
+      <EndProperty Name="NhaCungCap">
+        <ScalarProperty Name="id" ColumnName="NhaCungCap_id" />
+      </EndProperty>
+      <EndProperty Name="VatLieu">
+        <ScalarProperty Name="id" ColumnName="VatLieu_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="sp_BaoCaoTheoDichVu" FunctionName="thuctapModel.Store.sp_BaoCaoTheoDichVu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BaoCaoTheoDichVu_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenDichVu" ColumnName="TenDichVu" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BDT_DichVu" FunctionName="thuctapModel.Store.sp_BDT_DichVu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BDT_DichVu_Result">
+          <ScalarProperty Name="BDT_id" ColumnName="BDT_id" />
+          <ScalarProperty Name="TenDichVu" ColumnName="TenDichVu" />
+          <ScalarProperty Name="GiaDichVu" ColumnName="GiaDichVu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BDT_HinhAnh" FunctionName="thuctapModel.Store.sp_BDT_HinhAnh">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BDT_HinhAnh_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
+          <ScalarProperty Name="ChiPhi" ColumnName="ChiPhi" />
+          <ScalarProperty Name="ChuanDoan" ColumnName="ChuanDoan" />
+          <ScalarProperty Name="BacSi" ColumnName="BacSi" />
+          <ScalarProperty Name="BenhNhan" ColumnName="BenhNhan" />
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BenhNen" FunctionName="thuctapModel.Store.sp_BenhNen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BenhNen_Result">
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="BenhNen" ColumnName="BenhNen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BenhNhan_BDT" FunctionName="thuctapModel.Store.sp_BenhNhan_BDT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BenhNhan_BDT_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+          <ScalarProperty Name="LienHe" ColumnName="LienHe" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BenhNhan_not_BDT" FunctionName="thuctapModel.Store.sp_BenhNhan_not_BDT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BenhNhan_not_BDT_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+          <ScalarProperty Name="LienHe" ColumnName="LienHe" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BenhNhanTiepNhan_BDT" FunctionName="thuctapModel.Store.sp_BenhNhanTiepNhan_BDT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BenhNhanTiepNhan_BDT_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+          <ScalarProperty Name="LienHe" ColumnName="LienHe" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BenhNhanTiepNhan_BDT_have" FunctionName="thuctapModel.Store.sp_BenhNhanTiepNhan_BDT_have">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_BenhNhanTiepNhan_BDT_have_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+          <ScalarProperty Name="LienHe" ColumnName="LienHe" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_BuoiDieutriVaHinhAnh" FunctionName="thuctapModel.Store.sp_BuoiDieutriVaHinhAnh" />
+    <FunctionImportMapping FunctionImportName="sp_CT_BuoiDieuTri" FunctionName="thuctapModel.Store.sp_CT_BuoiDieuTri">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_CT_BuoiDieuTri_Result">
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="TenDichVu" ColumnName="TenDichVu" />
+          <ScalarProperty Name="GiaDichVu" ColumnName="GiaDichVu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_DonThuoc" FunctionName="thuctapModel.Store.sp_DonThuoc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_DonThuoc_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
+          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_HinhAnhBDT" FunctionName="thuctapModel.Store.sp_HinhAnhBDT" />
+    <FunctionImportMapping FunctionImportName="sp_loadDonThuoc_BDT" FunctionName="thuctapModel.Store.sp_loadDonThuoc_BDT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_loadDonThuoc_BDT_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
+          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_loadHinhAnhBDT" FunctionName="thuctapModel.Store.sp_loadHinhAnhBDT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_loadHinhAnhBDT_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Hinh" ColumnName="Hinh" />
+          <ScalarProperty Name="BDT_id" ColumnName="BDT_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_NhungCaTruc" FunctionName="thuctapModel.Store.sp_NhungCaTruc">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_NhungCaTruc_Result">
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="NgayTruc" ColumnName="NgayTruc" />
+          <ScalarProperty Name="Ca" ColumnName="Ca" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Report" FunctionName="thuctapModel.Store.sp_Report">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_Report_Result">
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenThuoc" ColumnName="TenThuoc" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="Donvi" ColumnName="Donvi" />
+          <ScalarProperty Name="Donthuoc_id" ColumnName="Donthuoc_id" />
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+          <ScalarProperty Name="HuongDan" ColumnName="HuongDan" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TaoBDT_DichVu" FunctionName="thuctapModel.Store.sp_TaoBDT_DichVu" />
+    <FunctionImportMapping FunctionImportName="sp_Thu" FunctionName="thuctapModel.Store.sp_Thu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_Thu_Result">
+          <ScalarProperty Name="tong_tien_BDT" ColumnName="tong tien BDT" />
+          <ScalarProperty Name="tong_tien_Don_thuoc" ColumnName="tong tien Don thuoc" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TimKiemTen" FunctionName="thuctapModel.Store.sp_TimKiemTen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_TimKiemTen_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="Tuoi" ColumnName="Tuoi" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TongTienBDT" FunctionName="thuctapModel.Store.sp_TongTienBDT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_TongTienBDT_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="NgayKham" ColumnName="NgayKham" />
+          <ScalarProperty Name="ChiPhi" ColumnName="ChiPhi" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TongTienChi" FunctionName="thuctapModel.Store.sp_TongTienChi">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_TongTienChi_Result">
+          <ScalarProperty Name="TenKhoanChi" ColumnName="TenKhoanChi" />
+          <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TongTienDT" FunctionName="thuctapModel.Store.sp_TongTienDT">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_TongTienDT_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TongTienNhanVien" FunctionName="thuctapModel.Store.sp_TongTienNhanVien">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_TongTienNhanVien_Result">
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+          <ScalarProperty Name="SoTienTra" ColumnName="SoTienTra" />
+          <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TongTienThu" FunctionName="thuctapModel.Store.sp_TongTienThu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_TongTienThu_Result">
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="SoTien" ColumnName="SoTien" />
+          <ScalarProperty Name="NgayThu" ColumnName="NgayThu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_TongTienVatLieu" FunctionName="thuctapModel.Store.sp_TongTienVatLieu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_TongTienVatLieu_Result">
+          <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+          <ScalarProperty Name="TenVatLieu" ColumnName="TenVatLieu" />
+          <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_XemLuong" FunctionName="thuctapModel.Store.sp_XemLuong">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_XemLuong_Result">
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="SoTienTra" ColumnName="SoTienTra" />
+          <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_XoaBDT" FunctionName="thuctapModel.Store.sp_XoaBDT" />
+    <FunctionImportMapping FunctionImportName="sp_XoaCTDT" FunctionName="thuctapModel.Store.sp_XoaCTDT" />
+    <FunctionImportMapping FunctionImportName="sp_XoaDichVu" FunctionName="thuctapModel.Store.sp_XoaDichVu" />
+    <FunctionImportMapping FunctionImportName="sp_XoaDonThuoc" FunctionName="thuctapModel.Store.sp_XoaDonThuoc" />
+    <FunctionImportMapping FunctionImportName="sp_XoaUser" FunctionName="thuctapModel.Store.sp_XoaUser" />
+  </EntityContainerMapping>
+</Mapping>
