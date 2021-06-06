@@ -1,6 +1,7 @@
 # THỰC TẬP CHUYÊN MÔN NĂM HỌC 2020-2021
-Họ và tên: Lê Minh Thái
-           Nguyễn Duy Thắng
+Họ và tên: 
+1. Lê Minh Thái - MSSV: 5951071096
+2. Nguyễn Duy Thắng - MSSV: 5951071100
      
 * Lớp: Công nghệ thông tin-K59
 
