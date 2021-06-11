@@ -24,6 +24,7 @@ namespace dental_sys
             InitializeComponent();
             this.buoiDieuTri = id;
             this.emailKH = emailKH;
+            this.CenterToScreen();
         }
 
         private void frmThemDichVu_Load(object sender, EventArgs e)
@@ -35,9 +36,19 @@ namespace dental_sys
                 cbDichVu.DataSource = qlDichVu.DichVus.ToList();
                 cbDichVu.DisplayMember = "TenDichVu";
                 cbDichVu.ValueMember = "id";
+                txtBDT_id.Enabled = false;
 
                 txtBDT_id.Text = Convert.ToString(buoiDieuTri);
 
+                dataGridView5.DataSource = qlDichVu.sp_BDT_DichVu(buoiDieuTri);
+            }
+        }
+
+        private void load()
+        {
+            using(thuctapEntities qlDichVu = new thuctapEntities())
+            {
+                //dataGridView5.DataSource = qlDichVu.sp_load_BDT_DichVu();
                 dataGridView5.DataSource = qlDichVu.sp_BDT_DichVu(buoiDieuTri);
             }
         }
@@ -59,7 +70,8 @@ namespace dental_sys
                     obj.loadDataBDT();
                     dataGridView5.Update();
                     dataGridView5.Refresh();
-                    this.Close();
+
+                    load();
                 }
                 catch (Exception)
                 {
@@ -72,14 +84,93 @@ namespace dental_sys
 
         private void btnCT_BDT_Click(object sender, EventArgs e)
         {
-             int id = int.Parse(txtBDT_id.Text);
-             using (thuctapEntities qlCTHD = new thuctapEntities())
-             {
+             
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            using(thuctapEntities qlDichVu = new thuctapEntities())
+            {
+                if (int.Parse(cbDichVu.SelectedValue.ToString()).Equals(null))
+                {
+                    MessageBox.Show("Vui lòng chọn dịch vụ cần xoá");
+                }
+                else
+                {
+                    try
+                    {
+                        qlDichVu.sp_XoaBDT_DichVu(int.Parse(txtBDT_id.Text), int.Parse(cbDichVu.SelectedValue.ToString()));
+                        MessageBox.Show("Xoá thành công");
+
+                        qlDichVu.SaveChanges();
+
+                        obj.loadDataBDT();
+
+
+                        dataGridView5.Update();
+                        dataGridView5.Refresh();
+
+                        load();
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+                
+            }
+        }
+
+        private void btnCT_BDT_Click_1(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtBDT_id.Text);
+            using (thuctapEntities qlCTHD = new thuctapEntities())
+            {
                 this.Hide();
                 frmXuatCT_CDT f = new frmXuatCT_CDT(id, emailKH);
                 f.ShowDialog();
                 this.Show();
-              }
+            }
+        }
+
+        private void dataGridView5_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                cbDichVu.Text = dataGridView5.CurrentRow.Cells[1].Value.ToString();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            using(thuctapEntities qlDichVu = new thuctapEntities())
+            {
+                try
+                {
+                    qlDichVu.sp_Sua_BDT_DichVu(int.Parse(cbDichVu.SelectedValue.ToString()));
+                    MessageBox.Show("Sửa thành công");
+
+                    qlDichVu.SaveChanges();
+
+
+                    obj.loadDataBDT();
+
+
+                    dataGridView5.Update();
+                    dataGridView5.Refresh();
+
+                    load();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Dịch vụ nãy đã tồn tại nên không sửa được");
+                }
+            }
         }
     }
 }

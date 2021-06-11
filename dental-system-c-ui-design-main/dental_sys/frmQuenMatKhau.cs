@@ -17,6 +17,7 @@ namespace dental_sys
         public frmQuenMatKhau()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
         Random random = new Random();
         int maxn = 0;

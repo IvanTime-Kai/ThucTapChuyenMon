@@ -17,6 +17,7 @@ namespace dental_sys
         public frmotp()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
 
         private void btnGui_Click(object sender, EventArgs e)

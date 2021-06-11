@@ -196,6 +196,103 @@ namespace dental_sys
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private bool kiemTraTrungLichUpdate(string tenBacSiForm, DateTime ngayTrucForm, string caForm)
+        {
+            foreach (DataGridViewRow row in dgv_CaTruc.Rows)
+            {
+                string tenBacSi = row.Cells[TEN_BAC_SI].Value.ToString();
+                int id = (Int32)row.Cells[ID].Value;
+
+                if (tenBacSi.Equals(tenBacSiForm) && id != selectedCaTrucId) // kiểm tra những row còn lại của bác sĩ đang sửa trên datagridview
+                {
+                    DateTime ngayTruc = (DateTime)row.Cells[NGAY_TRUC].Value;
+                    string ca = row.Cells[CA].Value.ToString();
+
+                    if (ngayTruc.Equals(ngayTrucForm) && ca.Equals(caForm))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private string getCurrentOrderBy()
+        {
+            string selectedText = cbSapXep.Text;
+            string orderBy = string.Empty;
+            if (selectedText.Equals("Bác sĩ"))
+            {
+                orderBy = "Ten";
+            }
+            else if (selectedText.Equals("Ngày hẹn"))
+            {
+                orderBy = "NgayTruc";
+            }
+
+            return orderBy;
+        }
+
+        private void cbSapXep_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadCaTruc(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private bool validateFromTo(DateTime from, DateTime to)
+        {
+            return (DateTime.Compare(from, to) > 0) ? false : true; // from không thể sau to
+        }
+
+        private void dtpFrom_ValueChanged(object sender, EventArgs e)
+        {
+            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
+            {
+                MessageBox.Show("Thao tác không hợp lệ", WARNING);
+                dtpFrom.Value = DateTime.Now.AddDays(-10).Date;
+                dtpTo.Value = DateTime.Now.AddDays(10).Date;
+                return; // nếu thông tin ngày tháng sai thì khởi tạo lại date time picker
+            }
+            loadCaTruc(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
+        }
+
+        private void dtpTo_ValueChanged(object sender, EventArgs e)
+        {
+            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
+            {
+                MessageBox.Show("Thao tác không hợp lệ", WARNING);
+                dtpFrom.Value = DateTime.Now.AddDays(-10).Date;
+                dtpTo.Value = DateTime.Now.AddDays(10).Date; // nếu thông tin ngày tháng sai thì khởi tạo lại date time picker
+                return;
+            }
+            loadCaTruc(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnDanhDau_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnThem_Click_1(object sender, EventArgs e)
+        {
             SqlConnection con = ConnectProvider.GetConnection(); con.Open();
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
 
@@ -230,29 +327,7 @@ namespace dental_sys
             con.Close();
         }
 
-        private bool kiemTraTrungLichUpdate(string tenBacSiForm, DateTime ngayTrucForm, string caForm)
-        {
-            foreach (DataGridViewRow row in dgv_CaTruc.Rows)
-            {
-                string tenBacSi = row.Cells[TEN_BAC_SI].Value.ToString();
-                int id = (Int32)row.Cells[ID].Value;
-
-                if (tenBacSi.Equals(tenBacSiForm) && id != selectedCaTrucId) // kiểm tra những row còn lại của bác sĩ đang sửa trên datagridview
-                {
-                    DateTime ngayTruc = (DateTime)row.Cells[NGAY_TRUC].Value;
-                    string ca = row.Cells[CA].Value.ToString();
-
-                    if (ngayTruc.Equals(ngayTrucForm) && ca.Equals(caForm))
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnSua_Click_1(object sender, EventArgs e)
         {
             if (selectedCaTrucId == 0)
             {
@@ -296,28 +371,7 @@ namespace dental_sys
             con.Close();
         }
 
-        private string getCurrentOrderBy()
-        {
-            string selectedText = cbSapXep.Text;
-            string orderBy = string.Empty;
-            if (selectedText.Equals("Bác sĩ"))
-            {
-                orderBy = "Ten";
-            }
-            else if (selectedText.Equals("Ngày hẹn"))
-            {
-                orderBy = "NgayTruc";
-            }
-
-            return orderBy;
-        }
-
-        private void cbSapXep_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadCaTruc(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnXoa_Click_1(object sender, EventArgs e)
         {
             if (selectedCaTrucId == 0)
             {
@@ -336,41 +390,12 @@ namespace dental_sys
             con.Close();
         }
 
-        private bool validateFromTo(DateTime from, DateTime to)
-        {
-            return (DateTime.Compare(from, to) > 0) ? false : true; // from không thể sau to
-        }
-
-        private void dtpFrom_ValueChanged(object sender, EventArgs e)
-        {
-            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
-            {
-                MessageBox.Show("Thao tác không hợp lệ", WARNING);
-                dtpFrom.Value = DateTime.Now.AddDays(-10).Date;
-                dtpTo.Value = DateTime.Now.AddDays(10).Date;
-                return; // nếu thông tin ngày tháng sai thì khởi tạo lại date time picker
-            }
-            loadCaTruc(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
-        }
-
-        private void dtpTo_ValueChanged(object sender, EventArgs e)
-        {
-            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
-            {
-                MessageBox.Show("Thao tác không hợp lệ", WARNING);
-                dtpFrom.Value = DateTime.Now.AddDays(-10).Date;
-                dtpTo.Value = DateTime.Now.AddDays(10).Date; // nếu thông tin ngày tháng sai thì khởi tạo lại date time picker
-                return;
-            }
-            loadCaTruc(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
+        private void btnReset_Click_1(object sender, EventArgs e)
         {
             setUp();
         }
 
-        private void btnDanhDau_Click(object sender, EventArgs e)
+        private void btnDanhDau_Click_1(object sender, EventArgs e)
         {
             frm_CaTruc caTruc = new frm_CaTruc();
             DialogResult dr = caTruc.ShowDialog(this);

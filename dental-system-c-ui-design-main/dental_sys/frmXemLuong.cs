@@ -15,6 +15,7 @@ namespace dental_sys
         public frmXemLuong()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
 
         int idUser;
@@ -28,8 +29,6 @@ namespace dental_sys
         {
             using(thuctapEntities xemLuong = new thuctapEntities())
             {
-                textBox1.Text = idUser.ToString();
-
                 dataGridView1.DataSource = xemLuong.sp_XemLuong(idUser).ToList();
             }
         }

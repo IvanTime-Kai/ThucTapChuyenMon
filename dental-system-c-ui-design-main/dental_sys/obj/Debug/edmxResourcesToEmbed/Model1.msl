@@ -36,6 +36,7 @@
           <ScalarProperty Name="BacSi" ColumnName="BacSi" />
           <ScalarProperty Name="BenhNhan" ColumnName="BenhNhan" />
           <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -103,6 +104,7 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
           <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+          <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -381,16 +383,27 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
           <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+          <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_HinhAnhBDT" FunctionName="thuctapModel.Store.sp_HinhAnhBDT" />
+    <FunctionImportMapping FunctionImportName="sp_load_BDT_DichVu" FunctionName="thuctapModel.Store.sp_load_BDT_DichVu">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_load_BDT_DichVu_Result">
+          <ScalarProperty Name="BDT_id" ColumnName="BDT_id" />
+          <ScalarProperty Name="TenDichVu" ColumnName="TenDichVu" />
+          <ScalarProperty Name="GiaDichVu" ColumnName="GiaDichVu" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_loadDonThuoc_BDT" FunctionName="thuctapModel.Store.sp_loadDonThuoc_BDT">
       <ResultMapping>
         <ComplexTypeMapping TypeName="thuctapModel.sp_loadDonThuoc_BDT_Result">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
           <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+          <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -429,6 +442,7 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_Sua_BDT_DichVu" FunctionName="thuctapModel.Store.sp_Sua_BDT_DichVu" />
     <FunctionImportMapping FunctionImportName="sp_TaoBDT_DichVu" FunctionName="thuctapModel.Store.sp_TaoBDT_DichVu" />
     <FunctionImportMapping FunctionImportName="sp_Thu" FunctionName="thuctapModel.Store.sp_Thu">
       <ResultMapping>
@@ -513,6 +527,7 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="sp_XoaBDT" FunctionName="thuctapModel.Store.sp_XoaBDT" />
+    <FunctionImportMapping FunctionImportName="sp_XoaBDT_DichVu" FunctionName="thuctapModel.Store.sp_XoaBDT_DichVu" />
     <FunctionImportMapping FunctionImportName="sp_XoaCTDT" FunctionName="thuctapModel.Store.sp_XoaCTDT" />
     <FunctionImportMapping FunctionImportName="sp_XoaDichVu" FunctionName="thuctapModel.Store.sp_XoaDichVu" />
     <FunctionImportMapping FunctionImportName="sp_XoaDonThuoc" FunctionName="thuctapModel.Store.sp_XoaDonThuoc" />

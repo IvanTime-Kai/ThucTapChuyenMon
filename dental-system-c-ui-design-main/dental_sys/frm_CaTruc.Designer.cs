@@ -29,19 +29,31 @@ namespace dental_sys
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.SuspendLayout();
+            // 
+            // bunifuElipse1
+            // 
+            this.bunifuElipse1.ElipseRadius = 5;
+            this.bunifuElipse1.TargetControl = this;
             // 
             // frm_CaTruc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 643);
+            this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frm_CaTruc";
             this.Text = "frm_CaTruc";
+            this.Load += new System.EventHandler(this.frm_CaTruc_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
     }
 }

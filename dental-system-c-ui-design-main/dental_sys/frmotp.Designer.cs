@@ -88,7 +88,7 @@ namespace dental_sys
             this.btnGui.ActiveFillColor = System.Drawing.Color.White;
             this.btnGui.ActiveForecolor = System.Drawing.Color.Red;
             this.btnGui.ActiveLineColor = System.Drawing.Color.Red;
-            this.btnGui.BackColor = System.Drawing.SystemColors.Control;
+            this.btnGui.BackColor = System.Drawing.Color.White;
             this.btnGui.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGui.BackgroundImage")));
             this.btnGui.ButtonText = "Gửi";
             this.btnGui.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -111,6 +111,7 @@ namespace dental_sys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(352, 208);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);

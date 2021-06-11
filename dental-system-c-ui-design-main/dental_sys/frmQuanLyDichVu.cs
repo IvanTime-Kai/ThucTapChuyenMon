@@ -22,6 +22,12 @@ namespace dental_sys
             // TODO: This line of code loads data into the 'thuctapDataSet.DichVu' table. You can move, or remove it, as needed.
             this.dichVuTableAdapter.Fill(this.thuctapDataSet.DichVu);
 
+            dataGridView1.Columns["dv"].Visible = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.MultiSelect = false;
+
         }
 
         private void load()

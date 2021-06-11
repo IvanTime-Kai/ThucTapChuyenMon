@@ -327,83 +327,17 @@ namespace dental_sys
 
         private void btnThem_NhomVL_Click(object sender, EventArgs e)
         {
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-
-            // get data from form
-            string tenNhom = txtTenNhomVatLieu.Text.Trim();
-
-            // validate data
-            if (tenNhom.Equals(string.Empty))
-            {
-                MessageBox.Show(TEN_NHOM_VL_KHONG_BO_TRONG, WARNING);
-                return;
-            }
-
-            //insert
-            string insertCommand = string.Format("insert into NhomVatLieu values(N'{0}')", tenNhom);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            loadNhomVatLieu();
-            resetDataNhomVatLieu();
-            con.Close();
+           
         }
 
         private void btnSua_NhomVL_Click(object sender, EventArgs e)
         {
-            // validate
-            string tenNhom = txtTenNhomVatLieu.Text.Trim();
-            if (tenNhom.Equals(string.Empty))
-            {
-                MessageBox.Show(TEN_NHOM_VL_KHONG_BO_TRONG, WARNING);
-                return;
-            }
-
-            if (currentNhomVatLieuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_NHOM_VAT_LIEU, "sửa"), WARNING);
-                return;
-            }
-
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string update = "update NhomVatLieu ";
-            update += string.Format("set TenNhom = N'{0}' ", tenNhom);
-            update += string.Format("where id = {0}", currentNhomVatLieuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            resetDataNhomVatLieu();
-            loadNhomVatLieu();
-            con.Close();
+            
         }
 
         private void btnXoa_NhomVL_Click(object sender, EventArgs e)
         {
-            if (currentNhomVatLieuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_NHOM_VAT_LIEU, "xoá"), WARNING);
-                return;
-            }
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string deleteCommand = string.Format("delete from NhomVatLieu where id = {0}", currentNhomVatLieuId);
-            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
-            try
-            {
-                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
-                loadNhomVatLieu();
-                resetDataNhomVatLieu();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(THONG_BAO_KHONG_THE_XOA_NHOM_VAT_LIEU_NAY, WARNING);
-            }
-
-            con.Close();
+            
         }
 
         private void dgv_NhomVatLieu_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -445,75 +379,12 @@ namespace dental_sys
 
         private void btnThem_VL_Click(object sender, EventArgs e)
         {
-            if (currentNhomVatLieuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_NHOM_VAT_LIEU, "thêm vật liệu"), WARNING);
-                return;
-            }
-
-            if (!validateFormVatLieu())
-            {
-                MessageBox.Show(THONG_BAO_THONG_TIN_VAT_LIEU_KHONG_HOP_LE, WARNING);
-                return;
-            }
-
-            string tenVatLieu = txtTenVatLieu.Text.Trim();
-            string donVi = cbDonViVatLieu.Text;
-            int tongNhap = 0;
-            int tongXuat = 0;
-            int tonKho = 0;
-            int donGia = Int32.Parse(txtDonGia.Text.Trim());
-
-            //insert
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string insertCommand = "insert into VatLieu ";
-            insertCommand += string.Format("values (N'{0}', N'{1}', {2}, {3}, {4}, {5}, {6})", tenVatLieu, donVi, tongNhap, tongXuat, tonKho, currentNhomVatLieuId, donGia);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
-            resetDataVatLieu();
-            con.Close();
-
-            // Cập nhật lại thông tin dữ liệu lên combobox
-            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+            
         }
 
         private void btnSua_VL_Click(object sender, EventArgs e)
         {
-            if (currentVatLieuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_VAT_LIEU, "sửa"), WARNING);
-                return;
-            }
-
-            if (!validateFormVatLieu())
-            {
-                MessageBox.Show(THONG_BAO_THONG_TIN_VAT_LIEU_KHONG_HOP_LE, WARNING);
-                return;
-            }
-
-            string tenVatLieu = txtTenVatLieu.Text.Trim();
-            string donVi = cbDonViVatLieu.Text;
-            int donGia = Int32.Parse(txtDonGia.Text.Trim());
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string update = "update VatLieu ";
-            update += string.Format("set TenVatLieu = N'{0}', DonVi = N'{1}', DonGia = {2} ", tenVatLieu, donVi, donGia);
-            update += string.Format("where id = {0}", currentVatLieuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            resetDataVatLieu();
-            loadVatLieuToGridView(currentNhomVatLieuId, txtTimKiem.Text);
-            con.Close();
-
-            // Cập nhật lại thông tin dữ liệu lên combobox
-            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+            
         }
 
         private void dgv_VatLieu_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -531,32 +402,7 @@ namespace dental_sys
 
         private void btnXoa_VL_Click(object sender, EventArgs e)
         {
-            if (currentVatLieuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_VAT_LIEU, "xoá"), WARNING);
-                return;
-            }
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string deleteCommand = string.Format("delete from VatLieu where id = {0}", currentVatLieuId);
-            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
-            try
-            {
-                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
-                loadVatLieuToGridView(currentNhomVatLieuId, txtTimKiem.Text);
-                resetDataVatLieu();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(THONG_BAO_KHONG_THE_XOA__VAT_LIEU_NAY, WARNING);
-            }
-
-            con.Close();
-
-            // Cập nhật lại thông tin dữ liệu lên combobox
-            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+           
         }
 
         private void cbTenVatLieu_Nhap_SelectedIndexChanged(object sender, EventArgs e)
@@ -571,38 +417,7 @@ namespace dental_sys
 
         private void btnNhap_Click(object sender, EventArgs e)
         {
-            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Nhap.SelectedValue;
-
-            DateTime ngayNhap = DateTime.Now.Date;
-            int soLuong = Int32.Parse(nudSoLuong_Nhap.Value.ToString());
-            int tongTien = Int32.Parse(txtTongTien.Text);
-            int vatLieuId = selectedVatLieu.Id;
-
-            //insert nhập vật liệu
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string insertCommand = "insert into NhapVatLieu ";
-            insertCommand += string.Format("values ('{0}', {1}, {2}, {3})", ngayNhap, vatLieuId, soLuong, tongTien);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            loadNhapVatLieu(null, null, string.Empty);
-            resetDataNhapVatLieu();
-            con.Close();
-
-            // Sau đó cập nhập tổng nhập và tồn kho của vật liệu đó
-            con = ConnectProvider.GetConnection(); con.Open();
-            sqlDataAdapter = new SqlDataAdapter();
-            string update = "update VatLieu ";
-            update += string.Format("set TongNhap = TongNhap + {0}, TonKho = TonKho + {0} ", soLuong);
-            update += string.Format("where id = {0}", vatLieuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
-            con.Close();
+            
         }
 
         private void nupSoLuong_Nhap_ValueChanged(object sender, EventArgs e)
@@ -648,41 +463,7 @@ namespace dental_sys
 
         private void btnXoa_Nhap_Click(object sender, EventArgs e)
         {
-            if (currentNhapVatLieuId == 0)
-            {
-                MessageBox.Show(THONG_BAO_VUI_LONG_CHON_NHAP_VAT_LIEU, WARNING);
-                return;
-            }
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string deleteCommand = string.Format("delete from NhapVatLieu where id = {0}", currentNhapVatLieuId);
-            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
-            sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
-            con.Close();
-
-            // Sau khi xoá 1 lần nhập vật liệu, cập nhập lại tổng nhập và tồn kho
-            DataGridViewRow row = dgv_NhapVatLieu.SelectedRows[0];
-            int soLuong = Int32.Parse(row.Cells[SO_LUONG].Value.ToString());
-            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Nhap.SelectedValue;
-            int vatLieuId = selectedVatLieu.Id;
-
-            con = ConnectProvider.GetConnection(); con.Open();
-            sqlDataAdapter = new SqlDataAdapter();
-            string update = "update VatLieu ";
-            update += string.Format("set TongNhap = TongNhap - {0}, TonKho = TonKho - {0} ", soLuong);
-            update += string.Format("where id = {0}", vatLieuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            // sau khi cập nhật xong thì ta mới load dữ liệu Nhập Vật Liệu lên gridview và reset lại form
-            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
-
-            loadNhapVatLieu(dtpFrom_Nhap.Value.Date, dtpTo_Nhap.Value.Date, getOrderBy_Nhap());
-            resetDataNhapVatLieu();
-            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
-            con.Close();
+            
         }
 
         private void dgv_NhapVatLieu_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -737,103 +518,17 @@ namespace dental_sys
 
         private void btnReset_Nhap_Click(object sender, EventArgs e)
         {
-            resetDataNhapVatLieu();
-            dtpFrom_Nhap.Value = DateTime.Now.AddDays(-10).Date;
-            dtpTo_Nhap.Value = DateTime.Now.AddDays(10).Date;
-            cbSapXep_Nhap.SelectedIndex = 0;
+            
         }
 
         private void btnXuat_Click(object sender, EventArgs e)
         {
-            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Xuat.SelectedValue;
-
-            DateTime ngayXuat = DateTime.Now.Date;
-            int soLuong = Int32.Parse(nudSoLuong_Xuat.Value.ToString());
-            int vatLieuId = selectedVatLieu.Id;
-
-            // kiểm tra xem còn đủ hàng trong kho để xuất không, đủ thì mới cho xuất, không đủ thì thông báo
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataReader sqlDataReader; SqlCommand sqlCommand;
-            string query = string.Format("select (TonKho - {0}) ", soLuong);
-            query += "from VatLieu ";
-            query += string.Format("where id = {0}", vatLieuId);
-            sqlCommand = new SqlCommand(query, con);
-            sqlDataReader = sqlCommand.ExecuteReader(); sqlDataReader.Read();
-            int soLuongTonKhoConLai = sqlDataReader.GetInt32(0);
-            if (soLuongTonKhoConLai < 0)
-            {
-                MessageBox.Show(THONG_BAO_KHONG_DU_SO_LUONG_VAT_LIEU_DE_XUAT, WARNING);
-                return;
-            }
-
-            // nếu còn đủ số lượng thì xuất bình thường
-            con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string insertCommand = "insert into XuatVatLieu ";
-            insertCommand += string.Format("values('{0}', {1}, {2})", ngayXuat, vatLieuId, soLuong);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            loadXuatVatLieu(null, null, string.Empty);
-            resetDataXuatVatLieu();
-            con.Close();
-
-            // Sau khi xuất thì cập nhật lại tồn kho và tổng xuất
-            con = ConnectProvider.GetConnection(); con.Open();
-            sqlDataAdapter = new SqlDataAdapter();
-            string update = "update VatLieu ";
-            update += string.Format("set TongXuat = TongXuat + {0}, TonKho = TonKho - {0} ", soLuong);
-            update += string.Format("where id = {0}", vatLieuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
-            con.Close();
-
-            // sau khi xuất thì load lại dữ liệu Vật liệu lên combobox để nó cập nhật lại tồn kho
-            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+            
         }
 
         private void btnXoa_Xuat_Click(object sender, EventArgs e)
         {
-            if (currentXuatVatLieuId == 0)
-            {
-                MessageBox.Show(THONG_BAO_VUI_LONG_CHON_XUAT_VAT_LIEU, WARNING);
-                return;
-            }
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string deleteCommand = string.Format("delete from XuatVatLieu where id = {0}", currentXuatVatLieuId);
-            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
-            sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
-            con.Close();
-
-            // Sau khi xoá 1 lần xuất vật liệu, cập nhập lại tổng tổng xuất và tồn kho
-            DataGridViewRow row = dgv_XuatVatLieu.SelectedRows[0];
-            int soLuong = Int32.Parse(row.Cells[SO_LUONG].Value.ToString());
-            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Xuat.SelectedValue;
-            int vatLieuId = selectedVatLieu.Id;
-
-            con = ConnectProvider.GetConnection(); con.Open();
-            sqlDataAdapter = new SqlDataAdapter();
-            string update = "update VatLieu ";
-            update += string.Format("set TongXuat = TongXuat - {0}, TonKho = TonKho + {0} ", soLuong);
-            update += string.Format("where id = {0}", vatLieuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            // sau khi cập nhật xong thì ta mới load dữ liệu Nhập Vật Liệu lên gridview và reset lại form
-            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
-
-            loadXuatVatLieu(dtpFrom_Nhap.Value.Date, dtpTo_Nhap.Value.Date, getOrderBy_Xuat());
-            resetDataXuatVatLieu();
-            con.Close();
-
-            // sau khi xuất thì load lại dữ liệu Vật liệu lên combobox để nó cập nhật lại tồn kho
-            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
-            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+            
         }
 
         private void cbTenVatLieu_Xuat_SelectedIndexChanged(object sender, EventArgs e)
@@ -894,15 +589,400 @@ namespace dental_sys
 
         private void btnReset_Xuat_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            loadVatLieuToGridView(currentNhomVatLieuId, txtTimKiem.Text);
+        }
+
+        private void btnThem_NhomVL_Click_1(object sender, EventArgs e)
+        {
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+
+            // get data from form
+            string tenNhom = txtTenNhomVatLieu.Text.Trim();
+
+            // validate data
+            if (tenNhom.Equals(string.Empty))
+            {
+                MessageBox.Show(TEN_NHOM_VL_KHONG_BO_TRONG, WARNING);
+                return;
+            }
+
+            //insert
+            string insertCommand = string.Format("insert into NhomVatLieu values(N'{0}')", tenNhom);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            loadNhomVatLieu();
+            resetDataNhomVatLieu();
+            con.Close();
+        }
+
+        private void btnSua_NhomVL_Click_1(object sender, EventArgs e)
+        {
+            // validate
+            string tenNhom = txtTenNhomVatLieu.Text.Trim();
+            if (tenNhom.Equals(string.Empty))
+            {
+                MessageBox.Show(TEN_NHOM_VL_KHONG_BO_TRONG, WARNING);
+                return;
+            }
+
+            if (currentNhomVatLieuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_NHOM_VAT_LIEU, "sửa"), WARNING);
+                return;
+            }
+
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string update = "update NhomVatLieu ";
+            update += string.Format("set TenNhom = N'{0}' ", tenNhom);
+            update += string.Format("where id = {0}", currentNhomVatLieuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            resetDataNhomVatLieu();
+            loadNhomVatLieu();
+            con.Close();
+        }
+
+        private void btnXoa_NhomVL_Click_1(object sender, EventArgs e)
+        {
+            if (currentNhomVatLieuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_NHOM_VAT_LIEU, "xoá"), WARNING);
+                return;
+            }
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string deleteCommand = string.Format("delete from NhomVatLieu where id = {0}", currentNhomVatLieuId);
+            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
+            try
+            {
+                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
+                loadNhomVatLieu();
+                resetDataNhomVatLieu();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(THONG_BAO_KHONG_THE_XOA_NHOM_VAT_LIEU_NAY, WARNING);
+            }
+
+            con.Close();
+        }
+
+        private void btnThem_VL_Click_1(object sender, EventArgs e)
+        {
+            if (currentNhomVatLieuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_NHOM_VAT_LIEU, "thêm vật liệu"), WARNING);
+                return;
+            }
+
+            if (!validateFormVatLieu())
+            {
+                MessageBox.Show(THONG_BAO_THONG_TIN_VAT_LIEU_KHONG_HOP_LE, WARNING);
+                return;
+            }
+
+            string tenVatLieu = txtTenVatLieu.Text.Trim();
+            string donVi = cbDonViVatLieu.Text;
+            int tongNhap = 0;
+            int tongXuat = 0;
+            int tonKho = 0;
+            int donGia = Int32.Parse(txtDonGia.Text.Trim());
+
+            //insert
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string insertCommand = "insert into VatLieu ";
+            insertCommand += string.Format("values (N'{0}', N'{1}', {2}, {3}, {4}, {5}, {6})", tenVatLieu, donVi, tongNhap, tongXuat, tonKho, currentNhomVatLieuId, donGia);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
+            resetDataVatLieu();
+            con.Close();
+
+            // Cập nhật lại thông tin dữ liệu lên combobox
+            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+        }
+
+        private void btnSua_VL_Click_1(object sender, EventArgs e)
+        {
+            if (currentVatLieuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_VAT_LIEU, "sửa"), WARNING);
+                return;
+            }
+
+            if (!validateFormVatLieu())
+            {
+                MessageBox.Show(THONG_BAO_THONG_TIN_VAT_LIEU_KHONG_HOP_LE, WARNING);
+                return;
+            }
+
+            string tenVatLieu = txtTenVatLieu.Text.Trim();
+            string donVi = cbDonViVatLieu.Text;
+            int donGia = Int32.Parse(txtDonGia.Text.Trim());
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string update = "update VatLieu ";
+            update += string.Format("set TenVatLieu = N'{0}', DonVi = N'{1}', DonGia = {2} ", tenVatLieu, donVi, donGia);
+            update += string.Format("where id = {0}", currentVatLieuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            resetDataVatLieu();
+            loadVatLieuToGridView(currentNhomVatLieuId, txtTimKiem.Text);
+            con.Close();
+
+            // Cập nhật lại thông tin dữ liệu lên combobox
+            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+        }
+
+        private void btnXoa_VL_Click_1(object sender, EventArgs e)
+        {
+            if (currentVatLieuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_VAT_LIEU, "xoá"), WARNING);
+                return;
+            }
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string deleteCommand = string.Format("delete from VatLieu where id = {0}", currentVatLieuId);
+            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
+            try
+            {
+                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
+                loadVatLieuToGridView(currentNhomVatLieuId, txtTimKiem.Text);
+                resetDataVatLieu();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(THONG_BAO_KHONG_THE_XOA__VAT_LIEU_NAY, WARNING);
+            }
+
+            con.Close();
+
+            // Cập nhật lại thông tin dữ liệu lên combobox
+            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReset_Nhap_Click_1(object sender, EventArgs e)
+        {
+            resetDataNhapVatLieu();
+            dtpFrom_Nhap.Value = DateTime.Now.AddDays(-10).Date;
+            dtpTo_Nhap.Value = DateTime.Now.AddDays(10).Date;
+            cbSapXep_Nhap.SelectedIndex = 0;
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            if (currentNhapVatLieuId == 0)
+            {
+                MessageBox.Show(THONG_BAO_VUI_LONG_CHON_NHAP_VAT_LIEU, WARNING);
+                return;
+            }
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string deleteCommand = string.Format("delete from NhapVatLieu where id = {0}", currentNhapVatLieuId);
+            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
+            sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
+            con.Close();
+
+            // Sau khi xoá 1 lần nhập vật liệu, cập nhập lại tổng nhập và tồn kho
+            DataGridViewRow row = dgv_NhapVatLieu.SelectedRows[0];
+            int soLuong = Int32.Parse(row.Cells[SO_LUONG].Value.ToString());
+            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Nhap.SelectedValue;
+            int vatLieuId = selectedVatLieu.Id;
+
+            con = ConnectProvider.GetConnection(); con.Open();
+            sqlDataAdapter = new SqlDataAdapter();
+            string update = "update VatLieu ";
+            update += string.Format("set TongNhap = TongNhap - {0}, TonKho = TonKho - {0} ", soLuong);
+            update += string.Format("where id = {0}", vatLieuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            // sau khi cập nhật xong thì ta mới load dữ liệu Nhập Vật Liệu lên gridview và reset lại form
+            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
+
+            loadNhapVatLieu(dtpFrom_Nhap.Value.Date, dtpTo_Nhap.Value.Date, getOrderBy_Nhap());
+            resetDataNhapVatLieu();
+            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+            con.Close();
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            
+
+
+
+
+            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Nhap.SelectedValue;
+
+            DateTime ngayNhap = DateTime.Now.Date;
+            int soLuong = Int32.Parse(nudSoLuong_Nhap.Value.ToString());
+            int tongTien = Int32.Parse(txtTongTien.Text);
+            int vatLieuId = selectedVatLieu.Id;
+
+            //insert nhập vật liệu
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string insertCommand = "insert into NhapVatLieu ";
+            insertCommand += string.Format("values ('{0}', {1}, {2}, {3})", ngayNhap, vatLieuId, soLuong, tongTien);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            loadNhapVatLieu(null, null, string.Empty);
+            resetDataNhapVatLieu();
+            con.Close();
+
+            // Sau đó cập nhập tổng nhập và tồn kho của vật liệu đó
+            con = ConnectProvider.GetConnection(); con.Open();
+            sqlDataAdapter = new SqlDataAdapter();
+            string update = "update VatLieu ";
+            update += string.Format("set TongNhap = TongNhap + {0}, TonKho = TonKho + {0} ", soLuong);
+            update += string.Format("where id = {0}", vatLieuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+            con.Close();
+        }
+
+        private void btnXuat_Click_1(object sender, EventArgs e)
+        {
+            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Xuat.SelectedValue;
+
+            DateTime ngayXuat = DateTime.Now.Date;
+            int soLuong = Int32.Parse(nudSoLuong_Xuat.Value.ToString());
+            int vatLieuId = selectedVatLieu.Id;
+
+            // kiểm tra xem còn đủ hàng trong kho để xuất không, đủ thì mới cho xuất, không đủ thì thông báo
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataReader sqlDataReader; SqlCommand sqlCommand;
+            string query = string.Format("select (TonKho - {0}) ", soLuong);
+            query += "from VatLieu ";
+            query += string.Format("where id = {0}", vatLieuId);
+            sqlCommand = new SqlCommand(query, con);
+            sqlDataReader = sqlCommand.ExecuteReader(); sqlDataReader.Read();
+            int soLuongTonKhoConLai = sqlDataReader.GetInt32(0);
+            if (soLuongTonKhoConLai < 0)
+            {
+                MessageBox.Show(THONG_BAO_KHONG_DU_SO_LUONG_VAT_LIEU_DE_XUAT, WARNING);
+                return;
+            }
+
+            // nếu còn đủ số lượng thì xuất bình thường
+            con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string insertCommand = "insert into XuatVatLieu ";
+            insertCommand += string.Format("values('{0}', {1}, {2})", ngayXuat, vatLieuId, soLuong);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            loadXuatVatLieu(null, null, string.Empty);
+            resetDataXuatVatLieu();
+            con.Close();
+
+            // Sau khi xuất thì cập nhật lại tồn kho và tổng xuất
+            con = ConnectProvider.GetConnection(); con.Open();
+            sqlDataAdapter = new SqlDataAdapter();
+            string update = "update VatLieu ";
+            update += string.Format("set TongXuat = TongXuat + {0}, TonKho = TonKho - {0} ", soLuong);
+            update += string.Format("where id = {0}", vatLieuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
+            con.Close();
+
+            // sau khi xuất thì load lại dữ liệu Vật liệu lên combobox để nó cập nhật lại tồn kho
+            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+        }
+
+        private void btnXoa_Xuat_Click_1(object sender, EventArgs e)
+        {
+            if (currentXuatVatLieuId == 0)
+            {
+                MessageBox.Show(THONG_BAO_VUI_LONG_CHON_XUAT_VAT_LIEU, WARNING);
+                return;
+            }
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string deleteCommand = string.Format("delete from XuatVatLieu where id = {0}", currentXuatVatLieuId);
+            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
+            sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
+            con.Close();
+
+            // Sau khi xoá 1 lần xuất vật liệu, cập nhập lại tổng tổng xuất và tồn kho
+            DataGridViewRow row = dgv_XuatVatLieu.SelectedRows[0];
+            int soLuong = Int32.Parse(row.Cells[SO_LUONG].Value.ToString());
+            VatLieuADO selectedVatLieu = (VatLieuADO)cbTenVatLieu_Xuat.SelectedValue;
+            int vatLieuId = selectedVatLieu.Id;
+
+            con = ConnectProvider.GetConnection(); con.Open();
+            sqlDataAdapter = new SqlDataAdapter();
+            string update = "update VatLieu ";
+            update += string.Format("set TongXuat = TongXuat - {0}, TonKho = TonKho + {0} ", soLuong);
+            update += string.Format("where id = {0}", vatLieuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            // sau khi cập nhật xong thì ta mới load dữ liệu Nhập Vật Liệu lên gridview và reset lại form
+            loadVatLieuToGridView(currentNhomVatLieuId, string.Empty);
+
+            loadXuatVatLieu(dtpFrom_Nhap.Value.Date, dtpTo_Nhap.Value.Date, getOrderBy_Xuat());
+            resetDataXuatVatLieu();
+            con.Close();
+
+            // sau khi xuất thì load lại dữ liệu Vật liệu lên combobox để nó cập nhật lại tồn kho
+            loadTenVatLieuToComboBox(cbTenVatLieu_Nhap);
+            loadTenVatLieuToComboBox(cbTenVatLieu_Xuat);
+        }
+
+        private void btnReset_Xuat_Click_1(object sender, EventArgs e)
+        {
             resetDataXuatVatLieu();
             dtpFrom_Xuat.Value = DateTime.Now.AddDays(-10).Date;
             dtpTo_Xuat.Value = DateTime.Now.AddDays(10).Date;
             cbSapXep_Xuat.SelectedIndex = 0;
         }
 
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        private void tabPage1_Click(object sender, EventArgs e)
         {
-            loadVatLieuToGridView(currentNhomVatLieuId, txtTimKiem.Text);
+
         }
     }
 }

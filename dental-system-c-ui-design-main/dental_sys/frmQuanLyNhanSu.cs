@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,9 +21,17 @@ namespace dental_sys
         string location = "";
         private void frmQuanLyNhanSu_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'thuctapDataSet.Users' table. You can move, or remove it, as needed.
-            this.usersTableAdapter.Fill(this.thuctapDataSet.Users);
-            using(thuctapEntities qlNhanSu = new thuctapEntities())
+            // TODO: This line of code loads data into the 'thuctapDataSet1.Users' table. You can move, or remove it, as needed.
+            this.usersTableAdapter.Fill(this.thuctapDataSet1.Users);
+
+
+            dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.MultiSelect = false;
+
+            using (thuctapEntities qlNhanSu = new thuctapEntities())
             {
                 cbChucVu.DataSource = qlNhanSu.Roles.ToList();
                 cbChucVu.DisplayMember = "role_name";
@@ -34,32 +43,7 @@ namespace dental_sys
         int idUser;
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                idUser = int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
-                txtTen.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
-                cbGioiTinh.SelectedItem = dataGridView1.CurrentRow.Cells[2].Value.ToString();
-                dtpNgaySinh.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
-                cbChucVu.SelectedValue = int.Parse(dataGridView1.CurrentRow.Cells[4].Value.ToString());
-                txtSDT.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
-                txtPassword.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
-                txtEmail.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString();
-                dtpNgayVaoLam.Text = dataGridView1.CurrentRow.Cells[9].Value.ToString();
-                try
-                {
-                    byte[] img = (byte[])dataGridView1.CurrentRow.Cells[5].Value;
-                    MemoryStream ms = new MemoryStream(img);
-                    picProduct.Image = Image.FromStream(ms);
-                }
-                catch (Exception)
-                {
-                    picProduct.Image = null;
-                }
-
-            }
-            catch (Exception)
-            {
-            }
+            
         }
 
         private byte[] getImage() // return byte[] cua image cua this.location
@@ -166,7 +150,19 @@ namespace dental_sys
                     }
                     
                     user.SoDienThoai = txtSDT.Text;
-                    user.MatKhau = txtPassword.Text;
+                    //user.MatKhau = txtPassword.Text;
+
+                    byte[] temp = ASCIIEncoding.ASCII.GetBytes(txtPassword.Text);
+                    byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+                    string hasPass = "";
+                    foreach (byte item in hasData)
+                    {
+                        hasPass += item;
+                    }
+
+                    user.MatKhau = hasPass;
+
                     user.Email = txtEmail.Text;
                     user.NgayVaoLam = dtpNgayVaoLam.Value;
 
@@ -176,6 +172,7 @@ namespace dental_sys
 
                     load();
                     refresh();
+                    picProduct.Image = null;
                 }
             }
         }
@@ -184,9 +181,10 @@ namespace dental_sys
         {
             using(thuctapEntities qlNhanSu = new thuctapEntities())
             {
-                if (idUser.Equals(null))
+                if (check_Null() == false)
                 {
                     MessageBox.Show("Vui lòng chọn nhân viên cần xoá");
+                    return;
                 }
                 else
                 {
@@ -197,9 +195,13 @@ namespace dental_sys
                         load();
                         MessageBox.Show("Xoá thành công");
                         refresh();
+                        picProduct.Image = null;
                     }
                     catch (Exception)
                     {
+                        MessageBox.Show("Không thể xoá những nhân viên đang còn hợp đồng");
+                        refresh();
+                        return;
                     }
                     
                 }
@@ -213,6 +215,7 @@ namespace dental_sys
                 if(check_Null() == false)
                 {
                     MessageBox.Show("Vui lòng chọn nhân viên cần sửa");
+                    return;
                 }
                 else
                 {
@@ -254,6 +257,41 @@ namespace dental_sys
                     {
                     }
                 }
+            }
+        }
+
+        private void dataGridView1_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView1_CellClick_2(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                idUser = int.Parse(dataGridView1.CurrentRow.Cells[0].Value.ToString());
+                txtTen.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+                cbGioiTinh.SelectedItem = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+                dtpNgaySinh.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+                cbChucVu.SelectedValue = int.Parse(dataGridView1.CurrentRow.Cells[4].Value.ToString());
+                txtSDT.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+                txtPassword.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+                txtEmail.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString();
+                dtpNgayVaoLam.Text = dataGridView1.CurrentRow.Cells[9].Value.ToString();
+                try
+                {
+                    byte[] img = (byte[])dataGridView1.CurrentRow.Cells[5].Value;
+                    MemoryStream ms = new MemoryStream(img);
+                    picProduct.Image = Image.FromStream(ms);
+                }
+                catch (Exception)
+                {
+                    picProduct.Image = null;
+                }
+
+            }
+            catch (Exception)
+            {
             }
         }
     }

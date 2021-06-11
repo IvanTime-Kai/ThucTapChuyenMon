@@ -15,11 +15,12 @@ namespace dental_sys
     public partial class frm_CuocHen : Form
     {
         TableLayoutPanel appointments;
-        string currentUser = "2";
-        public frm_CuocHen()
+        string currentUser = "0";
+        public frm_CuocHen(int bacSiId)
         {
             InitializeComponent();
             loadAppointment();
+            this.currentUser = bacSiId + "";
         }
 
         public SqlConnection GetConnection()
@@ -113,7 +114,7 @@ namespace dental_sys
                 }
                 catch (Exception ex)
                 {
-
+                    return;
                 }
 
 
@@ -125,7 +126,7 @@ namespace dental_sys
                 sqlDataAdapter = new SqlDataAdapter(); connect = GetConnection(); connect.Open();
                 trangThaiUpdate = "Hoàn Thành";
                 string ngayHenForInsert = ngayHen.Split('/')[2] + "-" + ngayHen.Split('/')[1] + "-" + ngayHen.Split('/')[0];
-                string insertBuoiDieuTri = string.Format("insert into BuoiDieuTri(NgayKham, Bacsi, BenhNhan) values ('{0}', {1}, {2})", ngayHenForInsert, bacSiId, benhNhanId);
+                string insertBuoiDieuTri = string.Format("insert into BuoiDieuTri(NgayKham, Bacsi, BenhNhan, ChuanDoan, ChiPhi, GhiChu) values ('{0}', {1}, {2}, N'{3}', {4}, N'{5}')", ngayHenForInsert, bacSiId, benhNhanId, string.Empty, 0, string.Empty);
                 sqlDataAdapter.InsertCommand = new SqlCommand(insertBuoiDieuTri, connect);
                 sqlDataAdapter.InsertCommand.ExecuteNonQuery();
 

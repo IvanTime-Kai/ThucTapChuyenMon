@@ -175,6 +175,11 @@ namespace dental_sys
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_HinhAnhBDT", idParameter);
         }
     
+        public virtual ObjectResult<sp_load_BDT_DichVu_Result> sp_load_BDT_DichVu()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_load_BDT_DichVu_Result>("sp_load_BDT_DichVu");
+        }
+    
         public virtual ObjectResult<sp_loadDonThuoc_BDT_Result> sp_loadDonThuoc_BDT(Nullable<int> id)
         {
             var idParameter = id.HasValue ?
@@ -209,6 +214,15 @@ namespace dental_sys
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Report_Result>("sp_Report", idParameter);
+        }
+    
+        public virtual int sp_Sua_BDT_DichVu(Nullable<int> dichVu_id)
+        {
+            var dichVu_idParameter = dichVu_id.HasValue ?
+                new ObjectParameter("DichVu_id", dichVu_id) :
+                new ObjectParameter("DichVu_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_Sua_BDT_DichVu", dichVu_idParameter);
         }
     
         public virtual int sp_TaoBDT_DichVu(Nullable<int> bDT_id, Nullable<int> dichVu_id)
@@ -340,6 +354,19 @@ namespace dental_sys
                 new ObjectParameter("id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaBDT", idParameter);
+        }
+    
+        public virtual int sp_XoaBDT_DichVu(Nullable<int> bDT_id, Nullable<int> dichVu_id)
+        {
+            var bDT_idParameter = bDT_id.HasValue ?
+                new ObjectParameter("BDT_id", bDT_id) :
+                new ObjectParameter("BDT_id", typeof(int));
+    
+            var dichVu_idParameter = dichVu_id.HasValue ?
+                new ObjectParameter("DichVu_id", dichVu_id) :
+                new ObjectParameter("DichVu_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaBDT_DichVu", bDT_idParameter, dichVu_idParameter);
         }
     
         public virtual int sp_XoaCTDT(Nullable<int> id)

@@ -16,6 +16,7 @@ namespace dental_sys
         public frmNhapMKnew()
         {
             InitializeComponent();
+            this.CenterToScreen();
         }
 
         private void button1_Click(object sender, EventArgs e)

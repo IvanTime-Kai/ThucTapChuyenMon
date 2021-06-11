@@ -17,11 +17,7 @@ C:\Users\root17\source\repos\dental_sys\dental_sys\obj\Debug\dental_sys.Messages
 D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\dental_sys.exe.config
 D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\dental_sys.exe
 D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\dental_sys.pdb
-D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.Dashboard.resources
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.Loading.resources
-D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.Messages.resources
-D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.Patient.resources
-D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.Principal.resources
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.Properties.Resources.resources
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.csproj.GenerateResource.cache
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.csproj.CoreCompileInputs.cache
@@ -146,3 +142,8 @@ D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.frmQL_CaTruc.r
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.frmQL_Luong.resources
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.frmQL_ThuChi.resources
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.frmQL_VatLieu.resources
+D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.frmQuanLy.resources
+D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.MainHinhAnh.resources
+D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\Newtonsoft.Json.dll
+D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\Newtonsoft.Json.xml
+D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.frmQL_ThanhToan.resources

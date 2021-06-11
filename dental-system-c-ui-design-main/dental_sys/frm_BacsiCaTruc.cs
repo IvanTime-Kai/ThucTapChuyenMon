@@ -14,13 +14,14 @@ namespace dental_sys
 {
     public partial class frm_BacsiCaTruc : Form
     {
-        int currentId = 2; // id của bác sĩ hiện tại đang đăng nhập, 
+        int currentId = 0; // id của bác sĩ hiện tại đang đăng nhập, 
         const string WARNING = "Warning!";
         const string NONE = "(None)";
         TableLayoutPanel tlp_CaTruc;
-        public frm_BacsiCaTruc()
+        public frm_BacsiCaTruc(int bacSiId)
         {
             InitializeComponent();
+            this.currentId = bacSiId;
         }
 
         // tìm index của ngày đó trong bảng

@@ -32,10 +32,8 @@ namespace dental_sys
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmQuenMatKhau));
             this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.txtGmail = new Bunifu.Framework.UI.BunifuMetroTextbox();
-            this.txtTK = new Bunifu.Framework.UI.BunifuMetroTextbox();
             this.btnGui = new Bunifu.Framework.UI.BunifuThinButton2();
             this.btnThoat = new Bunifu.Framework.UI.BunifuThinButton2();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -51,16 +49,6 @@ namespace dental_sys
             this.label4.Size = new System.Drawing.Size(57, 24);
             this.label4.TabIndex = 16;
             this.label4.Text = "Email";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(219, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 24);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Tài khoản";
             // 
             // bunifuElipse1
             // 
@@ -84,23 +72,6 @@ namespace dental_sys
             this.txtGmail.TabIndex = 19;
             this.txtGmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
-            // txtTK
-            // 
-            this.txtTK.BorderColorFocused = System.Drawing.Color.Red;
-            this.txtTK.BorderColorIdle = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtTK.BorderColorMouseHover = System.Drawing.Color.Red;
-            this.txtTK.BorderThickness = 1;
-            this.txtTK.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTK.Font = new System.Drawing.Font("Century Gothic", 9.75F);
-            this.txtTK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtTK.isPassword = false;
-            this.txtTK.Location = new System.Drawing.Point(319, 73);
-            this.txtTK.Margin = new System.Windows.Forms.Padding(4);
-            this.txtTK.Name = "txtTK";
-            this.txtTK.Size = new System.Drawing.Size(219, 33);
-            this.txtTK.TabIndex = 18;
-            this.txtTK.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
             // btnGui
             // 
             this.btnGui.ActiveBorderThickness = 1;
@@ -108,7 +79,7 @@ namespace dental_sys
             this.btnGui.ActiveFillColor = System.Drawing.Color.Red;
             this.btnGui.ActiveForecolor = System.Drawing.Color.White;
             this.btnGui.ActiveLineColor = System.Drawing.Color.Black;
-            this.btnGui.BackColor = System.Drawing.SystemColors.Control;
+            this.btnGui.BackColor = System.Drawing.Color.White;
             this.btnGui.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGui.BackgroundImage")));
             this.btnGui.ButtonText = "Gửi";
             this.btnGui.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -166,13 +137,12 @@ namespace dental_sys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(567, 278);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnGui);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.txtGmail);
-            this.Controls.Add(this.txtTK);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmQuenMatKhau";
@@ -186,12 +156,10 @@ namespace dental_sys
         #endregion
 
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label1;
         private Bunifu.Framework.UI.BunifuElipse bunifuElipse1;
         private Bunifu.Framework.UI.BunifuThinButton2 btnGui;
         private Bunifu.Framework.UI.BunifuThinButton2 btnThoat;
         private Bunifu.Framework.UI.BunifuMetroTextbox txtGmail;
-        private Bunifu.Framework.UI.BunifuMetroTextbox txtTK;
         private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

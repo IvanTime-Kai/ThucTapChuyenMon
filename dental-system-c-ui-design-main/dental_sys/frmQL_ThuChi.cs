@@ -339,54 +339,12 @@ namespace dental_sys
 
         private void btnThemKhoanThu_Click(object sender, EventArgs e)
         {
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-
-            // validate data
-            if (!validateFormKhoanThu())
-            {
-                return;
-            }
-            string tenKhoanThu = txtTenKhoanThu.Text.Trim();
-            int soTien = Int32.Parse(txtSoTien_KhoanThu.Text.Trim());
-
-            //insert
-            string insertCommand = string.Format("insert into Khoanthu values (N'{0}', {1})", tenKhoanThu, soTien);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            loadKhoanThu();
-            resetDataKhoanThu();
-            con.Close();
+            
         }
 
         private void btnSuaKhoanThu_Click(object sender, EventArgs e)
         {
-            // validate
-            if (currentKhoanThuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "thu", "sửa"), WARNING);
-                return;
-            }
-
-            if (!validateFormKhoanThu())
-            {
-                return;
-            }
-            string tenKhoanThu = txtTenKhoanThu.Text.Trim();
-            int soTien = Int32.Parse(txtSoTien_KhoanThu.Text.Trim());
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string update = "update Khoanthu ";
-            update += string.Format("set TenKhoanThu = N'{0}', SoTien = {1} ", tenKhoanThu, soTien);
-            update += string.Format("where id = {0}", currentKhoanThuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            resetDataKhoanThu();
-            loadKhoanThu();
-            con.Close();
+            
         }
 
         private void dgv_KhoanThu_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -409,28 +367,7 @@ namespace dental_sys
 
         private void btnXoaKhoanThu_Click(object sender, EventArgs e)
         {
-            if (currentKhoanThuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "thu", "xoá"), WARNING);
-                return;
-            }
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string deleteCommand = string.Format("delete from Khoanthu where id = {0}", currentKhoanThuId);
-            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
-            try
-            {
-                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
-                loadKhoanThu();
-                resetDataKhoanThu();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_KHONG_THE_XOA_KHOAN_NAY, "thu"), WARNING);
-            }
-
-            con.Close();
+            
         }
 
         private bool validateFormThu()
@@ -471,34 +408,7 @@ namespace dental_sys
 
         private void btnThemThu_Click(object sender, EventArgs e)
         {
-            if (currentKhoanThuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "thu", "thêm một lần thu"), WARNING);
-                return;
-            }
-
-            if (!validateFormThu())
-            {
-                return;
-            }
-
-            UserADO selectedUser = (UserADO)cbUser_Thu.SelectedValue;
-            int nguoiDongId = selectedUser.Id;
-            int khoanThuId = currentKhoanThuId;
-            string ghiChu = txtGhiChu_Thu.Text.Trim();
-            DateTime ngayDong = dtpNgayDong.Value.Date;
-
-            //insert
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string insertCommand = "insert into Thu ";
-            insertCommand += string.Format("values({0}, {1}, N'{2}', '{3}')", nguoiDongId, khoanThuId, ghiChu, ngayDong);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            resetDataThu();
-            loadThuGridView(currentKhoanThuId, string.Empty);
-            con.Close();
+           
         }
 
         private void dgv_Thu_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -516,34 +426,7 @@ namespace dental_sys
 
         private void btnSuaThu_Click(object sender, EventArgs e)
         {
-            if (currentThuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_LAN_THU, "sửa"), WARNING);
-                return;
-            }
-
-            if (!validateFormThu())
-            {
-                return;
-            }
-
-            UserADO selectedUser = (UserADO)cbUser_Thu.SelectedValue;
-            int nguoiDongId = selectedUser.Id;
-            int khoanThuId = currentKhoanThuId;
-            string ghiChu = txtGhiChu_Thu.Text.Trim();
-            DateTime ngayDong = dtpNgayDong.Value.Date;
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string update = "update Thu ";
-            update += string.Format("set NguoiDong = {0}, GhiChu = N'{1}', NgayThu = '{2}' ", nguoiDongId, ghiChu, ngayDong);
-            update += string.Format("where id = {0}", currentThuId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            resetDataThu();
-            loadThuGridView(currentKhoanThuId, getOrderBy_Thu());
-            con.Close();
+            
         }
 
         private string getOrderBy_Thu()
@@ -577,80 +460,17 @@ namespace dental_sys
 
         private void btnXoaThu_Click(object sender, EventArgs e)
         {
-            if (currentThuId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_LAN_THU, "xoá"), WARNING);
-                return;
-            }
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string deleteCommand = string.Format("delete from Thu where id = {0}", currentThuId);
-            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
-            try
-            {
-                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
-                loadThuGridView(currentKhoanThuId, getOrderBy_Thu());
-                resetDataThu();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(THONG_BAO_KHONG_THE_XOA_LAN_THU_NAY, WARNING);
-            }
-
-            con.Close();
+            
         }
 
         private void btnThemKhoanChi_Click(object sender, EventArgs e)
         {
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-
-            // validate data
-            if (!validateFormKhoanChi())
-            {
-                return;
-            }
-            string tenKhoanChi = txtTenKhoanChi.Text.Trim();
-            int soTien = Int32.Parse(txtSoTien_KhoanChi.Text.Trim());
-
-            //insert
-            string insertCommand = string.Format("insert into Khoanchi values (N'{0}', {1})", tenKhoanChi, soTien);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            loadKhoanChi();
-            resetDataKhoanChi();
-            con.Close();
+            
         }
 
         private void btnSuaKhoanChi_Click(object sender, EventArgs e)
         {
-            // validate
-            if (currentKhoanChiId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "chi", "sửa"), WARNING);
-                return;
-            }
-
-            if (!validateFormKhoanChi())
-            {
-                return;
-            }
-            string tenKhoanChi = txtTenKhoanChi.Text.Trim();
-            int soTien = Int32.Parse(txtSoTien_KhoanChi.Text.Trim());
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string update = "update Khoanchi ";
-            update += string.Format("set TenKhoanChi = N'{0}', SoTien = {1} ", tenKhoanChi, soTien);
-            update += string.Format("where id = {0}", currentKhoanChiId);
-            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-            resetDataKhoanChi();
-            loadKhoanChi();
-            con.Close();
+            
         }
 
         private void dgv_KhoanChi_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -673,60 +493,12 @@ namespace dental_sys
 
         private void btnXoaKhoanChi_Click(object sender, EventArgs e)
         {
-            if (currentKhoanChiId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "chi", "xoá"), WARNING);
-                return;
-            }
-
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string deleteCommand = string.Format("delete from Khoanchi where id = {0}", currentKhoanChiId);
-            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
-            try
-            {
-                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
-                loadKhoanChi();
-                resetDataKhoanChi();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_KHONG_THE_XOA_KHOAN_NAY, "chi"), WARNING);
-            }
-
-            con.Close();
+            
         }
 
         private void btnThemChi_Click(object sender, EventArgs e)
         {
-            if (currentKhoanChiId == 0)
-            {
-                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "chi", "thêm một lần chi"), WARNING);
-                return;
-            }
-
-            if (!validateFormChi())
-            {
-                return;
-            }
-
-            UserADO selectedUser = (UserADO)cbUser_Chi.SelectedValue;
-            int nguoiChiId = selectedUser.Id;
-            int khoanChiId = currentKhoanChiId;
-            string ghiChu = txtGhiChu_Chi.Text.Trim();
-            DateTime ngayChi = dtpNgayChi.Value.Date;
-
-            //insert
-            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-            string insertCommand = "insert into Chi ";
-            insertCommand += string.Format("values({0}, {1}, N'{2}', '{3}')", nguoiChiId, khoanChiId, ghiChu, ngayChi);
-            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
-            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
-
-            resetDataChi();
-            loadChiGridView(currentKhoanChiId, string.Empty);
-            con.Close();
+            
         }
 
         private void dtpNgayDong_ValueChanged(object sender, EventArgs e)
@@ -764,6 +536,299 @@ namespace dental_sys
 
         private void btnSuaChi_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnXoaChi_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cbSapXep_Chi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadChiGridView(currentKhoanChiId, getOrderBy_Chi());
+        }
+
+        private void btnThemKhoanThu_Click_1(object sender, EventArgs e)
+        {
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+
+            // validate data
+            if (!validateFormKhoanThu())
+            {
+                return;
+            }
+            string tenKhoanThu = txtTenKhoanThu.Text.Trim();
+            int soTien = Int32.Parse(txtSoTien_KhoanThu.Text.Trim());
+
+            //insert
+            string insertCommand = string.Format("insert into Khoanthu values (N'{0}', {1})", tenKhoanThu, soTien);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            loadKhoanThu();
+            resetDataKhoanThu();
+            con.Close();
+        }
+
+        private void btnSuaKhoanThu_Click_1(object sender, EventArgs e)
+        {
+            // validate
+            if (currentKhoanThuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "thu", "sửa"), WARNING);
+                return;
+            }
+
+            if (!validateFormKhoanThu())
+            {
+                return;
+            }
+            string tenKhoanThu = txtTenKhoanThu.Text.Trim();
+            int soTien = Int32.Parse(txtSoTien_KhoanThu.Text.Trim());
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string update = "update Khoanthu ";
+            update += string.Format("set TenKhoanThu = N'{0}', SoTien = {1} ", tenKhoanThu, soTien);
+            update += string.Format("where id = {0}", currentKhoanThuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            resetDataKhoanThu();
+            loadKhoanThu();
+            con.Close();
+        }
+
+        private void btnXoaKhoanThu_Click_1(object sender, EventArgs e)
+        {
+            if (currentKhoanThuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "thu", "xoá"), WARNING);
+                return;
+            }
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string deleteCommand = string.Format("delete from Khoanthu where id = {0}", currentKhoanThuId);
+            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
+            try
+            {
+                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
+                loadKhoanThu();
+                resetDataKhoanThu();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_KHONG_THE_XOA_KHOAN_NAY, "thu"), WARNING);
+            }
+
+            con.Close();
+        }
+
+        private void btnThemThu_Click_1(object sender, EventArgs e)
+        {
+            if (currentKhoanThuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "thu", "thêm một lần thu"), WARNING);
+                return;
+            }
+
+            if (!validateFormThu())
+            {
+                return;
+            }
+
+            UserADO selectedUser = (UserADO)cbUser_Thu.SelectedValue;
+            int nguoiDongId = selectedUser.Id;
+            int khoanThuId = currentKhoanThuId;
+            string ghiChu = txtGhiChu_Thu.Text.Trim();
+            DateTime ngayDong = dtpNgayDong.Value.Date;
+
+            //insert
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string insertCommand = "insert into Thu ";
+            insertCommand += string.Format("values({0}, {1}, N'{2}', '{3}')", nguoiDongId, khoanThuId, ghiChu, ngayDong);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            resetDataThu();
+            loadThuGridView(currentKhoanThuId, string.Empty);
+            con.Close();
+        }
+
+        private void btnSuaThu_Click_1(object sender, EventArgs e)
+        {
+            if (currentThuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_LAN_THU, "sửa"), WARNING);
+                return;
+            }
+
+            if (!validateFormThu())
+            {
+                return;
+            }
+
+            UserADO selectedUser = (UserADO)cbUser_Thu.SelectedValue;
+            int nguoiDongId = selectedUser.Id;
+            int khoanThuId = currentKhoanThuId;
+            string ghiChu = txtGhiChu_Thu.Text.Trim();
+            DateTime ngayDong = dtpNgayDong.Value.Date;
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string update = "update Thu ";
+            update += string.Format("set NguoiDong = {0}, GhiChu = N'{1}', NgayThu = '{2}' ", nguoiDongId, ghiChu, ngayDong);
+            update += string.Format("where id = {0}", currentThuId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            resetDataThu();
+            loadThuGridView(currentKhoanThuId, getOrderBy_Thu());
+            con.Close();
+        }
+
+        private void btnXoaThu_Click_1(object sender, EventArgs e)
+        {
+            if (currentThuId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_LAN_THU, "xoá"), WARNING);
+                return;
+            }
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string deleteCommand = string.Format("delete from Thu where id = {0}", currentThuId);
+            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
+            try
+            {
+                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
+                loadThuGridView(currentKhoanThuId, getOrderBy_Thu());
+                resetDataThu();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(THONG_BAO_KHONG_THE_XOA_LAN_THU_NAY, WARNING);
+            }
+
+            con.Close();
+        }
+
+        private void bunifuThinButton23_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+
+            // validate data
+            if (!validateFormKhoanChi())
+            {
+                return;
+            }
+            string tenKhoanChi = txtTenKhoanChi.Text.Trim();
+            int soTien = Int32.Parse(txtSoTien_KhoanChi.Text.Trim());
+
+            //insert
+            string insertCommand = string.Format("insert into Khoanchi values (N'{0}', {1})", tenKhoanChi, soTien);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            loadKhoanChi();
+            resetDataKhoanChi();
+            con.Close();
+        }
+
+        private void bunifuThinButton21_Click(object sender, EventArgs e)
+        {
+            // validate
+            if (currentKhoanChiId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "chi", "sửa"), WARNING);
+                return;
+            }
+
+            if (!validateFormKhoanChi())
+            {
+                return;
+            }
+            string tenKhoanChi = txtTenKhoanChi.Text.Trim();
+            int soTien = Int32.Parse(txtSoTien_KhoanChi.Text.Trim());
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string update = "update Khoanchi ";
+            update += string.Format("set TenKhoanChi = N'{0}', SoTien = {1} ", tenKhoanChi, soTien);
+            update += string.Format("where id = {0}", currentKhoanChiId);
+            sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+            sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+            resetDataKhoanChi();
+            loadKhoanChi();
+            con.Close();
+        }
+
+        private void bunifuThinButton22_Click(object sender, EventArgs e)
+        {
+            if (currentKhoanChiId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "chi", "xoá"), WARNING);
+                return;
+            }
+
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string deleteCommand = string.Format("delete from Khoanchi where id = {0}", currentKhoanChiId);
+            sqlDataAdapter.DeleteCommand = new SqlCommand(deleteCommand, con);
+            try
+            {
+                sqlDataAdapter.DeleteCommand.ExecuteNonQuery();
+                loadKhoanChi();
+                resetDataKhoanChi();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_KHONG_THE_XOA_KHOAN_NAY, "chi"), WARNING);
+            }
+
+            con.Close();
+        }
+
+        private void bunifuThinButton21_Click_1(object sender, EventArgs e)
+        {
+            if (currentKhoanChiId == 0)
+            {
+                MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_KHOAN, "chi", "thêm một lần chi"), WARNING);
+                return;
+            }
+
+            if (!validateFormChi())
+            {
+                return;
+            }
+
+            UserADO selectedUser = (UserADO)cbUser_Chi.SelectedValue;
+            int nguoiChiId = selectedUser.Id;
+            int khoanChiId = currentKhoanChiId;
+            string ghiChu = txtGhiChu_Chi.Text.Trim();
+            DateTime ngayChi = dtpNgayChi.Value.Date;
+
+            //insert
+            SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            string insertCommand = "insert into Chi ";
+            insertCommand += string.Format("values({0}, {1}, N'{2}', '{3}')", nguoiChiId, khoanChiId, ghiChu, ngayChi);
+            sqlDataAdapter.InsertCommand = new SqlCommand(insertCommand, con);
+            sqlDataAdapter.InsertCommand.ExecuteNonQuery();
+
+            resetDataChi();
+            loadChiGridView(currentKhoanChiId, string.Empty);
+            con.Close();
+        }
+
+        private void bunifuThinButton22_Click_1(object sender, EventArgs e)
+        {
             if (currentChiId == 0)
             {
                 MessageBox.Show(string.Format(THONG_BAO_VUI_LONG_CHON_LAN_CHI, "sửa"), WARNING);
@@ -794,7 +859,7 @@ namespace dental_sys
             con.Close();
         }
 
-        private void btnXoaChi_Click(object sender, EventArgs e)
+        private void bunifuThinButton23_Click_1(object sender, EventArgs e)
         {
             if (currentChiId == 0)
             {
@@ -820,10 +885,9 @@ namespace dental_sys
             con.Close();
         }
 
-        private void cbSapXep_Chi_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabPage1_Click(object sender, EventArgs e)
         {
-            loadChiGridView(currentKhoanChiId, getOrderBy_Chi());
-        }
 
+        }
     }
 }

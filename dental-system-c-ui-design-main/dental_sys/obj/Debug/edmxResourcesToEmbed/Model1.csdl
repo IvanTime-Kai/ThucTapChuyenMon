@@ -39,6 +39,7 @@
     <Property Name="BacSi" Type="Int32" />
     <Property Name="BenhNhan" Type="Int32" />
     <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DaThanhToan" Type="Boolean" />
     <NavigationProperty Name="BenhNhan1" Relationship="Self.FK__BuoiDieuT__BenhN__59FA5E80" FromRole="BuoiDieuTri" ToRole="BenhNhan" />
     <NavigationProperty Name="User" Relationship="Self.FK__BuoiDieuT__BacSi__59063A47" FromRole="BuoiDieuTri" ToRole="Users" />
     <NavigationProperty Name="DonThuocs" Relationship="Self.FK__DonThuoc__BuoiDi__628FA481" FromRole="BuoiDieuTri" ToRole="DonThuoc" />
@@ -112,6 +113,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="BuoiDieuTri" Type="Int32" />
     <Property Name="ThanhTien" Type="Int32" />
+    <Property Name="DaThanhToan" Type="Boolean" />
     <NavigationProperty Name="BuoiDieuTri1" Relationship="Self.FK__DonThuoc__BuoiDi__628FA481" FromRole="DonThuoc" ToRole="BuoiDieuTri" />
     <NavigationProperty Name="ChiTietDonThuocs" Relationship="Self.FK__ChiTietDo__Donth__5DCAEF64" FromRole="DonThuoc" ToRole="ChiTietDonThuoc" />
   </EntityType>
@@ -213,7 +215,7 @@
     <Property Name="Chucvu" Type="Int32" />
     <Property Name="AnhChup" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="SoDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <Property Name="MatKhau" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="NgayVaoLam" Type="DateTime" Precision="0" />
     <NavigationProperty Name="BenhNhans" Relationship="Self.FK__BenhNhan__NguoiT__5812160E" FromRole="Users" ToRole="BenhNhan" />
@@ -718,6 +720,7 @@
     <FunctionImport Name="sp_HinhAnhBDT">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="sp_load_BDT_DichVu" ReturnType="Collection(thuctapModel.sp_load_BDT_DichVu_Result)" />
     <FunctionImport Name="sp_loadDonThuoc_BDT" ReturnType="Collection(thuctapModel.sp_loadDonThuoc_BDT_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
@@ -729,6 +732,9 @@
     </FunctionImport>
     <FunctionImport Name="sp_Report" ReturnType="Collection(thuctapModel.sp_Report_Result)">
       <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_Sua_BDT_DichVu">
+      <Parameter Name="DichVu_id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_TaoBDT_DichVu">
       <Parameter Name="BDT_id" Mode="In" Type="Int32" />
@@ -770,6 +776,10 @@
     </FunctionImport>
     <FunctionImport Name="sp_XoaBDT">
       <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_XoaBDT_DichVu">
+      <Parameter Name="BDT_id" Mode="In" Type="Int32" />
+      <Parameter Name="DichVu_id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_XoaCTDT">
       <Parameter Name="id" Mode="In" Type="Int32" />
@@ -847,11 +857,18 @@
     <Property Type="Int32" Name="id" Nullable="false" />
     <Property Type="Int32" Name="BuoiDieuTri" Nullable="true" />
     <Property Type="Int32" Name="ThanhTien" Nullable="true" />
+    <Property Type="Boolean" Name="DaThanhToan" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_load_BDT_DichVu_Result">
+    <Property Type="Int32" Name="BDT_id" Nullable="false" />
+    <Property Type="String" Name="TenDichVu" Nullable="true" MaxLength="200" />
+    <Property Type="Int32" Name="GiaDichVu" Nullable="true" />
   </ComplexType>
   <ComplexType Name="sp_loadDonThuoc_BDT_Result">
     <Property Type="Int32" Name="id" Nullable="false" />
     <Property Type="Int32" Name="BuoiDieuTri" Nullable="true" />
     <Property Type="Int32" Name="ThanhTien" Nullable="true" />
+    <Property Type="Boolean" Name="DaThanhToan" Nullable="true" />
   </ComplexType>
   <ComplexType Name="sp_loadHinhAnhBDT_Result">
     <Property Type="Int32" Name="id" Nullable="false" />

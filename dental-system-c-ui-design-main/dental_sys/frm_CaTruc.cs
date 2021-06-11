@@ -193,5 +193,10 @@ namespace dental_sys
 
             Controls.Add(tableLayoutPanel1);
         }
+
+        private void frm_CaTruc_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

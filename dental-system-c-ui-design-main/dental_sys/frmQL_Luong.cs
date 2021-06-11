@@ -275,50 +275,53 @@ namespace dental_sys
 
         private void dgv_TraLuong_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            String columnName = dgv_TraLuong.Columns[e.ColumnIndex].Name;
-            if (columnName.Equals(BUTTONS)) // khi click vào nút "Trả lương" thì sẽ đánh dấu ngày trả lương cho nhân viên là ngày hiện tái
+            if(e.RowIndex >= 0)
             {
-                DataGridViewRow row = dgv_TraLuong.Rows[e.RowIndex];
-                int traLuongId = Int32.Parse(row.Cells[ID].Value.ToString());
-
-                // nếu chưa đánh dấu trả lương thì đánh dấu, nếu đã đánh dấu thì bỏ đánh dấu
-                SqlConnection con = ConnectProvider.GetConnection(); con.Open();
-                SqlDataReader sqlDataReader; SqlCommand sqlCommand;
-                string query = "select NgayTra from TraLuong ";
-                query += string.Format("where id = {0}", traLuongId);
-                sqlCommand = new SqlCommand(query, con);
-                sqlDataReader = sqlCommand.ExecuteReader(); sqlDataReader.Read();
-                try // nếu đã đánh dấu trả lương
+                String columnName = dgv_TraLuong.Columns[e.ColumnIndex].Name;
+                if (columnName.Equals(BUTTONS)) // khi click vào nút "Trả lương" thì sẽ đánh dấu ngày trả lương cho nhân viên là ngày hiện tái
                 {
-                    DateTime ngayTra = sqlDataReader.GetDateTime(0);
+                    DataGridViewRow row = dgv_TraLuong.Rows[e.RowIndex];
+                    int traLuongId = Int32.Parse(row.Cells[ID].Value.ToString());
 
-                    con = ConnectProvider.GetConnection(); con.Open();
-                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-                    string update = "update TraLuong ";
-                    update += string.Format("set NgayTra = {0} ", "null");
-                    update += string.Format("where id = {0}", traLuongId);
-                    sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-                    sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+                    // nếu chưa đánh dấu trả lương thì đánh dấu, nếu đã đánh dấu thì bỏ đánh dấu
+                    SqlConnection con = ConnectProvider.GetConnection(); con.Open();
+                    SqlDataReader sqlDataReader; SqlCommand sqlCommand;
+                    string query = "select NgayTra from TraLuong ";
+                    query += string.Format("where id = {0}", traLuongId);
+                    sqlCommand = new SqlCommand(query, con);
+                    sqlDataReader = sqlCommand.ExecuteReader(); sqlDataReader.Read();
+                    try // nếu đã đánh dấu trả lương
+                    {
+                        DateTime ngayTra = sqlDataReader.GetDateTime(0);
 
-                    loadTraLuong(getFilter(), cb_trangThai.Text);
+                        con = ConnectProvider.GetConnection(); con.Open();
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+                        string update = "update TraLuong ";
+                        update += string.Format("set NgayTra = {0} ", "null");
+                        update += string.Format("where id = {0}", traLuongId);
+                        sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+                        sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+                        loadTraLuong(getFilter(), cb_trangThai.Text);
+                        con.Close();
+                    }
+                    catch (Exception ex) // nếu chưa đánh dấu trả lương (cột NgayTra sẽ bằng null và khi GetDateTime(0) thì sẽ nhảy xuống khối catch)
+                    {
+                        DateTime current = DateTime.Now.Date;
+
+                        con = ConnectProvider.GetConnection(); con.Open();
+                        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+                        string update = "update TraLuong ";
+                        update += string.Format("set NgayTra = '{0}' ", current);
+                        update += string.Format("where id = {0}", traLuongId);
+                        sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
+                        sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
+
+                        loadTraLuong(getFilter(), cb_trangThai.Text);
+                        con.Close();
+                    }
                     con.Close();
                 }
-                catch (Exception ex) // nếu chưa đánh dấu trả lương (cột NgayTra sẽ bằng null và khi GetDateTime(0) thì sẽ nhảy xuống khối catch)
-                {
-                    DateTime current = DateTime.Now.Date;
-
-                    con = ConnectProvider.GetConnection(); con.Open();
-                    SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-                    string update = "update TraLuong ";
-                    update += string.Format("set NgayTra = '{0}' ", current);
-                    update += string.Format("where id = {0}", traLuongId);
-                    sqlDataAdapter.UpdateCommand = new SqlCommand(update, con);
-                    sqlDataAdapter.UpdateCommand.ExecuteNonQuery();
-
-                    loadTraLuong(getFilter(), cb_trangThai.Text);
-                    con.Close();
-                }
-                con.Close();
             }
         }
 
@@ -334,14 +337,22 @@ namespace dental_sys
 
         private void dgv_Roles_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataGridViewRow row = dgv_Roles.SelectedRows[0];
-            int mucLuong = Int32.Parse(row.Cells[MUC_LUONG].Value.ToString());
-            int roleId = Int32.Parse(row.Cells[ID].Value.ToString());
-            txtMucLuong.Text = mucLuong.ToString();
-            currentRoleId = roleId;
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgv_Roles.SelectedRows[0];
+                int mucLuong = Int32.Parse(row.Cells[MUC_LUONG].Value.ToString());
+                int roleId = Int32.Parse(row.Cells[ID].Value.ToString());
+                txtMucLuong.Text = mucLuong.ToString();
+                currentRoleId = roleId;
+            }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnSua_Click_1(object sender, EventArgs e)
         {
             // validate
             int mucLuong = 0;
@@ -387,6 +398,5 @@ namespace dental_sys
             loadRole();
             con.Close();
         }
-
     }
 }

@@ -25,12 +25,21 @@ namespace dental_sys
             this.donThuocId = donThuocId;
             this.emailKH = emailKH;
             MessageBox.Show("" + donThuocId);
+            this.CenterToScreen();
         }
 
         private void frmChiTietDonThuoc_Load(object sender, EventArgs e)
         {
 
             txtIDDonThuoc.Enabled = false;
+
+
+            dataGridView6.Columns["id"].Visible = false;
+            dataGridView6.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView6.ReadOnly = true;
+            dataGridView6.AllowUserToAddRows = false;
+            dataGridView6.MultiSelect = false;
+
             using (thuctapEntities qlCTDT = new thuctapEntities())
             {
                 txtIDDonThuoc.Text = Convert.ToString(donThuocId);
@@ -43,9 +52,7 @@ namespace dental_sys
         {
             using (thuctapEntities qlCTDT = new thuctapEntities())
             {
-                dataGridView6.DataSource = qlCTDT.ChiTietDonThuocs.Where(p => p.Donthuoc_id == donThuocId).ToList();
-           
-            
+                dataGridView6.DataSource = qlCTDT.ChiTietDonThuocs.Where(p => p.Donthuoc_id == donThuocId).ToList();         
             }
         }
         string idCTHD = "";
@@ -73,47 +80,52 @@ namespace dental_sys
         {
             using (thuctapEntities qlCTDT = new thuctapEntities())
             {
-                ChiTietDonThuoc CTDT = new ChiTietDonThuoc();
-                CTDT.TenThuoc = txtTenThuoc.Text;
                 try
                 {
-                    CTDT.SoLuong = int.Parse(txtSoLuong.Text);
+                    ChiTietDonThuoc CTDT = new ChiTietDonThuoc();
+                    CTDT.TenThuoc = txtTenThuoc.Text;
+                    try
+                    {
+                        CTDT.SoLuong = int.Parse(txtSoLuong.Text);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Số lượng phải là số");
+                        return;
+                    }
+
+                    CTDT.Donvi = cbDonVi.Text;
+                    CTDT.Donthuoc_id = int.Parse(txtIDDonThuoc.Text);
+                    try
+                    {
+                        CTDT.DonGia = int.Parse(txtDonGia.Text);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Đơn giá phải là số");
+                    }
+
+                    CTDT.HuongDan = txtHDSD.Text;
+
+                    qlCTDT.ChiTietDonThuocs.Add(CTDT);
+                    qlCTDT.SaveChanges();
+
+                    obj.loadData();
+                    dataGridView6.Update();
+                    dataGridView6.Refresh();
+
+                    loadData();
+                    refresh();
                 }
                 catch (Exception)
                 {
-                    MessageBox.Show("Số lượng chưa hợp lệ");
-                    return;
-                }
-                
-                CTDT.Donvi = cbDonVi.Text;
-                CTDT.Donthuoc_id = int.Parse(txtIDDonThuoc.Text);
-                CTDT.DonGia = int.Parse(txtDonGia.Text);
-                CTDT.HuongDan = txtHDSD.Text;
-
-                qlCTDT.ChiTietDonThuocs.Add(CTDT);
-                qlCTDT.SaveChanges();
-
-                obj.loadData();
-                dataGridView6.Update();
-                dataGridView6.Refresh();
-
-                loadData();
-
-
-               
+                }               
             }
         }
 
         private void btnXuatCTHD_Click(object sender, EventArgs e)
         {
-            int id = int.Parse(txtIDDonThuoc.Text);
-            using (thuctapEntities qlCTHD = new thuctapEntities())
-            {
-                this.Hide();
-                frmXuatCTDT f = new frmXuatCTDT(id, emailKH);
-                f.ShowDialog();
-                this.Show();
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -136,6 +148,9 @@ namespace dental_sys
                     qlCTDH.sp_XoaCTDT(int.Parse(this.idCTHD));
                     qlCTDH.SaveChanges();
                     loadData();
+                    obj.loadData();
+                    dataGridView6.Update();
+                    dataGridView6.Refresh();
                     MessageBox.Show("Đã xoá thành công");
                     this.idCTHD = "";
                 }
@@ -162,24 +177,45 @@ namespace dental_sys
                     MessageBox.Show("Vui lòng chọn thông tin đơn thuốc cần sửa");
                     return;
                 }
-                try
+                else
                 {
-                    int id = int.Parse(dataGridView6.CurrentRow.Cells[0].Value.ToString());
-                    ChiTietDonThuoc ctdt = qlCTDT.ChiTietDonThuocs.FirstOrDefault(p => p.id == id);
-                    ctdt.TenThuoc = txtTenThuoc.Text;
-                    ctdt.SoLuong = int.Parse(txtSoLuong.Text);
-                    ctdt.Donvi = cbDonVi.SelectedItem.ToString();
-                    ctdt.DonGia = int.Parse(txtDonGia.Text);
-                    ctdt.HuongDan = txtHDSD.Text;
+                    try
+                    {
+                        int id = int.Parse(dataGridView6.CurrentRow.Cells[0].Value.ToString());
+                        ChiTietDonThuoc ctdt = qlCTDT.ChiTietDonThuocs.FirstOrDefault(p => p.id == id);
+                        ctdt.TenThuoc = txtTenThuoc.Text;
+                        ctdt.SoLuong = int.Parse(txtSoLuong.Text);
+                        ctdt.Donvi = cbDonVi.SelectedItem.ToString();
+                        ctdt.DonGia = int.Parse(txtDonGia.Text);
+                        ctdt.HuongDan = txtHDSD.Text;
 
-                    qlCTDT.SaveChanges();
-                    loadData();
-                    MessageBox.Show("Sửa thành công");
-                    refresh();
+                        qlCTDT.SaveChanges();
+                        loadData();
+                        MessageBox.Show("Sửa thành công");
+                        refresh();
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
-                catch (Exception)
-                {
-                }
+                
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXuatCTHD_Click_1(object sender, EventArgs e)
+        {
+            int id = int.Parse(txtIDDonThuoc.Text);
+            using (thuctapEntities qlCTHD = new thuctapEntities())
+            {
+                this.Hide();
+                frmXuatCTDT f = new frmXuatCTDT(id, emailKH);
+                f.ShowDialog();
+                this.Show();
             }
         }
     }

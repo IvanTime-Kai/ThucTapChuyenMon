@@ -79,6 +79,9 @@
       <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK, Version=1.1.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.1.1.2225.0\lib\net20\OpenTK.dll</HintPath>
     </Reference>
@@ -133,12 +136,6 @@
     <Compile Include="CuocHen.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dashboard.Designer.cs">
-      <DependentUpon>Dashboard.cs</DependentUpon>
-    </Compile>
     <Compile Include="DataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -167,6 +164,12 @@
     </Compile>
     <Compile Include="frmQL_Luong.Designer.cs">
       <DependentUpon>frmQL_Luong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQL_ThanhToan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQL_ThanhToan.Designer.cs">
+      <DependentUpon>frmQL_ThanhToan.cs</DependentUpon>
     </Compile>
     <Compile Include="frmQL_ThuChi.cs">
       <SubType>Form</SubType>
@@ -306,11 +309,11 @@
     <Compile Include="Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Messages.cs">
+    <Compile Include="MainHinhAnh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Messages.Designer.cs">
-      <DependentUpon>Messages.cs</DependentUpon>
+    <Compile Include="MainHinhAnh.Designer.cs">
+      <DependentUpon>MainHinhAnh.cs</DependentUpon>
     </Compile>
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -327,6 +330,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MoMoSecurity.cs" />
     <Compile Include="NhaCungCap.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -343,18 +347,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NhungCaTrucSapToiCuaMotBacSi_DataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Patient.cs">
+    <Compile Include="frmQuanLy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Patient.Designer.cs">
-      <DependentUpon>Patient.cs</DependentUpon>
+    <Compile Include="frmQuanLy.Designer.cs">
+      <DependentUpon>frmQuanLy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Principal.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Principal.Designer.cs">
-      <DependentUpon>Principal.cs</DependentUpon>
-    </Compile>
+    <Compile Include="PaymentRequest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="frmQuanLyBenhNhan.cs">
@@ -403,6 +402,9 @@
     <Compile Include="sp_loadHinhAnhBDT_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="sp_load_BDT_DichVu_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_NhungCaTruc_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -437,6 +439,8 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="ThanhToanADO_BDT.cs" />
+    <Compile Include="ThanhToanADO_DT.cs" />
     <Compile Include="ThongTinTraLuongADO.cs" />
     <Compile Include="Thu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -474,9 +478,6 @@
     <Compile Include="YeuCauXuat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Dashboard.resx">
-      <DependentUpon>Dashboard.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmQL_CaTruc.resx">
       <DependentUpon>frmQL_CaTruc.cs</DependentUpon>
     </EmbeddedResource>
@@ -485,6 +486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmQL_Luong.resx">
       <DependentUpon>frmQL_Luong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQL_ThanhToan.resx">
+      <DependentUpon>frmQL_ThanhToan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQL_ThuChi.resx">
       <DependentUpon>frmQL_ThuChi.cs</DependentUpon>
@@ -549,14 +553,11 @@
     <EmbeddedResource Include="Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Messages.resx">
-      <DependentUpon>Messages.cs</DependentUpon>
+    <EmbeddedResource Include="frmQuanLy.resx">
+      <DependentUpon>frmQuanLy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Patient.resx">
-      <DependentUpon>Patient.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Principal.resx">
-      <DependentUpon>Principal.cs</DependentUpon>
+    <EmbeddedResource Include="MainHinhAnh.resx">
+      <DependentUpon>MainHinhAnh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -661,6 +662,31 @@
     <None Include="Resources\icons8_password_64.png" />
     <None Include="Resources\icons8_good_pincode_64.png" />
     <None Include="Resources\icons8_lady_window_lock_64.png" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\2.jpg" />
+    <None Include="Resources\3.jpg" />
+    <None Include="Resources\4.jpg" />
+    <None Include="Resources\5.jpg" />
+    <None Include="Resources\6.png" />
+    <None Include="Resources\icons8_synchronize_32.png" />
+    <None Include="Resources\icons8_checked_32.png" />
+    <None Include="Resources\icons8_inspection_32.png" />
+    <None Include="Resources\icons8_inspection_321.png" />
+    <None Include="Resources\icons8_search_32.png" />
+    <None Include="Resources\icons8_file_submodule_32.png" />
+    <None Include="Resources\icons8_treatment_32.png" />
+    <None Include="Resources\icons8_pdf_32.png" />
+    <None Include="Resources\icons8_file_submodule_321.png" />
+    <None Include="Resources\icons8_microsoft_excel_32.png" />
+    <None Include="Resources\icons8_message_preview_32.png" />
+    <None Include="Resources\icons8_medical_doctor_32.png" />
+    <None Include="Resources\icons8_money_32.png" />
+    <None Include="Resources\icons8_recycling_32.png" />
+    <None Include="Resources\icons8_general_ledger_32.png" />
+    <None Include="Resources\icons8_report_file_32.png" />
+    <None Include="Resources\icons8_exit_32.png" />
+    <None Include="Resources\icons8_power_off_button_32.png" />
+    <None Include="Resources\icons8_power_off_button_321.png" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -671,6 +697,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\icons8_refund_32.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

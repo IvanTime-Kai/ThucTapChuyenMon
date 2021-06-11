@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="thuctapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="thuctapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BDT_DichVu">
           <Key>
             <PropertyRef Name="BDT_id" />
@@ -55,6 +55,7 @@
           <Property Name="BacSi" Type="int" />
           <Property Name="BenhNhan" Type="int" />
           <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+          <Property Name="DaThanhToan" Type="bit" />
         </EntityType>
         <EntityType Name="CaTruc">
           <Key>
@@ -124,6 +125,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BuoiDieuTri" Type="int" />
           <Property Name="ThanhTien" Type="int" />
+          <Property Name="DaThanhToan" Type="bit" />
         </EntityType>
         <EntityType Name="HinhAnhDieuTri">
           <Key>
@@ -213,7 +215,7 @@
           <Property Name="Chucvu" Type="int" />
           <Property Name="AnhChup" Type="image" />
           <Property Name="SoDienThoai" Type="varchar" MaxLength="20" />
-          <Property Name="MatKhau" Type="varchar" MaxLength="10" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="100" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
           <Property Name="NgayVaoLam" Type="date" />
         </EntityType>
@@ -633,6 +635,7 @@
         <Function Name="sp_HinhAnhBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_load_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_loadDonThuoc_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
@@ -644,6 +647,9 @@
         </Function>
         <Function Name="sp_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_Sua_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DichVu_id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_TaoBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BDT_id" Type="int" Mode="In" />
@@ -685,6 +691,10 @@
         </Function>
         <Function Name="sp_XoaBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BDT_id" Type="int" Mode="In" />
+          <Parameter Name="DichVu_id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_XoaCTDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -838,7 +848,8 @@
             <End Role="YeuCauXuat" EntitySet="YeuCauXuat" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="thuctapModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -881,6 +892,7 @@
           <Property Name="BacSi" Type="Int32" />
           <Property Name="BenhNhan" Type="Int32" />
           <Property Name="GhiChu" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DaThanhToan" Type="Boolean" />
           <NavigationProperty Name="BenhNhan1" Relationship="Self.FK__BuoiDieuT__BenhN__59FA5E80" FromRole="BuoiDieuTri" ToRole="BenhNhan" />
           <NavigationProperty Name="User" Relationship="Self.FK__BuoiDieuT__BacSi__59063A47" FromRole="BuoiDieuTri" ToRole="Users" />
           <NavigationProperty Name="DonThuocs" Relationship="Self.FK__DonThuoc__BuoiDi__628FA481" FromRole="BuoiDieuTri" ToRole="DonThuoc" />
@@ -954,6 +966,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BuoiDieuTri" Type="Int32" />
           <Property Name="ThanhTien" Type="Int32" />
+          <Property Name="DaThanhToan" Type="Boolean" />
           <NavigationProperty Name="BuoiDieuTri1" Relationship="Self.FK__DonThuoc__BuoiDi__628FA481" FromRole="DonThuoc" ToRole="BuoiDieuTri" />
           <NavigationProperty Name="ChiTietDonThuocs" Relationship="Self.FK__ChiTietDo__Donth__5DCAEF64" FromRole="DonThuoc" ToRole="ChiTietDonThuoc" />
         </EntityType>
@@ -1055,7 +1068,7 @@
           <Property Name="Chucvu" Type="Int32" />
           <Property Name="AnhChup" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="SoDienThoai" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MatKhau" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="NgayVaoLam" Type="DateTime" Precision="0" />
           <NavigationProperty Name="BenhNhans" Relationship="Self.FK__BenhNhan__NguoiT__5812160E" FromRole="Users" ToRole="BenhNhan" />
@@ -1524,22 +1537,22 @@
             <End Role="VatLieu" EntitySet="VatLieux" />
           </AssociationSet>
           <FunctionImport Name="sp_BaoCaoTheoDichVu" ReturnType="Collection(thuctapModel.sp_BaoCaoTheoDichVu_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_BDT_DichVu" ReturnType="Collection(thuctapModel.sp_BDT_DichVu_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_BDT_HinhAnh" ReturnType="Collection(thuctapModel.sp_BDT_HinhAnh_Result)" />
           <FunctionImport Name="sp_BenhNen" ReturnType="Collection(thuctapModel.sp_BenhNen_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_BenhNhan_BDT" ReturnType="Collection(thuctapModel.sp_BenhNhan_BDT_Result)" />
           <FunctionImport Name="sp_BenhNhan_not_BDT" ReturnType="Collection(thuctapModel.sp_BenhNhan_not_BDT_Result)" />
           <FunctionImport Name="sp_BenhNhanTiepNhan_BDT" ReturnType="Collection(thuctapModel.sp_BenhNhanTiepNhan_BDT_Result)">
-          <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_BenhNhanTiepNhan_BDT_have" ReturnType="Collection(thuctapModel.sp_BenhNhanTiepNhan_BDT_have_Result)">
-          <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
+            <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_BuoiDieutriVaHinhAnh">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1552,25 +1565,29 @@
             <Parameter Name="Hinh" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sp_CT_BuoiDieuTri" ReturnType="Collection(thuctapModel.sp_CT_BuoiDieuTri_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_DonThuoc" ReturnType="Collection(thuctapModel.sp_DonThuoc_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_HinhAnhBDT">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="sp_load_BDT_DichVu" ReturnType="Collection(thuctapModel.sp_load_BDT_DichVu_Result)" />
           <FunctionImport Name="sp_loadDonThuoc_BDT" ReturnType="Collection(thuctapModel.sp_loadDonThuoc_BDT_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_loadHinhAnhBDT" ReturnType="Collection(thuctapModel.sp_loadHinhAnhBDT_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_NhungCaTruc" ReturnType="Collection(thuctapModel.sp_NhungCaTruc_Result)">
-          <Parameter Name="userId" Mode="In" Type="Int32" />
+            <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Report" ReturnType="Collection(thuctapModel.sp_Report_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Sua_BDT_DichVu">
+            <Parameter Name="DichVu_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_TaoBDT_DichVu">
             <Parameter Name="BDT_id" Mode="In" Type="Int32" />
@@ -1581,7 +1598,7 @@
             <Parameter Name="dayEnd" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_TimKiemTen" ReturnType="Collection(thuctapModel.sp_TimKiemTen_Result)">
-          <Parameter Name="ten" Mode="In" Type="String" />
+            <Parameter Name="ten" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_TongTienBDT" ReturnType="Collection(thuctapModel.sp_TongTienBDT_Result)">
             <Parameter Name="dayStart" Mode="In" Type="DateTime" />
@@ -1608,22 +1625,26 @@
             <Parameter Name="dayEnd" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_XemLuong" ReturnType="Collection(thuctapModel.sp_XemLuong_Result)">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaBDT">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaBDT_DichVu">
+            <Parameter Name="BDT_id" Mode="In" Type="Int32" />
+            <Parameter Name="DichVu_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaCTDT">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaDichVu">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaDonThuoc">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaUser">
-          <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_BaoCaoTheoDichVu_Result">
@@ -1689,11 +1710,18 @@
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="Int32" Name="BuoiDieuTri" Nullable="true" />
           <Property Type="Int32" Name="ThanhTien" Nullable="true" />
+          <Property Type="Boolean" Name="DaThanhToan" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_load_BDT_DichVu_Result">
+          <Property Type="Int32" Name="BDT_id" Nullable="false" />
+          <Property Type="String" Name="TenDichVu" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="GiaDichVu" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_loadDonThuoc_BDT_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="Int32" Name="BuoiDieuTri" Nullable="true" />
           <Property Type="Int32" Name="ThanhTien" Nullable="true" />
+          <Property Type="Boolean" Name="DaThanhToan" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_loadHinhAnhBDT_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1805,6 +1833,7 @@
                 <ScalarProperty Name="BacSi" ColumnName="BacSi" />
                 <ScalarProperty Name="BenhNhan" ColumnName="BenhNhan" />
                 <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1872,6 +1901,7 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2150,16 +2180,27 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_HinhAnhBDT" FunctionName="thuctapModel.Store.sp_HinhAnhBDT" />
+          <FunctionImportMapping FunctionImportName="sp_load_BDT_DichVu" FunctionName="thuctapModel.Store.sp_load_BDT_DichVu">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="thuctapModel.sp_load_BDT_DichVu_Result">
+                <ScalarProperty Name="BDT_id" ColumnName="BDT_id" />
+                <ScalarProperty Name="TenDichVu" ColumnName="TenDichVu" />
+                <ScalarProperty Name="GiaDichVu" ColumnName="GiaDichVu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_loadDonThuoc_BDT" FunctionName="thuctapModel.Store.sp_loadDonThuoc_BDT">
             <ResultMapping>
               <ComplexTypeMapping TypeName="thuctapModel.sp_loadDonThuoc_BDT_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="BuoiDieuTri" ColumnName="BuoiDieuTri" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+                <ScalarProperty Name="DaThanhToan" ColumnName="DaThanhToan" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2198,6 +2239,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Sua_BDT_DichVu" FunctionName="thuctapModel.Store.sp_Sua_BDT_DichVu" />
           <FunctionImportMapping FunctionImportName="sp_TaoBDT_DichVu" FunctionName="thuctapModel.Store.sp_TaoBDT_DichVu" />
           <FunctionImportMapping FunctionImportName="sp_Thu" FunctionName="thuctapModel.Store.sp_Thu">
             <ResultMapping>
@@ -2282,6 +2324,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_XoaBDT" FunctionName="thuctapModel.Store.sp_XoaBDT" />
+          <FunctionImportMapping FunctionImportName="sp_XoaBDT_DichVu" FunctionName="thuctapModel.Store.sp_XoaBDT_DichVu" />
           <FunctionImportMapping FunctionImportName="sp_XoaCTDT" FunctionName="thuctapModel.Store.sp_XoaCTDT" />
           <FunctionImportMapping FunctionImportName="sp_XoaDichVu" FunctionName="thuctapModel.Store.sp_XoaDichVu" />
           <FunctionImportMapping FunctionImportName="sp_XoaDonThuoc" FunctionName="thuctapModel.Store.sp_XoaDonThuoc" />

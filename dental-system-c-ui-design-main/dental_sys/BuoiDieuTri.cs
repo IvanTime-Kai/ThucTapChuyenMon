@@ -29,6 +29,7 @@ namespace dental_sys
         public Nullable<int> BacSi { get; set; }
         public Nullable<int> BenhNhan { get; set; }
         public string GhiChu { get; set; }
+        public Nullable<bool> DaThanhToan { get; set; }
     
         public virtual BenhNhan BenhNhan1 { get; set; }
         public virtual User User { get; set; }

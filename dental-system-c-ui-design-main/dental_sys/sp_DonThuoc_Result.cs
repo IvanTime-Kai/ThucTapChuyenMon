@@ -16,5 +16,6 @@ namespace dental_sys
         public int id { get; set; }
         public Nullable<int> BuoiDieuTri { get; set; }
         public Nullable<int> ThanhTien { get; set; }
+        public Nullable<bool> DaThanhToan { get; set; }
     }
 }

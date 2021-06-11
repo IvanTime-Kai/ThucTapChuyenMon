@@ -30,9 +30,11 @@ namespace dental_sys
         const string GMAIL_USERNAME = "trungtamnhakhoa74";
         const string GMAIL_PASSWORD = "trungtamnhakhoa74.pass";
         int selectedCuocHenId = 0;
-        public frmQL_LichHen()
+        int currentBacsiId;
+        public frmQL_LichHen(int currentBacSiId)
         {
             InitializeComponent();
+            this.currentBacsiId = currentBacSiId;
         }
 
         private void resetData()
@@ -312,27 +314,110 @@ namespace dental_sys
 
         private void dgv_LichHen_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedRowIndex = dgv_LichHen.SelectedRows[0].Index;
+           if(e.RowIndex >= 0)
+            {
+                int selectedRowIndex = dgv_LichHen.SelectedRows[0].Index;
 
-            string tenBacSi = dgv_LichHen.Rows[selectedRowIndex].Cells[TEN_BAC_SI].Value.ToString();
-            string tenBenhNhan = dgv_LichHen.Rows[selectedRowIndex].Cells[TEN_BENH_NHAN].Value.ToString();
-            DateTime ngayHen = (DateTime)dgv_LichHen.Rows[selectedRowIndex].Cells[NGAY_HEN].Value;
-            string Ca = (string)dgv_LichHen.Rows[selectedRowIndex].Cells[CA].Value.ToString();
-            string noiDung = dgv_LichHen.Rows[selectedRowIndex].Cells[NOI_DUNG].Value.ToString();
-            string trangThai = dgv_LichHen.Rows[selectedRowIndex].Cells[TRANG_THAI].Value.ToString();
-            int id = (Int32)dgv_LichHen.Rows[selectedRowIndex].Cells[ID].Value;
+                string tenBacSi = dgv_LichHen.Rows[selectedRowIndex].Cells[TEN_BAC_SI].Value.ToString();
+                string tenBenhNhan = dgv_LichHen.Rows[selectedRowIndex].Cells[TEN_BENH_NHAN].Value.ToString();
+                DateTime ngayHen = (DateTime)dgv_LichHen.Rows[selectedRowIndex].Cells[NGAY_HEN].Value;
+                string Ca = (string)dgv_LichHen.Rows[selectedRowIndex].Cells[CA].Value.ToString();
+                string noiDung = dgv_LichHen.Rows[selectedRowIndex].Cells[NOI_DUNG].Value.ToString();
+                string trangThai = dgv_LichHen.Rows[selectedRowIndex].Cells[TRANG_THAI].Value.ToString();
+                int id = (Int32)dgv_LichHen.Rows[selectedRowIndex].Cells[ID].Value;
 
 
-            cbTenBacSi.Text = tenBacSi;
-            cbTenBenhNhan.Text = tenBenhNhan;
-            dtpNgayHen.Value = ngayHen;
-            cbCa.Text = Ca;
-            txtNoiDung.Text = noiDung;
-            cbTrangThai.Text = trangThai;
-            selectedCuocHenId = id;
+                cbTenBacSi.Text = tenBacSi;
+                cbTenBenhNhan.Text = tenBenhNhan;
+                dtpNgayHen.Value = ngayHen;
+                cbCa.Text = Ca;
+                txtNoiDung.Text = noiDung;
+                cbTrangThai.Text = trangThai;
+                selectedCuocHenId = id;
+            }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private string getCurrentOrderBy()
+        {
+            string selectedText = cbSapXep.Text;
+            string orderBy = string.Empty;
+            if (selectedText.Equals("Bác sĩ"))
+            {
+                orderBy = "Ten";
+            }
+            else if (selectedText.Equals("Bệnh nhân"))
+            {
+                orderBy = "TenBenhNhan";
+            }
+            else if (selectedText.Equals("Ngày hẹn"))
+            {
+                orderBy = "NgayHen";
+            }
+
+            return orderBy;
+        }
+
+        private void cbSapXep_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
+        }
+
+        private void btnDanhDau_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void dtpFrom_ValueChanged(object sender, EventArgs e)
+        {
+            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
+            {
+                MessageBox.Show("Thao tác không hợp lệ", WARNING);
+                dtpFrom.Value = DateTime.Now.Date;
+                dtpTo.Value = new DateTime(dtpFrom.Value.Year, dtpFrom.Value.Month, dtpFrom.Value.Day + 1).Date;
+                return;
+            }
+            loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
+        }
+
+        private void dtpTo_ValueChanged(object sender, EventArgs e)
+        {
+            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
+            {
+                MessageBox.Show("Thao tác không hợp lệ", WARNING);
+                dtpFrom.Value = DateTime.Now.Date;
+                dtpTo.Value = new DateTime(dtpFrom.Value.Year, dtpFrom.Value.Month, dtpFrom.Value.Day + 1).Date;
+                // loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value); bỏ dòng này
+                return;
+            }
+            loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
+        }
+
+        private bool validateFromTo(DateTime from, DateTime to)
+        {
+            return (DateTime.Compare(from, to) > 0) ? false : true;
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnThem_Click_1(object sender, EventArgs e)
         {
             SqlConnection con = ConnectProvider.GetConnection(); con.Open();
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
@@ -372,43 +457,7 @@ namespace dental_sys
             con.Close();
         }
 
-        private string getCurrentOrderBy()
-        {
-            string selectedText = cbSapXep.Text;
-            string orderBy = string.Empty;
-            if (selectedText.Equals("Bác sĩ"))
-            {
-                orderBy = "Ten";
-            }
-            else if (selectedText.Equals("Bệnh nhân"))
-            {
-                orderBy = "TenBenhNhan";
-            }
-            else if (selectedText.Equals("Ngày hẹn"))
-            {
-                orderBy = "NgayHen";
-            }
-
-            return orderBy;
-        }
-
-        private void cbSapXep_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
-        }
-
-        private void btnDanhDau_Click(object sender, EventArgs e)
-        {
-            frm_CuocHen cuocHen = new frm_CuocHen();
-            DialogResult dr = cuocHen.ShowDialog(this);
-            if (dr == DialogResult.Cancel || dr == DialogResult.OK)
-            {
-                cuocHen.Close();
-                loadLichHen(string.Empty, dtpFrom.Value, dtpTo.Value);
-            }
-        }
-
-        private void btnSua_Click(object sender, EventArgs e)
+        private void btnSua_Click_1(object sender, EventArgs e)
         {
             if (selectedCuocHenId == 0)
             {
@@ -456,7 +505,7 @@ namespace dental_sys
             con.Close();
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnXoa_Click_1(object sender, EventArgs e)
         {
             if (selectedCuocHenId == 0)
             {
@@ -475,39 +524,22 @@ namespace dental_sys
             con.Close();
         }
 
-        private void dtpFrom_ValueChanged(object sender, EventArgs e)
+        private void btnDanhDau_Click_1(object sender, EventArgs e)
         {
-            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
+            
+            frm_CuocHen cuocHen = new frm_CuocHen(currentBacsiId);
+            DialogResult dr = cuocHen.ShowDialog(this);
+            if (dr == DialogResult.Cancel || dr == DialogResult.OK)
             {
-                MessageBox.Show("Thao tác không hợp lệ", WARNING);
-                dtpFrom.Value = DateTime.Now.Date;
-                dtpTo.Value = new DateTime(dtpFrom.Value.Year, dtpFrom.Value.Month, dtpFrom.Value.Day + 1).Date;
-                return;
+                cuocHen.Close();
+                loadLichHen(string.Empty, dtpFrom.Value, dtpTo.Value);
             }
-            loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
         }
 
-        private void dtpTo_ValueChanged(object sender, EventArgs e)
-        {
-            if (!validateFromTo(dtpFrom.Value, dtpTo.Value))
-            {
-                MessageBox.Show("Thao tác không hợp lệ", WARNING);
-                dtpFrom.Value = DateTime.Now.Date;
-                dtpTo.Value = new DateTime(dtpFrom.Value.Year, dtpFrom.Value.Month, dtpFrom.Value.Day + 1).Date;
-                // loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value); bỏ dòng này
-                return;
-            }
-            loadLichHen(getCurrentOrderBy(), dtpFrom.Value, dtpTo.Value);
-        }
-
-        private bool validateFromTo(DateTime from, DateTime to)
-        {
-            return (DateTime.Compare(from, to) > 0) ? false : true;
-        }
-
-        private void btnReset_Click(object sender, EventArgs e)
+        private void btnReset_Click_1(object sender, EventArgs e)
         {
             setUp();
         }
+
     }
 }

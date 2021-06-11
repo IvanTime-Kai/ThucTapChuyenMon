@@ -33,6 +33,14 @@ namespace dental_sys
             // TODO: This line of code loads data into the 'thuctapDataSet1.DichVu' table. You can move, or remove it, as needed.
             this.dichVuTableAdapter.Fill(this.thuctapDataSet1.DichVu);
 
+
+
+            dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.MultiSelect = false;
+
             using (thuctapEntities qlBaoCao = new thuctapEntities())
             {
                 cbDichVu.DataSource = qlBaoCao.DichVus.ToList();
@@ -52,6 +60,8 @@ namespace dental_sys
                 txtChi.Text = sumTongChi.ToString();
                 txtChiTraLuong.Text = sumTongTraLuong.ToString();
                 lbTongChi.Text = Tongchi.ToString();
+
+                cbBuoiDieuTri.SelectedItem = 0;
             }
 
         }
@@ -71,8 +81,6 @@ namespace dental_sys
         {
             using (thuctapEntities qlBaoCao = new thuctapEntities())
             {
-                MessageBox.Show(cbBuoiDieuTri.SelectedIndex.ToString());
-
                 if (int.Parse(cbBuoiDieuTri.SelectedIndex.ToString()) == 1)
                 {
                     dgvBenhNhan.DataSource = qlBaoCao.sp_BenhNhan_BDT().ToList();
@@ -102,89 +110,11 @@ namespace dental_sys
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            using (thuctapEntities qlBaoCao = new thuctapEntities())
-            {
-
-                try
-                {
-                    dgvThuBDT.DataSource = qlBaoCao.sp_TongTienBDT(dtpDayStart.Value, dtpDayEnd.Value).ToList();
-                    dgvDonThuoc.DataSource = qlBaoCao.sp_TongTienDT(dtpDayStart.Value, dtpDayEnd.Value).ToList();
-                    dgvThu.DataSource = qlBaoCao.sp_TongTienThu(dtpDayStart.Value, dtpDayEnd.Value).ToList();
-
-
-
-                    for (int i = 0; i < dgvThuBDT.Rows.Count; i++)
-                    {
-                        sumTongBDT += int.Parse(dgvThuBDT.Rows[i].Cells[2].Value.ToString());
-                    }
-
-                    txtTongTienBDT.Text = Convert.ToString(sumTongBDT);
-
-                    for (int i = 0; i < dgvDonThuoc.Rows.Count; i++)
-                    {
-                        sumTongDT += int.Parse(dgvDonThuoc.Rows[i].Cells[1].Value.ToString());
-                    }
-
-                    txtTongTienDT.Text = Convert.ToString(sumTongDT);
-
-                    for (int i = 0; i < dgvThu.Rows.Count; i++)
-                    {
-                        sumTongThu += int.Parse(dgvThu.Rows[i].Cells[1].Value.ToString());
-                    }
-
-                    txtTongTienThu.Text = Convert.ToString(sumTongThu);
-
-
-                    lbTongThu.Text = (sumTongBDT + sumTongDT + sumTongThu).ToString();
-                }
-                catch (Exception)
-                {
-                }
-                
-            }
+            
         }
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
-            using (thuctapEntities qlBaoCao = new thuctapEntities())
-            {
-
-                try
-                {
-                    dgvVatLieu.DataSource = qlBaoCao.sp_TongTienVatLieu(dtpStart.Value, dtpEnd.Value).ToList();
-                    dgvChi.DataSource = qlBaoCao.sp_TongTienChi(dtpStart.Value, dtpEnd.Value).ToList();
-                    dgvTraLuong.DataSource = qlBaoCao.sp_TongTienNhanVien(dtpStart.Value, dtpEnd.Value).ToList();
-
-
-
-                    for (int i = 0; i < dgvVatLieu.Rows.Count; i++)
-                    {
-                        sumTongVL += int.Parse(dgvVatLieu.Rows[i].Cells[3].Value.ToString());
-                    }
-
-                    txtChiVL.Text = Convert.ToString(sumTongVL);
-
-                    for (int i = 0; i < dgvChi.Rows.Count; i++)
-                    {
-                        sumTongChi += int.Parse(dgvChi.Rows[i].Cells[1].Value.ToString());
-                    }
-
-                    txtChi.Text = Convert.ToString(sumTongChi);
-
-                    for (int i = 0; i < dgvTraLuong.Rows.Count; i++)
-                    {
-                        sumTongTraLuong += int.Parse(dgvTraLuong.Rows[i].Cells[3].Value.ToString());
-                    }
-
-                    txtChiTraLuong.Text = Convert.ToString(sumTongTraLuong);
-
-
-                    lbTongChi.Text = (sumTongVL + sumTongChi + sumTongTraLuong).ToString();
-                }
-                catch (Exception)
-                {
-                }
-                
-            }
+            
         }
 
         private void ToExcel(DataGridView dataGridView, string fileName)
@@ -234,9 +164,115 @@ namespace dental_sys
 
         private void btnExcel_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
+        {
+            using (thuctapEntities qlBaoCao = new thuctapEntities())
+            {
+
+                try
+                {
+                    dgvThuBDT.DataSource = qlBaoCao.sp_TongTienBDT(dtpDayStart.Value, dtpDayEnd.Value).ToList();
+                    dgvDonThuoc.DataSource = qlBaoCao.sp_TongTienDT(dtpDayStart.Value, dtpDayEnd.Value).ToList();
+                    dgvThu.DataSource = qlBaoCao.sp_TongTienThu(dtpDayStart.Value, dtpDayEnd.Value).ToList();
+
+
+
+                    for (int i = 0; i < dgvThuBDT.Rows.Count; i++)
+                    {
+                        sumTongBDT += int.Parse(dgvThuBDT.Rows[i].Cells[2].Value.ToString());
+                    }
+
+                    txtTongTienBDT.Text = Convert.ToString(sumTongBDT);
+
+                    for (int i = 0; i < dgvDonThuoc.Rows.Count; i++)
+                    {
+                        sumTongDT += int.Parse(dgvDonThuoc.Rows[i].Cells[1].Value.ToString());
+                    }
+
+                    txtTongTienDT.Text = Convert.ToString(sumTongDT);
+
+                    for (int i = 0; i < dgvThu.Rows.Count; i++)
+                    {
+                        sumTongThu += int.Parse(dgvThu.Rows[i].Cells[1].Value.ToString());
+                    }
+
+                    txtTongTienThu.Text = Convert.ToString(sumTongThu);
+
+
+                    lbTongThu.Text = (sumTongBDT + sumTongDT + sumTongThu).ToString();
+                }
+                catch (Exception)
+                {
+                }
+
+            }
+        }
+
+        private void btnTimKiem_Click_1(object sender, EventArgs e)
+        {
+            using (thuctapEntities qlBaoCao = new thuctapEntities())
+            {
+
+                try
+                {
+                    dgvVatLieu.DataSource = qlBaoCao.sp_TongTienVatLieu(dtpStart.Value, dtpEnd.Value).ToList();
+                    dgvChi.DataSource = qlBaoCao.sp_TongTienChi(dtpStart.Value, dtpEnd.Value).ToList();
+                    dgvTraLuong.DataSource = qlBaoCao.sp_TongTienNhanVien(dtpStart.Value, dtpEnd.Value).ToList();
+
+
+
+                    for (int i = 0; i < dgvVatLieu.Rows.Count; i++)
+                    {
+                        sumTongVL += int.Parse(dgvVatLieu.Rows[i].Cells[3].Value.ToString());
+                    }
+
+                    txtChiVL.Text = Convert.ToString(sumTongVL);
+
+                    for (int i = 0; i < dgvChi.Rows.Count; i++)
+                    {
+                        sumTongChi += int.Parse(dgvChi.Rows[i].Cells[1].Value.ToString());
+                    }
+
+                    txtChi.Text = Convert.ToString(sumTongChi);
+
+                    for (int i = 0; i < dgvTraLuong.Rows.Count; i++)
+                    {
+                        sumTongTraLuong += int.Parse(dgvTraLuong.Rows[i].Cells[3].Value.ToString());
+                    }
+
+                    txtChiTraLuong.Text = Convert.ToString(sumTongTraLuong);
+
+
+                    lbTongChi.Text = (sumTongVL + sumTongChi + sumTongTraLuong).ToString();
+                }
+                catch (Exception)
+                {
+                }
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExcel_Click_1(object sender, EventArgs e)
+        {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 ToExcel(dgvBenhNhan, saveFileDialog1.FileName);
+            }
+        }
+
+        private void btnExcel_DV_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ToExcel(dataGridView1, saveFileDialog1.FileName);
             }
         }
     }

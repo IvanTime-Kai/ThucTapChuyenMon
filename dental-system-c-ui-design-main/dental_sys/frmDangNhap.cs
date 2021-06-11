@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace dental_sys
         {
             InitializeComponent();
         }
+        frm_NhanDienKhuonMat frm_NDKM;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -41,26 +43,47 @@ namespace dental_sys
                         
                         try
                         {
-                            
-                            user = quanLy.Users.Single(p => p.Email == txtUser.Text && p.MatKhau == txtPassWord.Text);
-                            int id = int.Parse(quanLy.Users.Single(p => p.Email == txtUser.Text && p.MatKhau == txtPassWord.Text).id.ToString());
+                            byte[] temp = ASCIIEncoding.ASCII.GetBytes(txtPassWord.Text);
+                            byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+                            string hasPass = "";
+                            foreach (byte item in hasData)
+                            {
+                                hasPass += item;
+                            }
+
+                            user = quanLy.Users.Single(p => p.Email == txtUser.Text && p.MatKhau == hasPass);
+                            int id = int.Parse(quanLy.Users.Single(p => p.Email == txtUser.Text && p.MatKhau == hasPass).id.ToString());
                             MessageBox.Show("Đăng nhập thành công");
                             Role role = quanLy.Roles.FirstOrDefault(p => p.id == user.Chucvu);
                             try
                             {
                                 if (role.role_name == "Bác sĩ")
                                 {                                 
-                                    Loading _load = new Loading(id);
+                                    Loading _load = new Loading(id, true, true, true, false, false ,false ,false ,false ,false ,true);
                                     _load.Show();
-                                    
+                                    this.Hide();
+                                    frm_NDKM.Close();
+
                                 }
                                 else if (role.role_name == "Lễ tân")
                                 {
-                                    Loading _load = new Loading(id);
+                                    Loading _load = new Loading(id, true, true, false, false, false, false, false, false, false, true);
                                     _load.Show();
-                                    
+                                    this.Hide();
+                                    frm_NDKM.Close();
+
                                 }
-                                
+                                else if(role.role_name == "Giám đốc")
+                                {
+                                    Loading _load = new Loading(id, true, true, true, true, true, true, true, true, true, true);
+                                    _load.Show();
+                                    this.Hide();
+                                    frm_NDKM.Close();
+
+                                }
+
+
                             }
                             catch (Exception)
                             {
@@ -94,9 +117,36 @@ namespace dental_sys
 
         private void frmDangNhap_Shown(object sender, EventArgs e)
         {
-            frm_NhanDienKhuonMat frm_NhanDienKhuonMat = new frm_NhanDienKhuonMat();
-            frm_NhanDienKhuonMat.Show();
-            frm_NhanDienKhuonMat.Hide();
+            frm_NDKM = new frm_NhanDienKhuonMat();
+            frm_NDKM.Show();
+            frm_NDKM.Hide();
+        }
+
+        private void guna2CustomCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (guna2CustomCheckBox1.Checked)
+            {
+                txtPassWord.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                txtPassWord.UseSystemPasswordChar = true;
+            }
+            
+        }
+
+        private void bunifuImageButton3_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Có thực sự muốn thoát?", "Thoát chương trình!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+
+            if (dr == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            else if (dr == DialogResult.Cancel)
+            {
+                // do nothing
+            }
         }
     }
 }

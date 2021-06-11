@@ -50,6 +50,7 @@
     <Property Name="BacSi" Type="int" />
     <Property Name="BenhNhan" Type="int" />
     <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+    <Property Name="DaThanhToan" Type="bit" />
   </EntityType>
   <EntityType Name="CaTruc">
     <Key>
@@ -119,6 +120,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BuoiDieuTri" Type="int" />
     <Property Name="ThanhTien" Type="int" />
+    <Property Name="DaThanhToan" Type="bit" />
   </EntityType>
   <EntityType Name="HinhAnhDieuTri">
     <Key>
@@ -208,7 +210,7 @@
     <Property Name="Chucvu" Type="int" />
     <Property Name="AnhChup" Type="image" />
     <Property Name="SoDienThoai" Type="varchar" MaxLength="20" />
-    <Property Name="MatKhau" Type="varchar" MaxLength="10" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="100" />
     <Property Name="Email" Type="varchar" MaxLength="100" />
     <Property Name="NgayVaoLam" Type="date" />
   </EntityType>
@@ -628,6 +630,7 @@
   <Function Name="sp_HinhAnhBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_load_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_loadDonThuoc_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
@@ -639,6 +642,9 @@
   </Function>
   <Function Name="sp_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Sua_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DichVu_id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_TaoBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BDT_id" Type="int" Mode="In" />
@@ -680,6 +686,10 @@
   </Function>
   <Function Name="sp_XoaBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BDT_id" Type="int" Mode="In" />
+    <Parameter Name="DichVu_id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_XoaCTDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />

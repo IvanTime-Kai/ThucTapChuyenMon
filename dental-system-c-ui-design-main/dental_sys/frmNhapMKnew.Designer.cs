@@ -117,7 +117,7 @@ namespace dental_sys
             this.button1.ActiveFillColor = System.Drawing.Color.Red;
             this.button1.ActiveForecolor = System.Drawing.Color.White;
             this.button1.ActiveLineColor = System.Drawing.Color.Black;
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
+            this.button1.BackColor = System.Drawing.Color.White;
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
             this.button1.ButtonText = "Xác nhận";
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -140,6 +140,7 @@ namespace dental_sys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(505, 341);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);

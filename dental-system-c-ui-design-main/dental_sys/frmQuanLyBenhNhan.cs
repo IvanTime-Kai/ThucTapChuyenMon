@@ -33,8 +33,33 @@ namespace dental_sys
             this.dataTable1TableAdapter.Fill(this.thuctapDataSet1.DataTable1);
             // TODO: This line of code loads data into the 'thuctapDataSet1.BenhNhan' table. You can move, or remove it, as needed.
             this.benhNhanTableAdapter.Fill(this.thuctapDataSet1.BenhNhan);
-            
-            using(thuctapEntities qlBenhNhan = new thuctapEntities())
+
+
+            dgvBenhNhan.Columns["bn"].Visible = false;
+            dgvBenhNhan.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBenhNhan.ReadOnly = true;
+            dgvBenhNhan.AllowUserToAddRows = false;
+            dgvBenhNhan.MultiSelect = false;
+
+            dgvBenhNen.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBenhNen.ReadOnly = true;
+            dgvBenhNen.AllowUserToAddRows = false;
+            dgvBenhNen.MultiSelect = false;
+
+            dataGridView1.Columns["id"].Visible = false;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ReadOnly = true;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.MultiSelect = false;
+
+            dataGridView6.Columns["dt"].Visible = false;
+            dataGridView6.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView6.ReadOnly = true;
+            dataGridView6.AllowUserToAddRows = false;
+            dataGridView6.MultiSelect = false;
+
+
+            using (thuctapEntities qlBenhNhan = new thuctapEntities())
             {
                 // Load data lên bảng dgvBuoiDieuTri
                 //dgvBuoiDieuTri.DataSource = qlBenhNhan.sp_BDT_HinhAnh().ToList();
@@ -81,11 +106,37 @@ namespace dental_sys
             {
                 txtID.Text = dgvBuoiDieuTri.CurrentRow.Cells[0].Value.ToString();
                 dtpBuoiDieuTri.Text = dgvBuoiDieuTri.CurrentRow.Cells[1].Value.ToString();
-                txtChuanDoan.Text = dgvBuoiDieuTri.CurrentRow.Cells[2].Value.ToString();
-                txtChiPhi.Text = dgvBuoiDieuTri.CurrentRow.Cells[3].Value.ToString();
+                if(dgvBuoiDieuTri.CurrentRow.Cells[2].Value == null)
+                {
+                    txtChuanDoan.Text = string.Empty;
+                }
+                else
+                {
+                    txtChuanDoan.Text = dgvBuoiDieuTri.CurrentRow.Cells[2].Value.ToString();
+                }
+
+                if (dgvBuoiDieuTri.CurrentRow.Cells[3].Value == null)
+                {
+                    txtChiPhi.Text = string.Empty;
+                }
+                else
+                {
+                    txtChiPhi.Text = dgvBuoiDieuTri.CurrentRow.Cells[3].Value.ToString();
+                }
+
+                if (dgvBuoiDieuTri.CurrentRow.Cells[6].Value == null)
+                {
+                    txtGhiChu.Text = string.Empty;
+                }
+                else
+                {
+                    txtGhiChu.Text = dgvBuoiDieuTri.CurrentRow.Cells[6].Value.ToString();
+                }
+
+
                 cbBacSi.SelectedValue = int.Parse(dgvBuoiDieuTri.CurrentRow.Cells[4].Value.ToString());
                 txtBenhNhan.Text = dgvBuoiDieuTri.CurrentRow.Cells[5].Value.ToString();
-                txtGhiChu.Text = dgvBuoiDieuTri.CurrentRow.Cells[6].Value.ToString();
+                
 
                 idBDT_HinhAnh();
                 BDT_DonThuoc();
@@ -221,15 +272,23 @@ namespace dental_sys
         {
             using (thuctapEntities qlBenhNhan = new thuctapEntities())
             {
-                HinhAnhDieuTri hinhAnhBuoiDieuTri = new HinhAnhDieuTri();
-                hinhAnhBuoiDieuTri.Hinh = getImage();
-                hinhAnhBuoiDieuTri.BDT_id = int.Parse(txtID.Text);
+                try
+                {
+                    HinhAnhDieuTri hinhAnhBuoiDieuTri = new HinhAnhDieuTri();
+                    hinhAnhBuoiDieuTri.Hinh = getImage();
+                    hinhAnhBuoiDieuTri.BDT_id = int.Parse(txtID.Text);
 
-                qlBenhNhan.HinhAnhDieuTris.Add(hinhAnhBuoiDieuTri);
-                qlBenhNhan.SaveChanges();
+                    qlBenhNhan.HinhAnhDieuTris.Add(hinhAnhBuoiDieuTri);
+                    qlBenhNhan.SaveChanges();
 
-                idBDT_HinhAnh();
-                refreshFormHA_BDT();
+                    idBDT_HinhAnh();
+                    refreshFormHA_BDT();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Vui lòng chọn buổi điều trị để thêm hình ảnh");
+                }
+                
             }
         }
 
@@ -287,6 +346,7 @@ namespace dental_sys
 
                         donThuoc.BuoiDieuTri = int.Parse(txtDonThuoc_BDT.Text);
                         donThuoc.ThanhTien = 0;
+                        donThuoc.DaThanhToan = false;
 
                         qlBenhNhan.DonThuocs.Add(donThuoc);
 
@@ -320,22 +380,29 @@ namespace dental_sys
 
         private void btnDichVu_Click(object sender, EventArgs e)
         {
-            // bo them try catch
-            int id_BenhNhan = int.Parse(dgvBuoiDieuTri.CurrentRow.Cells[5].Value.ToString());
-            using (thuctapEntities qlBenhNhan = new thuctapEntities())
+            try
             {
-                try
+                int id_BenhNhan = int.Parse(dgvBuoiDieuTri.CurrentRow.Cells[5].Value.ToString());
+                using (thuctapEntities qlBenhNhan = new thuctapEntities())
                 {
-                    string email = qlBenhNhan.BenhNhans.Find(id_BenhNhan).Email;
-                    int id = int.Parse(txtID.Text);
-                    frmThemDichVu frmdichvu = new frmThemDichVu(id, email);
-                    frmdichvu.Show();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Vui lòng chọn buổi điều trị");
+                    try
+                    {
+                        string email = qlBenhNhan.BenhNhans.Find(id_BenhNhan).Email;
+                        int id = int.Parse(txtID.Text);
+                        frmThemDichVu frmdichvu = new frmThemDichVu(id, email);
+                        frmdichvu.Show();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Vui lòng chọn buổi điều trị");
+                    }
                 }
             }
+            catch (Exception)
+            {
+                MessageBox.Show("Vui lòng chọn khách hàng để thêm dịch vụ");
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -399,12 +466,13 @@ namespace dental_sys
 
                         loadDataBDT();
                         MessageBox.Show("Đã xoá thành công");
+                        refreshForm();
                     }
                     catch (Exception)
                     {
-
+                        MessageBox.Show("Không thể xoá những buổi diều trị đang thực hiện");
                     }
-                    refreshForm();
+                    
                 }
             }
         }
@@ -545,6 +613,7 @@ namespace dental_sys
                 }
                 catch (Exception)
                 {
+                    MessageBox.Show("Đơn thuốc đã được thanh toán");
                 }
                 txtDonThuoc_BDT.Text = "";
             }
@@ -570,11 +639,24 @@ namespace dental_sys
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnSearch_Click_1(object sender, EventArgs e)
+        {
             string searchString = txtTimKiem.text.ToString();
             using (thuctapEntities qlBenhNhan = new thuctapEntities())
             {
                 dgvBenhNhan.DataSource = qlBenhNhan.sp_TimKiemTen(searchString).ToList();
             }
+        }
+
+        private void btnLichHen_Click(object sender, EventArgs e)
+        {
+            //frmQL_LichHen frmQL_LichHen = new frmQL_LichHen();
+            //frmQL_LichHen.Show();
+
+
         }
     }
 }
