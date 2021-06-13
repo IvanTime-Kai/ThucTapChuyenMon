@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -33,7 +34,15 @@ namespace dental_sys
             }
             if (txtpass.Text.Equals(txtpassmoi.Text))
             {
-                string query = " update Users set MatKhau='" + txtpassmoi.Text + "' where id like '" + id + "' ";
+                byte[] temp = ASCIIEncoding.ASCII.GetBytes(txtpassmoi.Text);
+                byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+
+                string hasPass = "";
+                foreach (byte item in hasData)
+                {
+                    hasPass += item;
+                }
+                string query = " update Users set MatKhau='" + hasPass + "' where id like '" + id + "' ";
                 int data = Connect.Instace.updateTaikhoan(query);
                 if (data > 0)
                     MessageBox.Show("Đổi mật khẩu thành công.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

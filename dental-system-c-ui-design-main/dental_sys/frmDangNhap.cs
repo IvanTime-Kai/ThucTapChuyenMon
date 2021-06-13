@@ -76,7 +76,7 @@ namespace dental_sys
                                 }
                                 else if(role.role_name == "Giám đốc")
                                 {
-                                    Loading _load = new Loading(id, true, true, true, true, true, true, true, true, true, true);
+                                    Loading _load = new Loading(id, true, true, false, true, true, true, true, true, true, true);
                                     _load.Show();
                                     this.Hide();
                                     frm_NDKM.Close();

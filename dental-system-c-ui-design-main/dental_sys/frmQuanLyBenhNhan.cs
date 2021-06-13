@@ -21,6 +21,7 @@ namespace dental_sys
         private int maFile;
         private void frmQuanLyBenhNhan_Load(object sender, EventArgs e)
         {
+
             // TODO: This line of code loads data into the 'thuctapDataSet.DonThuoc' table. You can move, or remove it, as needed.
             this.donThuocTableAdapter.Fill(this.thuctapDataSet.DonThuoc);
             // TODO: This line of code loads data into the 'thuctapDataSet.HinhAnhDieuTri' table. You can move, or remove it, as needed.
@@ -58,6 +59,16 @@ namespace dental_sys
             dataGridView6.AllowUserToAddRows = false;
             dataGridView6.MultiSelect = false;
 
+            dgvBuoiDieuTri.Columns["idBDT"].Visible = false;
+            dgvBuoiDieuTri.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvBuoiDieuTri.ReadOnly = true;
+            dgvBuoiDieuTri.AllowUserToAddRows = false;
+            dgvBuoiDieuTri.MultiSelect = false;
+
+
+            //formatDataGridView(dgvBuoiDieuTri);
+
+
 
             using (thuctapEntities qlBenhNhan = new thuctapEntities())
             {
@@ -83,6 +94,21 @@ namespace dental_sys
                 txtDonThuoc_BDT.Enabled = false;
                 
             }
+        }
+
+        private void formatDataGridView(DataGridView dgv)
+        {
+            dgv.ReadOnly = true;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+            dgv.BackgroundColor = Color.White;
+            dgv.RowHeadersVisible = false;
+            dgv.AllowUserToResizeRows = false;
         }
 
         private void idBDT_HinhAnh()
@@ -163,9 +189,9 @@ namespace dental_sys
                 dgvBuoiDieuTri.DataSource = qlBenhNhan.BuoiDieuTris.Where(p => p.BenhNhan == id).ToList();
                 txtBenhNhan.Text = Convert.ToString(id);
 
-                cbBuoiDieuTri.DataSource = qlBenhNhan.BuoiDieuTris.Where(p => p.BenhNhan == id).ToList();
-                cbBuoiDieuTri.DisplayMember = "id";
-                cbBuoiDieuTri.ValueMember = "id";
+                //cbBuoiDieuTri.DataSource = qlBenhNhan.BuoiDieuTris.Where(p => p.BenhNhan == id).ToList();
+                //cbBuoiDieuTri.DisplayMember = "id";
+                //cbBuoiDieuTri.ValueMember = "id";
 
                 txtChiPhi.Text = "0";
             }
@@ -203,6 +229,7 @@ namespace dental_sys
                 dataGridView1.DataSource = qlBenhNhan.HinhAnhDieuTris.ToList();
             }
         }
+
 
         private void btnThem_Click(object sender, EventArgs e)
         {
@@ -272,23 +299,29 @@ namespace dental_sys
         {
             using (thuctapEntities qlBenhNhan = new thuctapEntities())
             {
-                try
+                if(picProduct.Image == null)
                 {
-                    HinhAnhDieuTri hinhAnhBuoiDieuTri = new HinhAnhDieuTri();
-                    hinhAnhBuoiDieuTri.Hinh = getImage();
-                    hinhAnhBuoiDieuTri.BDT_id = int.Parse(txtID.Text);
-
-                    qlBenhNhan.HinhAnhDieuTris.Add(hinhAnhBuoiDieuTri);
-                    qlBenhNhan.SaveChanges();
-
-                    idBDT_HinhAnh();
-                    refreshFormHA_BDT();
+                    MessageBox.Show("Vui lòng chọn hình ảnh của buổi điều trị");
                 }
-                catch (Exception)
+                else
                 {
-                    MessageBox.Show("Vui lòng chọn buổi điều trị để thêm hình ảnh");
-                }
-                
+                    try
+                    {
+                        HinhAnhDieuTri hinhAnhBuoiDieuTri = new HinhAnhDieuTri();
+                        hinhAnhBuoiDieuTri.Hinh = getImage();
+                        hinhAnhBuoiDieuTri.BDT_id = int.Parse(txtID.Text);
+
+                        qlBenhNhan.HinhAnhDieuTris.Add(hinhAnhBuoiDieuTri);
+                        qlBenhNhan.SaveChanges();
+
+                        idBDT_HinhAnh();
+                        refreshFormHA_BDT();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Vui lòng chọn buổi điều trị để thêm hình ảnh");
+                    }
+                }              
             }
         }
 
@@ -602,7 +635,7 @@ namespace dental_sys
                     MessageBox.Show("Vui lòng chọn đơn thuốc cần xoá");
                     return;
                 }
-                MessageBox.Show(idDonThuoc);
+                //MessageBox.Show(idDonThuoc);
                 try
                 {
                     qlBenhNhan.sp_XoaDonThuoc(int.Parse(this.idDonThuoc));

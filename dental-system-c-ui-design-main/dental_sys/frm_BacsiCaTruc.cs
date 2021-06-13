@@ -206,6 +206,16 @@ namespace dental_sys
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void btnXuatPDF_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnReset_Click_1(object sender, EventArgs e)
+        {
             dtpFrom.Value = DateTime.Now.AddDays(-10).Date;
             dtpTo.Value = DateTime.Now.AddDays(10).Date;
 
@@ -214,7 +224,7 @@ namespace dental_sys
             loadCatruc(NONE, null, null);
         }
 
-        private void btnXuatPDF_Click(object sender, EventArgs e)
+        private void btnXuatPDF_Click_1(object sender, EventArgs e)
         {
             new frm_ReportLichTrucVaGuiMail(currentId).ShowDialog();
         }

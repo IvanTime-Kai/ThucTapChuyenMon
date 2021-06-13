@@ -30,6 +30,7 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 11. Quản lí báo cáo
 12. Quản lí bệnh nhân
 13. Xe ca trực
+14. Quản lí thanh toán
 
 
 ## Phần 3: Các chức năng chưa hoàn thành:

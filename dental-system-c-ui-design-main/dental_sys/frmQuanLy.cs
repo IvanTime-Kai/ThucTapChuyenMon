@@ -245,6 +245,42 @@ namespace dental_sys
             loadform(new frmQL_ThanhToan());
         }
 
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var confirmResult = MessageBox.Show("Thực sự muốn đăng xuất ??",
+                                     "Xác nhận!!",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                new frmDangNhap().Show();
+                this.Close();
+            }
+            else
+            {
+                // nothing
+            }
+        }
+
+        private void thoátToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Có thực sự muốn thoát?", "Thoát chương trình!", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+
+            if (dr == DialogResult.Yes)
+            {
+                this.Close();
+                System.Environment.Exit(0);
+            }
+            else if (dr == DialogResult.Cancel)
+            {
+                // do nothing
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
         //bool mnuExpanded = false;
         private void MouseDetect_Tick(object sender, EventArgs e)
         {

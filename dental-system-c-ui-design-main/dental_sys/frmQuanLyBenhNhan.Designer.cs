@@ -55,17 +55,17 @@ namespace dental_sys
             this.dataTable1TableAdapter = new dental_sys.thuctapDataSet1TableAdapters.DataTable1TableAdapter();
             this.dataTable2TableAdapter = new dental_sys.thuctapDataSet1TableAdapters.DataTable2TableAdapter();
             this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnXoaDonThuoc = new Bunifu.Framework.UI.BunifuThinButton2();
+            this.btnThemDonThuoc = new Bunifu.Framework.UI.BunifuThinButton2();
             this.txtDonThuoc_BDT = new System.Windows.Forms.TextBox();
-            this.cbBuoiDieuTri = new Guna.UI.WinForms.GunaComboBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
             this.dt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.buoiDieuTriDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.thanhTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnCTDT = new Bunifu.Framework.UI.BunifuImageButton();
-            this.btnThemDonThuoc = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.btnXoaDonThuoc = new Bunifu.Framework.UI.BunifuThinButton2();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -98,18 +98,17 @@ namespace dental_sys
             this.btnXoa = new Bunifu.Framework.UI.BunifuThinButton2();
             this.btnSua = new Bunifu.Framework.UI.BunifuThinButton2();
             this.dgvBuoiDieuTri = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnSearch = new Bunifu.Framework.UI.BunifuImageButton();
+            this.txtTimKiem = new Bunifu.Framework.UI.BunifuTextbox();
+            this.idBDT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ngayKhamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chuanDoanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chiPhiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bacSiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.benhNhanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ghiChuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btnSearch = new Bunifu.Framework.UI.BunifuImageButton();
-            this.txtTimKiem = new Bunifu.Framework.UI.BunifuTextbox();
-            this.btnLichHen = new Bunifu.Framework.UI.BunifuImageButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBenhNhan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.benhNhanBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet1)).BeginInit();
@@ -122,6 +121,7 @@ namespace dental_sys
             ((System.ComponentModel.ISupportInitialize)(this.dataTable2BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet11)).BeginInit();
             this.tabPage4.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCTDT)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -133,7 +133,6 @@ namespace dental_sys
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuoiDieuTri)).BeginInit();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnLichHen)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvBenhNhan
@@ -289,14 +288,10 @@ namespace dental_sys
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.groupBox1);
             this.tabPage4.Controls.Add(this.label10);
-            this.tabPage4.Controls.Add(this.txtDonThuoc_BDT);
-            this.tabPage4.Controls.Add(this.cbBuoiDieuTri);
-            this.tabPage4.Controls.Add(this.label12);
             this.tabPage4.Controls.Add(this.dataGridView6);
             this.tabPage4.Controls.Add(this.btnCTDT);
-            this.tabPage4.Controls.Add(this.btnThemDonThuoc);
-            this.tabPage4.Controls.Add(this.btnXoaDonThuoc);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
@@ -305,6 +300,92 @@ namespace dental_sys
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Đơn thuốc";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnXoaDonThuoc);
+            this.groupBox1.Controls.Add(this.btnThemDonThuoc);
+            this.groupBox1.Controls.Add(this.txtDonThuoc_BDT);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(586, 217);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(300, 166);
+            this.groupBox1.TabIndex = 28;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Thanh toán đơn thuốc";
+            // 
+            // btnXoaDonThuoc
+            // 
+            this.btnXoaDonThuoc.ActiveBorderThickness = 1;
+            this.btnXoaDonThuoc.ActiveCornerRadius = 20;
+            this.btnXoaDonThuoc.ActiveFillColor = System.Drawing.Color.White;
+            this.btnXoaDonThuoc.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnXoaDonThuoc.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnXoaDonThuoc.BackColor = System.Drawing.Color.Transparent;
+            this.btnXoaDonThuoc.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnXoaDonThuoc.BackgroundImage")));
+            this.btnXoaDonThuoc.ButtonText = "Xoá";
+            this.btnXoaDonThuoc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnXoaDonThuoc.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnXoaDonThuoc.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnXoaDonThuoc.IdleBorderThickness = 1;
+            this.btnXoaDonThuoc.IdleCornerRadius = 20;
+            this.btnXoaDonThuoc.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnXoaDonThuoc.IdleForecolor = System.Drawing.Color.White;
+            this.btnXoaDonThuoc.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnXoaDonThuoc.Location = new System.Drawing.Point(172, 104);
+            this.btnXoaDonThuoc.Margin = new System.Windows.Forms.Padding(4);
+            this.btnXoaDonThuoc.Name = "btnXoaDonThuoc";
+            this.btnXoaDonThuoc.Size = new System.Drawing.Size(94, 44);
+            this.btnXoaDonThuoc.TabIndex = 16;
+            this.btnXoaDonThuoc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnXoaDonThuoc.Click += new System.EventHandler(this.btnXoaDonThuoc_Click);
+            // 
+            // btnThemDonThuoc
+            // 
+            this.btnThemDonThuoc.ActiveBorderThickness = 1;
+            this.btnThemDonThuoc.ActiveCornerRadius = 20;
+            this.btnThemDonThuoc.ActiveFillColor = System.Drawing.Color.White;
+            this.btnThemDonThuoc.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnThemDonThuoc.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnThemDonThuoc.BackColor = System.Drawing.Color.Transparent;
+            this.btnThemDonThuoc.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnThemDonThuoc.BackgroundImage")));
+            this.btnThemDonThuoc.ButtonText = "Thêm";
+            this.btnThemDonThuoc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnThemDonThuoc.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThemDonThuoc.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnThemDonThuoc.IdleBorderThickness = 1;
+            this.btnThemDonThuoc.IdleCornerRadius = 20;
+            this.btnThemDonThuoc.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnThemDonThuoc.IdleForecolor = System.Drawing.Color.White;
+            this.btnThemDonThuoc.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnThemDonThuoc.Location = new System.Drawing.Point(27, 104);
+            this.btnThemDonThuoc.Margin = new System.Windows.Forms.Padding(4);
+            this.btnThemDonThuoc.Name = "btnThemDonThuoc";
+            this.btnThemDonThuoc.Size = new System.Drawing.Size(94, 44);
+            this.btnThemDonThuoc.TabIndex = 17;
+            this.btnThemDonThuoc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnThemDonThuoc.Click += new System.EventHandler(this.btnThemDonThuoc_Click);
+            // 
+            // txtDonThuoc_BDT
+            // 
+            this.txtDonThuoc_BDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDonThuoc_BDT.Location = new System.Drawing.Point(161, 38);
+            this.txtDonThuoc_BDT.Name = "txtDonThuoc_BDT";
+            this.txtDonThuoc_BDT.Size = new System.Drawing.Size(105, 29);
+            this.txtDonThuoc_BDT.TabIndex = 20;
+            this.txtDonThuoc_BDT.TextChanged += new System.EventHandler(this.txtDonThuoc_BDT_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(22, 43);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(119, 24);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Buổi Điều Trị";
             // 
             // label10
             // 
@@ -315,45 +396,6 @@ namespace dental_sys
             this.label10.Size = new System.Drawing.Size(97, 24);
             this.label10.TabIndex = 27;
             this.label10.Text = "Đơn thuốc";
-            // 
-            // txtDonThuoc_BDT
-            // 
-            this.txtDonThuoc_BDT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDonThuoc_BDT.Location = new System.Drawing.Point(672, 176);
-            this.txtDonThuoc_BDT.Name = "txtDonThuoc_BDT";
-            this.txtDonThuoc_BDT.Size = new System.Drawing.Size(182, 29);
-            this.txtDonThuoc_BDT.TabIndex = 20;
-            this.txtDonThuoc_BDT.TextChanged += new System.EventHandler(this.txtDonThuoc_BDT_TextChanged);
-            // 
-            // cbBuoiDieuTri
-            // 
-            this.cbBuoiDieuTri.BackColor = System.Drawing.Color.Transparent;
-            this.cbBuoiDieuTri.BaseColor = System.Drawing.Color.White;
-            this.cbBuoiDieuTri.BorderColor = System.Drawing.Color.Silver;
-            this.cbBuoiDieuTri.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbBuoiDieuTri.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBuoiDieuTri.FocusedColor = System.Drawing.Color.Empty;
-            this.cbBuoiDieuTri.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbBuoiDieuTri.ForeColor = System.Drawing.Color.Black;
-            this.cbBuoiDieuTri.FormattingEnabled = true;
-            this.cbBuoiDieuTri.Location = new System.Drawing.Point(672, 239);
-            this.cbBuoiDieuTri.Margin = new System.Windows.Forms.Padding(2);
-            this.cbBuoiDieuTri.Name = "cbBuoiDieuTri";
-            this.cbBuoiDieuTri.OnHoverItemBaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            this.cbBuoiDieuTri.OnHoverItemForeColor = System.Drawing.Color.White;
-            this.cbBuoiDieuTri.Size = new System.Drawing.Size(182, 30);
-            this.cbBuoiDieuTri.TabIndex = 14;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(533, 245);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(119, 24);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "Buổi Điều Trị";
             // 
             // dataGridView6
             // 
@@ -412,58 +454,6 @@ namespace dental_sys
             this.btnCTDT.TabStop = false;
             this.btnCTDT.Zoom = 10;
             this.btnCTDT.Click += new System.EventHandler(this.btnCTDT_Click);
-            // 
-            // btnThemDonThuoc
-            // 
-            this.btnThemDonThuoc.ActiveBorderThickness = 1;
-            this.btnThemDonThuoc.ActiveCornerRadius = 20;
-            this.btnThemDonThuoc.ActiveFillColor = System.Drawing.Color.White;
-            this.btnThemDonThuoc.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnThemDonThuoc.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnThemDonThuoc.BackColor = System.Drawing.Color.Transparent;
-            this.btnThemDonThuoc.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnThemDonThuoc.BackgroundImage")));
-            this.btnThemDonThuoc.ButtonText = "Thêm";
-            this.btnThemDonThuoc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnThemDonThuoc.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThemDonThuoc.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnThemDonThuoc.IdleBorderThickness = 1;
-            this.btnThemDonThuoc.IdleCornerRadius = 20;
-            this.btnThemDonThuoc.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnThemDonThuoc.IdleForecolor = System.Drawing.Color.White;
-            this.btnThemDonThuoc.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnThemDonThuoc.Location = new System.Drawing.Point(615, 360);
-            this.btnThemDonThuoc.Margin = new System.Windows.Forms.Padding(4);
-            this.btnThemDonThuoc.Name = "btnThemDonThuoc";
-            this.btnThemDonThuoc.Size = new System.Drawing.Size(94, 44);
-            this.btnThemDonThuoc.TabIndex = 17;
-            this.btnThemDonThuoc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnThemDonThuoc.Click += new System.EventHandler(this.btnThemDonThuoc_Click);
-            // 
-            // btnXoaDonThuoc
-            // 
-            this.btnXoaDonThuoc.ActiveBorderThickness = 1;
-            this.btnXoaDonThuoc.ActiveCornerRadius = 20;
-            this.btnXoaDonThuoc.ActiveFillColor = System.Drawing.Color.White;
-            this.btnXoaDonThuoc.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnXoaDonThuoc.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnXoaDonThuoc.BackColor = System.Drawing.Color.Transparent;
-            this.btnXoaDonThuoc.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnXoaDonThuoc.BackgroundImage")));
-            this.btnXoaDonThuoc.ButtonText = "Xoá";
-            this.btnXoaDonThuoc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnXoaDonThuoc.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoaDonThuoc.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnXoaDonThuoc.IdleBorderThickness = 1;
-            this.btnXoaDonThuoc.IdleCornerRadius = 20;
-            this.btnXoaDonThuoc.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnXoaDonThuoc.IdleForecolor = System.Drawing.Color.White;
-            this.btnXoaDonThuoc.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnXoaDonThuoc.Location = new System.Drawing.Point(760, 360);
-            this.btnXoaDonThuoc.Margin = new System.Windows.Forms.Padding(4);
-            this.btnXoaDonThuoc.Name = "btnXoaDonThuoc";
-            this.btnXoaDonThuoc.Size = new System.Drawing.Size(94, 44);
-            this.btnXoaDonThuoc.TabIndex = 16;
-            this.btnXoaDonThuoc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnXoaDonThuoc.Click += new System.EventHandler(this.btnXoaDonThuoc_Click);
             // 
             // tabPage2
             // 
@@ -937,7 +927,7 @@ namespace dental_sys
             this.dgvBuoiDieuTri.BackgroundColor = System.Drawing.Color.White;
             this.dgvBuoiDieuTri.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBuoiDieuTri.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn1,
+            this.idBDT,
             this.ngayKhamDataGridViewTextBoxColumn,
             this.chuanDoanDataGridViewTextBoxColumn,
             this.chiPhiDataGridViewTextBoxColumn,
@@ -953,56 +943,6 @@ namespace dental_sys
             this.dgvBuoiDieuTri.Size = new System.Drawing.Size(912, 234);
             this.dgvBuoiDieuTri.TabIndex = 0;
             this.dgvBuoiDieuTri.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBuoiDieuTri_CellClick);
-            // 
-            // idDataGridViewTextBoxColumn1
-            // 
-            this.idDataGridViewTextBoxColumn1.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn1.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            this.idDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // ngayKhamDataGridViewTextBoxColumn
-            // 
-            this.ngayKhamDataGridViewTextBoxColumn.DataPropertyName = "NgayKham";
-            this.ngayKhamDataGridViewTextBoxColumn.HeaderText = "NgayKham";
-            this.ngayKhamDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.ngayKhamDataGridViewTextBoxColumn.Name = "ngayKhamDataGridViewTextBoxColumn";
-            // 
-            // chuanDoanDataGridViewTextBoxColumn
-            // 
-            this.chuanDoanDataGridViewTextBoxColumn.DataPropertyName = "ChuanDoan";
-            this.chuanDoanDataGridViewTextBoxColumn.HeaderText = "ChuanDoan";
-            this.chuanDoanDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.chuanDoanDataGridViewTextBoxColumn.Name = "chuanDoanDataGridViewTextBoxColumn";
-            // 
-            // chiPhiDataGridViewTextBoxColumn
-            // 
-            this.chiPhiDataGridViewTextBoxColumn.DataPropertyName = "ChiPhi";
-            this.chiPhiDataGridViewTextBoxColumn.HeaderText = "ChiPhi";
-            this.chiPhiDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.chiPhiDataGridViewTextBoxColumn.Name = "chiPhiDataGridViewTextBoxColumn";
-            // 
-            // bacSiDataGridViewTextBoxColumn
-            // 
-            this.bacSiDataGridViewTextBoxColumn.DataPropertyName = "BacSi";
-            this.bacSiDataGridViewTextBoxColumn.HeaderText = "BacSi";
-            this.bacSiDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.bacSiDataGridViewTextBoxColumn.Name = "bacSiDataGridViewTextBoxColumn";
-            // 
-            // benhNhanDataGridViewTextBoxColumn
-            // 
-            this.benhNhanDataGridViewTextBoxColumn.DataPropertyName = "BenhNhan";
-            this.benhNhanDataGridViewTextBoxColumn.HeaderText = "BenhNhan";
-            this.benhNhanDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.benhNhanDataGridViewTextBoxColumn.Name = "benhNhanDataGridViewTextBoxColumn";
-            // 
-            // ghiChuDataGridViewTextBoxColumn
-            // 
-            this.ghiChuDataGridViewTextBoxColumn.DataPropertyName = "GhiChu";
-            this.ghiChuDataGridViewTextBoxColumn.HeaderText = "GhiChu";
-            this.ghiChuDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.ghiChuDataGridViewTextBoxColumn.Name = "ghiChuDataGridViewTextBoxColumn";
             // 
             // tabControl1
             // 
@@ -1053,19 +993,55 @@ namespace dental_sys
             this.txtTimKiem.TabIndex = 24;
             this.txtTimKiem.text = "";
             // 
-            // btnLichHen
+            // idBDT
             // 
-            this.btnLichHen.BackColor = System.Drawing.Color.SeaGreen;
-            this.btnLichHen.Image = ((System.Drawing.Image)(resources.GetObject("btnLichHen.Image")));
-            this.btnLichHen.ImageActive = null;
-            this.btnLichHen.Location = new System.Drawing.Point(1222, 11);
-            this.btnLichHen.Name = "btnLichHen";
-            this.btnLichHen.Size = new System.Drawing.Size(50, 43);
-            this.btnLichHen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnLichHen.TabIndex = 27;
-            this.btnLichHen.TabStop = false;
-            this.btnLichHen.Zoom = 10;
-            this.btnLichHen.Click += new System.EventHandler(this.btnLichHen_Click);
+            this.idBDT.DataPropertyName = "id";
+            this.idBDT.HeaderText = "id";
+            this.idBDT.MinimumWidth = 6;
+            this.idBDT.Name = "idBDT";
+            this.idBDT.ReadOnly = true;
+            // 
+            // ngayKhamDataGridViewTextBoxColumn
+            // 
+            this.ngayKhamDataGridViewTextBoxColumn.DataPropertyName = "NgayKham";
+            this.ngayKhamDataGridViewTextBoxColumn.HeaderText = "NgayKham";
+            this.ngayKhamDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.ngayKhamDataGridViewTextBoxColumn.Name = "ngayKhamDataGridViewTextBoxColumn";
+            // 
+            // chuanDoanDataGridViewTextBoxColumn
+            // 
+            this.chuanDoanDataGridViewTextBoxColumn.DataPropertyName = "ChuanDoan";
+            this.chuanDoanDataGridViewTextBoxColumn.HeaderText = "ChuanDoan";
+            this.chuanDoanDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.chuanDoanDataGridViewTextBoxColumn.Name = "chuanDoanDataGridViewTextBoxColumn";
+            // 
+            // chiPhiDataGridViewTextBoxColumn
+            // 
+            this.chiPhiDataGridViewTextBoxColumn.DataPropertyName = "ChiPhi";
+            this.chiPhiDataGridViewTextBoxColumn.HeaderText = "ChiPhi";
+            this.chiPhiDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.chiPhiDataGridViewTextBoxColumn.Name = "chiPhiDataGridViewTextBoxColumn";
+            // 
+            // bacSiDataGridViewTextBoxColumn
+            // 
+            this.bacSiDataGridViewTextBoxColumn.DataPropertyName = "BacSi";
+            this.bacSiDataGridViewTextBoxColumn.HeaderText = "BacSi";
+            this.bacSiDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.bacSiDataGridViewTextBoxColumn.Name = "bacSiDataGridViewTextBoxColumn";
+            // 
+            // benhNhanDataGridViewTextBoxColumn
+            // 
+            this.benhNhanDataGridViewTextBoxColumn.DataPropertyName = "BenhNhan";
+            this.benhNhanDataGridViewTextBoxColumn.HeaderText = "BenhNhan";
+            this.benhNhanDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.benhNhanDataGridViewTextBoxColumn.Name = "benhNhanDataGridViewTextBoxColumn";
+            // 
+            // ghiChuDataGridViewTextBoxColumn
+            // 
+            this.ghiChuDataGridViewTextBoxColumn.DataPropertyName = "GhiChu";
+            this.ghiChuDataGridViewTextBoxColumn.HeaderText = "GhiChu";
+            this.ghiChuDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.ghiChuDataGridViewTextBoxColumn.Name = "ghiChuDataGridViewTextBoxColumn";
             // 
             // frmQuanLyBenhNhan
             // 
@@ -1073,7 +1049,6 @@ namespace dental_sys
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1303, 693);
-            this.Controls.Add(this.btnLichHen);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnSearch);
@@ -1098,6 +1073,8 @@ namespace dental_sys
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet11)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnCTDT)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -1111,7 +1088,6 @@ namespace dental_sys
             ((System.ComponentModel.ISupportInitialize)(this.dgvBuoiDieuTri)).EndInit();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.btnSearch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnLichHen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1171,16 +1147,8 @@ namespace dental_sys
         private Bunifu.Framework.UI.BunifuThinButton2 btnXoa;
         private Bunifu.Framework.UI.BunifuThinButton2 btnSua;
         private System.Windows.Forms.DataGridView dgvBuoiDieuTri;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ngayKhamDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chuanDoanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn chiPhiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bacSiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn benhNhanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ghiChuDataGridViewTextBoxColumn;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TextBox txtDonThuoc_BDT;
-        private Guna.UI.WinForms.GunaComboBox cbBuoiDieuTri;
         private Bunifu.Framework.UI.BunifuImageButton btnSearch;
         private Bunifu.Framework.UI.BunifuTextbox txtTimKiem;
         private System.Windows.Forms.Label label8;
@@ -1196,6 +1164,13 @@ namespace dental_sys
         private System.Windows.Forms.DataGridViewTextBoxColumn dt;
         private System.Windows.Forms.DataGridViewTextBoxColumn buoiDieuTriDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn thanhTienDataGridViewTextBoxColumn;
-        private Bunifu.Framework.UI.BunifuImageButton btnLichHen;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idBDT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ngayKhamDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chuanDoanDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chiPhiDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bacSiDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn benhNhanDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ghiChuDataGridViewTextBoxColumn;
     }
 }

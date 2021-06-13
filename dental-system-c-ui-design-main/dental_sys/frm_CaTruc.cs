@@ -23,7 +23,7 @@ namespace dental_sys
 
         public SqlConnection GetConnection()
         {
-            string connectString = @"Data Source=IVANTIME\SQLEXPRESS;Initial Catalog=thuctap;Integrated Security=True";
+            string connectString = @"Data Source=.\SQLEXPRESS;Initial Catalog=thuctap;Integrated Security=True";
             return new SqlConnection(connectString);
         }
 
