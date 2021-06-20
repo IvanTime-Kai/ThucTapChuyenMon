@@ -33,10 +33,11 @@ Giảng viên: Thầy Nguyễn Lê Minh. 
 14. Quản lí thanh toán
 
 
-## Phần 3: Các chức năng chưa hoàn thành:
-1. Hiển thị biểu đồ
-
 ## Hướng dẫn sử dụng:
+1. Tải file IvantimeDental.msi.zip từ đường link github sau đó giải nén và chạy file IvantimeDental.msi và làm theo hướng dẫn.
+2. Tại thư mục bạn cài chương trình click chọn vào \IvantimeDental\Release\Data chạy file Create database.bat để cài đặt cơ sở dữ liệu (Yêu cầu đã cài trước SQL Server 2019), nếu không chạy được file Create database.bat thì mở nó lên bằng notepad sau đó copy, mở cmd hoặc PowerShell và dán đoạn code vừa copy vào sau đó nhấn Enter.
+3. Sau đó chạy file dental_sys.exe trong \IvantimeDental\Release để chay chương trình.
+
 
 
 Xin cám ơn!

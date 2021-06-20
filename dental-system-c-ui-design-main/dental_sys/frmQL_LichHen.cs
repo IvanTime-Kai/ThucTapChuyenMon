@@ -126,17 +126,17 @@ namespace dental_sys
 
             SqlConnection con = ConnectProvider.GetConnection(); con.Open();
             SqlDataReader sqlDataReader; SqlCommand command;
-            DateTime toDay = DateTime.Now.Date;
+            DateTime tomorrow = DateTime.Now.Date.AddDays(1);
             string query = "select BenhNhan.TenBenhNhan, BenhNhan.Email, CuocHen.NoiDung, CuocHen.Ca, CuocHen.id ";
             query += "from CuocHen inner join BenhNhan on CuocHen.BenhNhan = BenhNhan.id ";
-            query += string.Format("where NgayHen = '{0}' AND DaGuiEmail = 0", toDay);
+            query += string.Format("where NgayHen = '{0}' AND DaGuiEmail = 0", tomorrow);
             command = new SqlCommand(query, con);
             sqlDataReader = command.ExecuteReader();
 
             if (sqlDataReader.HasRows) // kiểm tra nếu có cuộc hẹn chưa được gửi mail
             {
                 while (sqlDataReader.Read())
-                {  // gửi mail nhắc lịch hẹn cho khách hàng ngày hôm nay
+                {  // gửi mail nhắc lịch hẹn cho khách hàng ngày mai
                     msg.To.Clear();
                     string tenBenhNhan = sqlDataReader.GetString(0);
                     string emailBenhNhan = sqlDataReader.GetString(1);
@@ -144,7 +144,7 @@ namespace dental_sys
                     string ca = sqlDataReader.GetString(3);
                     int cuochenId = sqlDataReader.GetInt32(4);
 
-                    string tinNhan = string.Format("<h2>Xin chào {0}!</h2> <p>Đừng quên hôm nay bạn có buổi hẹn với phòng khám nha khoa vào lúc {1}</p>", tenBenhNhan, (ca.Equals("1") ? "7h30" : "1h30"));
+                    string tinNhan = string.Format("<h2>Xin chào {0}!</h2> <p>Đừng quên ngày mai bạn có buổi hẹn với phòng khám nha khoa vào lúc {1}</p>", tenBenhNhan, (ca.Equals("1") ? "7h30" : "1h30"));
                     tinNhan += string.Format("<p><strong>Nội dung:</strong> {0}</p> <p>Xin cảm ơn!</p>", noiDungCuocHen);
                     msg.Body = tinNhan;
                     msg.To.Add(new MailAddress(emailBenhNhan));
@@ -153,7 +153,7 @@ namespace dental_sys
                 con.Close();
 
                 con = ConnectProvider.GetConnection(); con.Open();
-                string update = string.Format("update CuocHen set DaGuiEmail = 1 where NgayHen = '{0}'", DateTime.Now.Date);
+                string update = string.Format("update CuocHen set DaGuiEmail = 1 where NgayHen = '{0}'", tomorrow);
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.UpdateCommand = new SqlCommand(update, con);
                 adapter.UpdateCommand.ExecuteNonQuery();

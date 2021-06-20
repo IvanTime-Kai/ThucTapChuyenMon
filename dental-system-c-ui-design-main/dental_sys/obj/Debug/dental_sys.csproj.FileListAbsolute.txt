@@ -147,3 +147,5 @@ D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.MainHinhAnh.re
 D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\Newtonsoft.Json.dll
 D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\Newtonsoft.Json.xml
 D:\dental-system-c-ui-design-main\dental_sys\obj\Debug\dental_sys.frmQL_ThanhToan.resources
+D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\Guna.UI.dll
+D:\dental-system-c-ui-design-main\dental_sys\bin\Debug\Guna.UI2.dll

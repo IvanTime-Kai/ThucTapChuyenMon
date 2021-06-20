@@ -793,6 +793,27 @@
     <FunctionImport Name="sp_XoaUser">
       <Parameter Name="id" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="sp_XoaBenhNhan">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_ThemBenhNen">
+      <Parameter Name="idBenhNhan" Mode="In" Type="Int32" />
+      <Parameter Name="idBenhNen" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_LocBenhNen" ReturnType="Collection(thuctapModel.sp_LocBenhNen_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_XoaBenhNen">
+      <Parameter Name="idBenhNhan" Mode="In" Type="Int32" />
+      <Parameter Name="idBenhNen" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_SuaBenhNen">
+      <Parameter Name="idBenhNhan" Mode="In" Type="Int32" />
+      <Parameter Name="idBenhNen" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_loadBenhNen" ReturnType="Collection(thuctapModel.sp_loadBenhNen_Result)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_BaoCaoTheoDichVu_Result">
     <Property Type="Int32" Name="id" Nullable="false" />
@@ -938,5 +959,13 @@
     <Property Type="String" Name="Ten" Nullable="true" MaxLength="100" />
     <Property Type="Int32" Name="SoTienTra" Nullable="true" />
     <Property Type="DateTime" Name="NgayTra" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_LocBenhNen_Result">
+    <Property Type="Int32" Name="BenhNhan_id" Nullable="false" />
+    <Property Type="Int32" Name="BenhNen_id" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="sp_loadBenhNen_Result">
+    <Property Type="String" Name="TenBenhNhan" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="BenhNen" Nullable="true" MaxLength="100" />
   </ComplexType>
 </Schema>

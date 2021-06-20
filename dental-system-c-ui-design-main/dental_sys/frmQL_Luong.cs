@@ -50,7 +50,8 @@ namespace dental_sys
                 List<ThongTinTraLuongADO> listThongTinTraLuong = new List<ThongTinTraLuongADO>();
                 con = ConnectProvider.GetConnection(); con.Open();
                 query = "select Users.id, Users.NgayVaoLam, Roles.MucLuong, Roles.role_name ";
-                query += "from Users inner join Roles on Users.Chucvu = Roles.id";
+                query += "from Users inner join Roles on Users.Chucvu = Roles.id ";
+                query += "where Roles.role_name != N'Giám đốc'";
                 sqlCommand = new SqlCommand(query, con);
                 sqlDataReader = sqlCommand.ExecuteReader();
                 while (sqlDataReader.Read())

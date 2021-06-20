@@ -83,6 +83,9 @@ namespace dental_sys
             string des = directoryPath + fileName;
             byte[] bytes = new byte[1024];
 
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
             //DateTime now = DateTime.Now;
             //string current = now.Date.Year.ToString() + now.Date.Month + now.Date.Day + now.Date.Hour + now.Date.Minute + now.Date.Second;
 

@@ -55,9 +55,6 @@ namespace dental_sys
             this.btnXoa = new Bunifu.Framework.UI.BunifuThinButton2();
             this.btnSua = new Bunifu.Framework.UI.BunifuThinButton2();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.thuctapDataSet1 = new dental_sys.thuctapDataSet1();
-            this.usersTableAdapter = new dental_sys.thuctapDataSet1TableAdapters.UsersTableAdapter();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gioiTinhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,12 +65,17 @@ namespace dental_sys
             this.matKhauDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.emailDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ngayVaoLamDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usersBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.thuctapDataSet1 = new dental_sys.thuctapDataSet1();
+            this.usersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.usersTableAdapter = new dental_sys.thuctapDataSet1TableAdapters.UsersTableAdapter();
             this.gunaGroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnFile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // gunaGroupBox1
@@ -390,26 +392,13 @@ namespace dental_sys
             this.matKhauDataGridViewTextBoxColumn,
             this.emailDataGridViewTextBoxColumn,
             this.ngayVaoLamDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.usersBindingSource;
+            this.dataGridView1.DataSource = this.usersBindingSource1;
             this.dataGridView1.Location = new System.Drawing.Point(51, 385);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(1229, 217);
             this.dataGridView1.TabIndex = 21;
+            this.dataGridView1.DataSourceChanged += new System.EventHandler(this.dataGridView1_DataSourceChanged);
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick_2);
-            // 
-            // usersBindingSource
-            // 
-            this.usersBindingSource.DataMember = "Users";
-            this.usersBindingSource.DataSource = this.thuctapDataSet1;
-            // 
-            // thuctapDataSet1
-            // 
-            this.thuctapDataSet1.DataSetName = "thuctapDataSet1";
-            this.thuctapDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // usersTableAdapter
-            // 
-            this.usersTableAdapter.ClearBeforeFill = true;
             // 
             // id
             // 
@@ -473,6 +462,25 @@ namespace dental_sys
             this.ngayVaoLamDataGridViewTextBoxColumn.HeaderText = "NgayVaoLam";
             this.ngayVaoLamDataGridViewTextBoxColumn.Name = "ngayVaoLamDataGridViewTextBoxColumn";
             // 
+            // usersBindingSource1
+            // 
+            this.usersBindingSource1.DataMember = "Users";
+            this.usersBindingSource1.DataSource = this.thuctapDataSet1;
+            // 
+            // thuctapDataSet1
+            // 
+            this.thuctapDataSet1.DataSetName = "thuctapDataSet1";
+            this.thuctapDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // usersBindingSource
+            // 
+            this.usersBindingSource.DataMember = "Users";
+            this.usersBindingSource.DataSource = this.thuctapDataSet1;
+            // 
+            // usersTableAdapter
+            // 
+            this.usersTableAdapter.ClearBeforeFill = true;
+            // 
             // frmQuanLyNhanSu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,13 +496,15 @@ namespace dental_sys
             this.Name = "frmQuanLyNhanSu";
             this.Text = "frmQuanLyNhanSu";
             this.Load += new System.EventHandler(this.frmQuanLyNhanSu_Load);
+            this.Shown += new System.EventHandler(this.frmQuanLyNhanSu_Shown);
             this.gunaGroupBox1.ResumeLayout(false);
             this.gunaGroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnFile)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -527,6 +537,7 @@ namespace dental_sys
         private thuctapDataSet1 thuctapDataSet1;
         private System.Windows.Forms.BindingSource usersBindingSource;
         private thuctapDataSet1TableAdapters.UsersTableAdapter usersTableAdapter;
+        private System.Windows.Forms.BindingSource usersBindingSource1;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn gioiTinhDataGridViewTextBoxColumn;

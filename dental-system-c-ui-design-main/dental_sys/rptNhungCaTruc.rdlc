@@ -19,8 +19,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox84</rd:DefaultName>
-        <Top>0.17583in</Top>
-        <Left>2.69667in</Left>
+        <Top>0.33209in</Top>
+        <Left>2.01959in</Left>
         <Height>0.375in</Height>
         <Width>2.5625in</Width>
         <Style>
@@ -208,8 +208,8 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>NhungCaTrucSapToiCuaMotBacSi_DataSet</DataSetName>
-        <Top>1.62375in</Top>
-        <Left>1.87375in</Left>
+        <Top>1.78001in</Top>
+        <Left>1.19667in</Left>
         <Height>0.5in</Height>
         <Width>4.01042in</Width>
         <ZIndex>1</ZIndex>
@@ -234,8 +234,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox99</rd:DefaultName>
-        <Top>0.79042in</Top>
-        <Left>5.43625in</Left>
+        <Top>1.03695in</Top>
+        <Left>4.20709in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>2</ZIndex>
@@ -264,8 +264,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox100</rd:DefaultName>
-        <Top>1.23833in</Top>
-        <Left>1.87375in</Left>
+        <Top>1.39459in</Top>
+        <Left>1.19667in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>3</ZIndex>
@@ -294,8 +294,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox101</rd:DefaultName>
-        <Top>1.23833in</Top>
-        <Left>3.28in</Left>
+        <Top>1.39459in</Top>
+        <Left>2.60292in</Left>
         <Height>0.25in</Height>
         <Width>1in</Width>
         <ZIndex>4</ZIndex>
@@ -324,8 +324,8 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox3</rd:DefaultName>
-        <Top>0.79042in</Top>
-        <Left>4.53in</Left>
+        <Top>1.03695in</Top>
+        <Left>3.62375in</Left>
         <Height>0.25in</Height>
         <Width>0.54167in</Width>
         <ZIndex>5</ZIndex>
@@ -343,8 +343,8 @@
         <Source>Embedded</Source>
         <Value>tảixuống</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>0.11333in</Top>
-        <Left>6.83208in</Left>
+        <Top>0.10292in</Top>
+        <Left>5.06125in</Left>
         <Height>0.76042in</Height>
         <Width>0.82292in</Width>
         <ZIndex>6</ZIndex>

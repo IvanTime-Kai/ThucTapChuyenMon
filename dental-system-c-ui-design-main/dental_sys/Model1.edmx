@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="thuctapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="thuctapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="BDT_DichVu">
           <Key>
             <PropertyRef Name="BDT_id" />
@@ -636,10 +636,16 @@
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_load_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_loadBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_loadDonThuoc_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_loadHinhAnhBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LocBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_NhungCaTruc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -651,9 +657,17 @@
         <Function Name="sp_Sua_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DichVu_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_SuaBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+          <Parameter Name="idBenhNen" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_TaoBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BDT_id" Type="int" Mode="In" />
           <Parameter Name="DichVu_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_ThemBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+          <Parameter Name="idBenhNen" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_Thu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="dayStart" Type="date" Mode="In" />
@@ -695,6 +709,13 @@
         <Function Name="sp_XoaBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BDT_id" Type="int" Mode="In" />
           <Parameter Name="DichVu_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+          <Parameter Name="idBenhNen" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_XoaBenhNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_XoaCTDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -848,8 +869,7 @@
             <End Role="YeuCauXuat" EntitySet="YeuCauXuat" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="thuctapModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1537,22 +1557,22 @@
             <End Role="VatLieu" EntitySet="VatLieux" />
           </AssociationSet>
           <FunctionImport Name="sp_BaoCaoTheoDichVu" ReturnType="Collection(thuctapModel.sp_BaoCaoTheoDichVu_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_BDT_DichVu" ReturnType="Collection(thuctapModel.sp_BDT_DichVu_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_BDT_HinhAnh" ReturnType="Collection(thuctapModel.sp_BDT_HinhAnh_Result)" />
           <FunctionImport Name="sp_BenhNen" ReturnType="Collection(thuctapModel.sp_BenhNen_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_BenhNhan_BDT" ReturnType="Collection(thuctapModel.sp_BenhNhan_BDT_Result)" />
           <FunctionImport Name="sp_BenhNhan_not_BDT" ReturnType="Collection(thuctapModel.sp_BenhNhan_not_BDT_Result)" />
           <FunctionImport Name="sp_BenhNhanTiepNhan_BDT" ReturnType="Collection(thuctapModel.sp_BenhNhanTiepNhan_BDT_Result)">
-            <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
+          <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_BenhNhanTiepNhan_BDT_have" ReturnType="Collection(thuctapModel.sp_BenhNhanTiepNhan_BDT_have_Result)">
-            <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
+          <Parameter Name="NgayTiepNhan" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_BuoiDieutriVaHinhAnh">
             <Parameter Name="id" Mode="In" Type="Int32" />
@@ -1565,29 +1585,29 @@
             <Parameter Name="Hinh" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sp_CT_BuoiDieuTri" ReturnType="Collection(thuctapModel.sp_CT_BuoiDieuTri_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_DonThuoc" ReturnType="Collection(thuctapModel.sp_DonThuoc_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_HinhAnhBDT">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_load_BDT_DichVu" ReturnType="Collection(thuctapModel.sp_load_BDT_DichVu_Result)" />
           <FunctionImport Name="sp_loadDonThuoc_BDT" ReturnType="Collection(thuctapModel.sp_loadDonThuoc_BDT_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_loadHinhAnhBDT" ReturnType="Collection(thuctapModel.sp_loadHinhAnhBDT_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_NhungCaTruc" ReturnType="Collection(thuctapModel.sp_NhungCaTruc_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
+          <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Report" ReturnType="Collection(thuctapModel.sp_Report_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_Sua_BDT_DichVu">
-            <Parameter Name="DichVu_id" Mode="In" Type="Int32" />
+          <Parameter Name="DichVu_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_TaoBDT_DichVu">
             <Parameter Name="BDT_id" Mode="In" Type="Int32" />
@@ -1598,7 +1618,7 @@
             <Parameter Name="dayEnd" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_TimKiemTen" ReturnType="Collection(thuctapModel.sp_TimKiemTen_Result)">
-            <Parameter Name="ten" Mode="In" Type="String" />
+          <Parameter Name="ten" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_TongTienBDT" ReturnType="Collection(thuctapModel.sp_TongTienBDT_Result)">
             <Parameter Name="dayStart" Mode="In" Type="DateTime" />
@@ -1625,25 +1645,46 @@
             <Parameter Name="dayEnd" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="sp_XemLuong" ReturnType="Collection(thuctapModel.sp_XemLuong_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaBDT">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaBDT_DichVu">
             <Parameter Name="BDT_id" Mode="In" Type="Int32" />
             <Parameter Name="DichVu_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaCTDT">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaDichVu">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaDonThuoc">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_XoaUser">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaBenhNhan">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_ThemBenhNen">
+            <Parameter Name="idBenhNhan" Mode="In" Type="Int32" />
+            <Parameter Name="idBenhNen" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_LocBenhNen" ReturnType="Collection(thuctapModel.sp_LocBenhNen_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_XoaBenhNen">
+            <Parameter Name="idBenhNhan" Mode="In" Type="Int32" />
+            <Parameter Name="idBenhNen" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_SuaBenhNen">
+            <Parameter Name="idBenhNhan" Mode="In" Type="Int32" />
+            <Parameter Name="idBenhNen" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_loadBenhNen" ReturnType="Collection(thuctapModel.sp_loadBenhNen_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -1791,6 +1832,14 @@
           <Property Type="String" Name="Ten" Nullable="true" MaxLength="100" />
           <Property Type="Int32" Name="SoTienTra" Nullable="true" />
           <Property Type="DateTime" Name="NgayTra" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_LocBenhNen_Result">
+          <Property Type="Int32" Name="BenhNhan_id" Nullable="false" />
+          <Property Type="Int32" Name="BenhNen_id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_loadBenhNen_Result">
+          <Property Type="String" Name="TenBenhNhan" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="BenhNen" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2329,6 +2378,26 @@
           <FunctionImportMapping FunctionImportName="sp_XoaDichVu" FunctionName="thuctapModel.Store.sp_XoaDichVu" />
           <FunctionImportMapping FunctionImportName="sp_XoaDonThuoc" FunctionName="thuctapModel.Store.sp_XoaDonThuoc" />
           <FunctionImportMapping FunctionImportName="sp_XoaUser" FunctionName="thuctapModel.Store.sp_XoaUser" />
+          <FunctionImportMapping FunctionImportName="sp_XoaBenhNhan" FunctionName="thuctapModel.Store.sp_XoaBenhNhan" />
+          <FunctionImportMapping FunctionImportName="sp_ThemBenhNen" FunctionName="thuctapModel.Store.sp_ThemBenhNen" />
+          <FunctionImportMapping FunctionImportName="sp_LocBenhNen" FunctionName="thuctapModel.Store.sp_LocBenhNen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="thuctapModel.sp_LocBenhNen_Result">
+                <ScalarProperty Name="BenhNhan_id" ColumnName="BenhNhan_id" />
+                <ScalarProperty Name="BenhNen_id" ColumnName="BenhNen_id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_XoaBenhNen" FunctionName="thuctapModel.Store.sp_XoaBenhNen" />
+          <FunctionImportMapping FunctionImportName="sp_SuaBenhNen" FunctionName="thuctapModel.Store.sp_SuaBenhNen" />
+          <FunctionImportMapping FunctionImportName="sp_loadBenhNen" FunctionName="thuctapModel.Store.sp_loadBenhNen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="thuctapModel.sp_loadBenhNen_Result">
+                <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+                <ScalarProperty Name="BenhNen" ColumnName="BenhNen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

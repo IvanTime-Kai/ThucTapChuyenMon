@@ -121,7 +121,7 @@ namespace dental_sys
             this.dgv_ThanhToanDT.BackgroundColor = System.Drawing.Color.White;
             this.dgv_ThanhToanDT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ThanhToanDT.GridColor = System.Drawing.Color.Black;
-            this.dgv_ThanhToanDT.Location = new System.Drawing.Point(8, 106);
+            this.dgv_ThanhToanDT.Location = new System.Drawing.Point(281, 184);
             this.dgv_ThanhToanDT.Name = "dgv_ThanhToanDT";
             this.dgv_ThanhToanDT.Size = new System.Drawing.Size(787, 333);
             this.dgv_ThanhToanDT.TabIndex = 4;
@@ -131,7 +131,7 @@ namespace dental_sys
             // 
             this.cbBenhNhan_DT.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbBenhNhan_DT.FormattingEnabled = true;
-            this.cbBenhNhan_DT.Location = new System.Drawing.Point(391, 54);
+            this.cbBenhNhan_DT.Location = new System.Drawing.Point(664, 132);
             this.cbBenhNhan_DT.Name = "cbBenhNhan_DT";
             this.cbBenhNhan_DT.Size = new System.Drawing.Size(172, 32);
             this.cbBenhNhan_DT.TabIndex = 3;
@@ -141,7 +141,7 @@ namespace dental_sys
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(277, 62);
+            this.label2.Location = new System.Drawing.Point(550, 140);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(108, 24);
             this.label2.TabIndex = 2;

@@ -33,11 +33,17 @@ namespace dental_sys
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmqlBaoCao));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnExcel_DV = new Bunifu.Framework.UI.BunifuImageButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tenDichVuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tongTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dichVuBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.thuctapDataSet1 = new dental_sys.thuctapDataSet1();
             this.cbDichVu = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnExcel = new Bunifu.Framework.UI.BunifuImageButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cbBuoiDieuTri = new System.Windows.Forms.ComboBox();
             this.dtpNgayTiepNhan = new System.Windows.Forms.DateTimePicker();
@@ -49,6 +55,7 @@ namespace dental_sys
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new Bunifu.Framework.UI.BunifuThinButton2();
             this.dtpDayStart = new System.Windows.Forms.DateTimePicker();
             this.dtpDayEnd = new System.Windows.Forms.DateTimePicker();
             this.txtTongTienThu = new System.Windows.Forms.TextBox();
@@ -61,6 +68,7 @@ namespace dental_sys
             this.lbTongChi = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnTimKiem = new Bunifu.Framework.UI.BunifuThinButton2();
             this.dtpStart = new System.Windows.Forms.DateTimePicker();
             this.dtpEnd = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
@@ -80,20 +88,14 @@ namespace dental_sys
             this.donThuocTableAdapter = new dental_sys.thuctapDataSetTableAdapters.DonThuocTableAdapter();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.bunifuElipse1 = new Bunifu.Framework.UI.BunifuElipse(this.components);
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnExcel_DV = new Bunifu.Framework.UI.BunifuImageButton();
-            this.btnExcel = new Bunifu.Framework.UI.BunifuImageButton();
-            this.btnSearch = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.btnTimKiem = new Bunifu.Framework.UI.BunifuThinButton2();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tenDichVuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tongTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExcel_DV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dichVuBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBenhNhan)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -108,8 +110,6 @@ namespace dental_sys
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.donThuocBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnExcel_DV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -140,6 +140,20 @@ namespace dental_sys
             this.tabPage1.Text = "Báo cáo dịch vụ";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnExcel_DV
+            // 
+            this.btnExcel_DV.BackColor = System.Drawing.Color.White;
+            this.btnExcel_DV.Image = global::dental_sys.Properties.Resources.icons8_microsoft_excel_32;
+            this.btnExcel_DV.ImageActive = null;
+            this.btnExcel_DV.Location = new System.Drawing.Point(272, 334);
+            this.btnExcel_DV.Name = "btnExcel_DV";
+            this.btnExcel_DV.Size = new System.Drawing.Size(71, 71);
+            this.btnExcel_DV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnExcel_DV.TabIndex = 10;
+            this.btnExcel_DV.TabStop = false;
+            this.btnExcel_DV.Zoom = 10;
+            this.btnExcel_DV.Click += new System.EventHandler(this.btnExcel_DV_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AutoGenerateColumns = false;
@@ -159,6 +173,29 @@ namespace dental_sys
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.Size = new System.Drawing.Size(614, 499);
             this.dataGridView1.TabIndex = 1;
+            // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            // 
+            // tenDichVuDataGridViewTextBoxColumn
+            // 
+            this.tenDichVuDataGridViewTextBoxColumn.DataPropertyName = "TenDichVu";
+            this.tenDichVuDataGridViewTextBoxColumn.HeaderText = "TenDichVu";
+            this.tenDichVuDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tenDichVuDataGridViewTextBoxColumn.Name = "tenDichVuDataGridViewTextBoxColumn";
+            // 
+            // tongTienDataGridViewTextBoxColumn
+            // 
+            this.tongTienDataGridViewTextBoxColumn.DataPropertyName = "TongTien";
+            this.tongTienDataGridViewTextBoxColumn.HeaderText = "TongTien";
+            this.tongTienDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tongTienDataGridViewTextBoxColumn.Name = "tongTienDataGridViewTextBoxColumn";
+            this.tongTienDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // dichVuBindingSource
             // 
@@ -197,6 +234,28 @@ namespace dental_sys
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Báo cáo bệnh nhân";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // btnExcel
+            // 
+            this.btnExcel.BackColor = System.Drawing.Color.White;
+            this.btnExcel.Image = global::dental_sys.Properties.Resources.icons8_microsoft_excel_32;
+            this.btnExcel.ImageActive = null;
+            this.btnExcel.Location = new System.Drawing.Point(294, 348);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(71, 71);
+            this.btnExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.btnExcel.TabIndex = 9;
+            this.btnExcel.TabStop = false;
+            this.btnExcel.Zoom = 10;
+            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click_1);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(220, 248);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.TabIndex = 8;
             // 
             // label1
             // 
@@ -326,6 +385,32 @@ namespace dental_sys
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tìm kiếm";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.ActiveBorderThickness = 1;
+            this.btnSearch.ActiveCornerRadius = 20;
+            this.btnSearch.ActiveFillColor = System.Drawing.Color.White;
+            this.btnSearch.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSearch.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
+            this.btnSearch.ButtonText = "Tìm kiếm";
+            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSearch.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnSearch.IdleBorderThickness = 1;
+            this.btnSearch.IdleCornerRadius = 20;
+            this.btnSearch.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSearch.IdleForecolor = System.Drawing.Color.White;
+            this.btnSearch.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnSearch.Location = new System.Drawing.Point(69, 185);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(5);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(170, 49);
+            this.btnSearch.TabIndex = 4;
+            this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click_1);
+            // 
             // dtpDayStart
             // 
             this.dtpDayStart.Location = new System.Drawing.Point(50, 43);
@@ -448,6 +533,32 @@ namespace dental_sys
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tìm kiếm";
+            // 
+            // btnTimKiem
+            // 
+            this.btnTimKiem.ActiveBorderThickness = 1;
+            this.btnTimKiem.ActiveCornerRadius = 20;
+            this.btnTimKiem.ActiveFillColor = System.Drawing.Color.White;
+            this.btnTimKiem.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnTimKiem.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnTimKiem.BackColor = System.Drawing.Color.Transparent;
+            this.btnTimKiem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.BackgroundImage")));
+            this.btnTimKiem.ButtonText = "Tìm kiếm";
+            this.btnTimKiem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTimKiem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTimKiem.ForeColor = System.Drawing.Color.SeaGreen;
+            this.btnTimKiem.IdleBorderThickness = 1;
+            this.btnTimKiem.IdleCornerRadius = 20;
+            this.btnTimKiem.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnTimKiem.IdleForecolor = System.Drawing.Color.White;
+            this.btnTimKiem.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
+            this.btnTimKiem.Location = new System.Drawing.Point(61, 182);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(5);
+            this.btnTimKiem.Name = "btnTimKiem";
+            this.btnTimKiem.Size = new System.Drawing.Size(170, 49);
+            this.btnTimKiem.TabIndex = 25;
+            this.btnTimKiem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click_1);
             // 
             // dtpStart
             // 
@@ -579,117 +690,6 @@ namespace dental_sys
             this.bunifuElipse1.ElipseRadius = 5;
             this.bunifuElipse1.TargetControl = this;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(220, 248);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
-            this.label2.TabIndex = 8;
-            // 
-            // btnExcel_DV
-            // 
-            this.btnExcel_DV.BackColor = System.Drawing.Color.White;
-            this.btnExcel_DV.Image = global::dental_sys.Properties.Resources.icons8_microsoft_excel_32;
-            this.btnExcel_DV.ImageActive = null;
-            this.btnExcel_DV.Location = new System.Drawing.Point(272, 334);
-            this.btnExcel_DV.Name = "btnExcel_DV";
-            this.btnExcel_DV.Size = new System.Drawing.Size(71, 71);
-            this.btnExcel_DV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnExcel_DV.TabIndex = 10;
-            this.btnExcel_DV.TabStop = false;
-            this.btnExcel_DV.Zoom = 10;
-            this.btnExcel_DV.Click += new System.EventHandler(this.btnExcel_DV_Click);
-            // 
-            // btnExcel
-            // 
-            this.btnExcel.BackColor = System.Drawing.Color.White;
-            this.btnExcel.Image = global::dental_sys.Properties.Resources.icons8_microsoft_excel_32;
-            this.btnExcel.ImageActive = null;
-            this.btnExcel.Location = new System.Drawing.Point(294, 348);
-            this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(71, 71);
-            this.btnExcel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.btnExcel.TabIndex = 9;
-            this.btnExcel.TabStop = false;
-            this.btnExcel.Zoom = 10;
-            this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click_1);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.ActiveBorderThickness = 1;
-            this.btnSearch.ActiveCornerRadius = 20;
-            this.btnSearch.ActiveFillColor = System.Drawing.Color.White;
-            this.btnSearch.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnSearch.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
-            this.btnSearch.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSearch.BackgroundImage")));
-            this.btnSearch.ButtonText = "Tìm kiếm";
-            this.btnSearch.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSearch.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnSearch.IdleBorderThickness = 1;
-            this.btnSearch.IdleCornerRadius = 20;
-            this.btnSearch.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnSearch.IdleForecolor = System.Drawing.Color.White;
-            this.btnSearch.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnSearch.Location = new System.Drawing.Point(69, 185);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(5);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(170, 49);
-            this.btnSearch.TabIndex = 4;
-            this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click_1);
-            // 
-            // btnTimKiem
-            // 
-            this.btnTimKiem.ActiveBorderThickness = 1;
-            this.btnTimKiem.ActiveCornerRadius = 20;
-            this.btnTimKiem.ActiveFillColor = System.Drawing.Color.White;
-            this.btnTimKiem.ActiveForecolor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnTimKiem.ActiveLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnTimKiem.BackColor = System.Drawing.Color.Transparent;
-            this.btnTimKiem.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.BackgroundImage")));
-            this.btnTimKiem.ButtonText = "Tìm kiếm";
-            this.btnTimKiem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTimKiem.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimKiem.ForeColor = System.Drawing.Color.SeaGreen;
-            this.btnTimKiem.IdleBorderThickness = 1;
-            this.btnTimKiem.IdleCornerRadius = 20;
-            this.btnTimKiem.IdleFillColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnTimKiem.IdleForecolor = System.Drawing.Color.White;
-            this.btnTimKiem.IdleLineColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnTimKiem.Location = new System.Drawing.Point(61, 182);
-            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(5);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(170, 49);
-            this.btnTimKiem.TabIndex = 25;
-            this.btnTimKiem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnTimKiem.Click += new System.EventHandler(this.btnTimKiem_Click_1);
-            // 
-            // id
-            // 
-            this.id.DataPropertyName = "id";
-            this.id.HeaderText = "id";
-            this.id.MinimumWidth = 6;
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            // 
-            // tenDichVuDataGridViewTextBoxColumn
-            // 
-            this.tenDichVuDataGridViewTextBoxColumn.DataPropertyName = "TenDichVu";
-            this.tenDichVuDataGridViewTextBoxColumn.HeaderText = "TenDichVu";
-            this.tenDichVuDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tenDichVuDataGridViewTextBoxColumn.Name = "tenDichVuDataGridViewTextBoxColumn";
-            // 
-            // tongTienDataGridViewTextBoxColumn
-            // 
-            this.tongTienDataGridViewTextBoxColumn.DataPropertyName = "TongTien";
-            this.tongTienDataGridViewTextBoxColumn.HeaderText = "TongTien";
-            this.tongTienDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tongTienDataGridViewTextBoxColumn.Name = "tongTienDataGridViewTextBoxColumn";
-            this.tongTienDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // frmqlBaoCao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -703,11 +703,13 @@ namespace dental_sys
             this.Load += new System.EventHandler(this.frmqlBaoCao_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.btnExcel_DV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dichVuBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBenhNhan)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
@@ -724,8 +726,6 @@ namespace dental_sys
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.thuctapDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.donThuocBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnExcel_DV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnExcel)).EndInit();
             this.ResumeLayout(false);
 
         }

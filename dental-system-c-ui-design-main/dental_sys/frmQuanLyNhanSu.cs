@@ -33,11 +33,14 @@ namespace dental_sys
 
             using (thuctapEntities qlNhanSu = new thuctapEntities())
             {
-                cbChucVu.DataSource = qlNhanSu.Roles.ToList();
+                cbChucVu.DataSource = qlNhanSu.Roles.Where(p => p.id != 3).ToList();
                 cbChucVu.DisplayMember = "role_name";
                 cbChucVu.ValueMember = "id";
 
                 cbGioiTinh.SelectedIndex = 0;
+
+                
+
             }
         }
         int idUser;
@@ -88,7 +91,14 @@ namespace dental_sys
         {
             using(thuctapEntities qlNhanSu = new thuctapEntities())
             {
-                dataGridView1.DataSource = qlNhanSu.Users.ToList();
+                Role role = qlNhanSu.Roles.Where(p => p.role_name == "Giám đốc").First();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if ((Int32)row.Cells[4].Value == role.id)
+                    {
+                        dataGridView1.Rows[row.Index].Visible = false;
+                    }
+                }
             }
         }
 
@@ -142,6 +152,8 @@ namespace dental_sys
                     if (getImage() == null)
                     {
                         MessageBox.Show("Vui lòng load hình ảnh sản phẩm lên");
+                        refresh();
+                        picProduct.Image = null;
                         return;
                     }
                     else
@@ -292,6 +304,28 @@ namespace dental_sys
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void dataGridView1_DataSourceChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void frmQuanLyNhanSu_Shown(object sender, EventArgs e)
+        {
+            using (thuctapEntities qlNhanSu = new thuctapEntities())
+            {
+                Role role = qlNhanSu.Roles.Where(p => p.role_name == "Giám đốc").First();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if ((Int32)row.Cells[4].Value == role.id)
+                    {
+                        //MessageBox.Show(role.id + " " + (Int32)row.Cells[4].Value);
+                        dataGridView1.Rows[row.Index].Visible = false;
+                        //MessageBox.Show(" " + row.Index);
+                    }
+                }
             }
         }
     }

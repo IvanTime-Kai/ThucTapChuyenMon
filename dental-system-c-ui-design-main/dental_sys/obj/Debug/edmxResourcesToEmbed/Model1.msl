@@ -532,5 +532,25 @@
     <FunctionImportMapping FunctionImportName="sp_XoaDichVu" FunctionName="thuctapModel.Store.sp_XoaDichVu" />
     <FunctionImportMapping FunctionImportName="sp_XoaDonThuoc" FunctionName="thuctapModel.Store.sp_XoaDonThuoc" />
     <FunctionImportMapping FunctionImportName="sp_XoaUser" FunctionName="thuctapModel.Store.sp_XoaUser" />
+    <FunctionImportMapping FunctionImportName="sp_XoaBenhNhan" FunctionName="thuctapModel.Store.sp_XoaBenhNhan" />
+    <FunctionImportMapping FunctionImportName="sp_ThemBenhNen" FunctionName="thuctapModel.Store.sp_ThemBenhNen" />
+    <FunctionImportMapping FunctionImportName="sp_LocBenhNen" FunctionName="thuctapModel.Store.sp_LocBenhNen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_LocBenhNen_Result">
+          <ScalarProperty Name="BenhNhan_id" ColumnName="BenhNhan_id" />
+          <ScalarProperty Name="BenhNen_id" ColumnName="BenhNen_id" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_XoaBenhNen" FunctionName="thuctapModel.Store.sp_XoaBenhNen" />
+    <FunctionImportMapping FunctionImportName="sp_SuaBenhNen" FunctionName="thuctapModel.Store.sp_SuaBenhNen" />
+    <FunctionImportMapping FunctionImportName="sp_loadBenhNen" FunctionName="thuctapModel.Store.sp_loadBenhNen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="thuctapModel.sp_loadBenhNen_Result">
+          <ScalarProperty Name="TenBenhNhan" ColumnName="TenBenhNhan" />
+          <ScalarProperty Name="BenhNen" ColumnName="BenhNen" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

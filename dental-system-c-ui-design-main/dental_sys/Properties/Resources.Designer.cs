@@ -293,6 +293,16 @@ namespace dental_sys.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_power_off_button_16 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_power_off_button_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_power_off_button_32 {
             get {
                 object obj = ResourceManager.GetObject("icons8_power_off_button_32", resourceCulture);

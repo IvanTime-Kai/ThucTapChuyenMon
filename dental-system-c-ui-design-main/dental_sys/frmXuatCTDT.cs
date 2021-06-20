@@ -49,6 +49,7 @@ namespace dental_sys
 
         public void ExportToPDF()
         {
+            
             Microsoft.Reporting.WinForms.Warning[] warnings;
             string[] streamids;
             string mimeType;
@@ -57,12 +58,26 @@ namespace dental_sys
             byte[] bytes = new byte[1024];
 
             bytes = this.reportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out filenameExtension, out streamids, out warnings);
-            string fileName = @"D:\Aplication\HoaDonBaiTapLon\HoaDon_" + maFile + ".pdf";
-            File.WriteAllBytes(fileName, bytes);
-            Process pr = Process.Start(fileName);
-            pr.Close();
 
-            frmMail emailCTDT = new frmMail(this.mailKH, maFile);
+            string directoryPath = Application.StartupPath + "\\HoaDonBaiTapLon\\";
+            string fileName = "HoaDon.pdf";
+            string des = directoryPath + fileName;
+
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
+            try
+            {
+                File.WriteAllBytes(des, bytes);
+                Process pr = Process.Start(des);
+                pr.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            frmMail emailCTDT = new frmMail(this.mailKH, des);
             emailCTDT.send();
         }
     }

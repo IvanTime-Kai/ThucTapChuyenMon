@@ -27,7 +27,7 @@ namespace dental_sys
             this.mailKH = mailKH;
             this.maFile = maFile;
             txtTo.Text = this.mailKH;
-            textBox1.Text = @"D:\Aplication\HoaDonBaiTapLon\HoaDon_" + maFile + ".pdf";
+            textBox1.Text = this.maFile;
         }
         thuctapEntities quanlichuan = new thuctapEntities();
 

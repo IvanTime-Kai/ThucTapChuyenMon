@@ -631,10 +631,16 @@
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_load_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_loadBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_loadDonThuoc_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_loadHinhAnhBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_LocBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_NhungCaTruc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -646,9 +652,17 @@
   <Function Name="sp_Sua_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DichVu_id" Type="int" Mode="In" />
   </Function>
+  <Function Name="sp_SuaBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+    <Parameter Name="idBenhNen" Type="int" Mode="In" />
+  </Function>
   <Function Name="sp_TaoBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BDT_id" Type="int" Mode="In" />
     <Parameter Name="DichVu_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ThemBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+    <Parameter Name="idBenhNen" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_Thu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="dayStart" Type="date" Mode="In" />
@@ -690,6 +704,13 @@
   <Function Name="sp_XoaBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="BDT_id" Type="int" Mode="In" />
     <Parameter Name="DichVu_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+    <Parameter Name="idBenhNen" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaBenhNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_XoaCTDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="int" Mode="In" />

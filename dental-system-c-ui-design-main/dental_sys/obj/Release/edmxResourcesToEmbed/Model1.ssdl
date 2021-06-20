@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="thuctapModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BDT_DichVu">
+    <Key>
+      <PropertyRef Name="BDT_id" />
+      <PropertyRef Name="DichVu_id" />
+    </Key>
+    <Property Name="BDT_id" Type="int" Nullable="false" />
+    <Property Name="DichVu_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BenhNen">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BenhNen" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="BenhNen_BenhNhan">
+    <Key>
+      <PropertyRef Name="BenhNhan_id" />
+      <PropertyRef Name="BenhNen_id" />
+    </Key>
+    <Property Name="BenhNhan_id" Type="int" Nullable="false" />
+    <Property Name="BenhNen_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BenhNhan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenBenhNhan" Type="nvarchar" MaxLength="100" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="15" />
+    <Property Name="Tuoi" Type="int" />
+    <Property Name="NgheNghiep" Type="nvarchar" MaxLength="100" />
+    <Property Name="LienHe" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="DiaChi" Type="nvarchar" MaxLength="300" />
+    <Property Name="AnhChup" Type="image" />
+    <Property Name="NguoiTiepNhan" Type="int" />
+    <Property Name="NgayTiepNhan" Type="date" />
+  </EntityType>
+  <EntityType Name="BuoiDieuTri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayKham" Type="date" />
+    <Property Name="ChuanDoan" Type="nvarchar" MaxLength="200" />
+    <Property Name="ChiPhi" Type="int" />
+    <Property Name="BacSi" Type="int" />
+    <Property Name="BenhNhan" Type="int" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+    <Property Name="DaThanhToan" Type="bit" />
+  </EntityType>
+  <EntityType Name="CaTruc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NguoiTruc" Type="int" />
+    <Property Name="NgayTruc" Type="date" />
+    <Property Name="Ca" Type="nvarchar" MaxLength="10" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Chi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NguoiChi" Type="int" />
+    <Property Name="KhoanChi" Type="int" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+    <Property Name="NgayChi" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ChiTietDonThuoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenThuoc" Type="varchar" MaxLength="100" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="Donvi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Donthuoc_id" Type="int" />
+    <Property Name="DonGia" Type="int" />
+    <Property Name="HuongDan" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="CuocHen">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BacSi" Type="int" />
+    <Property Name="BenhNhan" Type="int" />
+    <Property Name="NgayHen" Type="date" />
+    <Property Name="Ca" Type="nvarchar" MaxLength="20" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
+    <Property Name="NoiDung" Type="nvarchar" MaxLength="200" />
+    <Property Name="DaGuiEmail" Type="bit" />
+  </EntityType>
+  <EntityType Name="DichVu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenDichVu" Type="nvarchar" MaxLength="200" />
+    <Property Name="GiaDichVu" Type="int" />
+  </EntityType>
+  <EntityType Name="DonGia_VatLieu">
+    <Key>
+      <PropertyRef Name="NhaCungCap_id" />
+      <PropertyRef Name="VatLieu_id" />
+    </Key>
+    <Property Name="NhaCungCap_id" Type="int" Nullable="false" />
+    <Property Name="VatLieu_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DonThuoc">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuoiDieuTri" Type="int" />
+    <Property Name="ThanhTien" Type="int" />
+    <Property Name="DaThanhToan" Type="bit" />
+  </EntityType>
+  <EntityType Name="HinhAnhDieuTri">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Hinh" Type="image" />
+    <Property Name="BDT_id" Type="int" />
+  </EntityType>
+  <EntityType Name="Khoanchi">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenKhoanChi" Type="nvarchar" MaxLength="100" />
+    <Property Name="SoTien" Type="int" />
+  </EntityType>
+  <EntityType Name="Khoanthu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenKhoanThu" Type="nvarchar" MaxLength="100" />
+    <Property Name="SoTien" Type="int" />
+  </EntityType>
+  <EntityType Name="NhaCungCap">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNhaCungCap" Type="nvarchar" MaxLength="200" />
+    <Property Name="QuocGia" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="NhapVatLieu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayNhap" Type="date" />
+    <Property Name="VatLieu_id" Type="int" />
+    <Property Name="Soluong" Type="int" />
+    <Property Name="TongTien" Type="int" />
+  </EntityType>
+  <EntityType Name="NhomVatLieu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNhom" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role_name" Type="nvarchar" MaxLength="50" />
+    <Property Name="MucLuong" Type="int" />
+  </EntityType>
+  <EntityType Name="Thu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NguoiDong" Type="int" />
+    <Property Name="KhoanThu" Type="int" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="200" />
+    <Property Name="NgayThu" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TraLuong">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayTra" Type="date" />
+    <Property Name="SoTienTra" Type="int" />
+    <Property Name="ThangLuong" Type="date" />
+    <Property Name="NguoiDuocTra" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ten" Type="nvarchar" MaxLength="100" />
+    <Property Name="GioiTinh" Type="nvarchar" MaxLength="15" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="Chucvu" Type="int" />
+    <Property Name="AnhChup" Type="image" />
+    <Property Name="SoDienThoai" Type="varchar" MaxLength="20" />
+    <Property Name="MatKhau" Type="varchar" MaxLength="100" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="NgayVaoLam" Type="date" />
+  </EntityType>
+  <EntityType Name="VatLieu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenVatLieu" Type="nvarchar" MaxLength="200" />
+    <Property Name="DonVi" Type="nvarchar" MaxLength="20" />
+    <Property Name="TongNhap" Type="int" />
+    <Property Name="TongXuat" Type="int" />
+    <Property Name="TonKho" Type="int" />
+    <Property Name="NhomVatLieu" Type="int" />
+    <Property Name="DonGia" Type="int" />
+  </EntityType>
+  <EntityType Name="XuatVatLieu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayXuat" Type="date" />
+    <Property Name="VatLieu_id" Type="int" />
+    <Property Name="Soluong" Type="int" />
+  </EntityType>
+  <EntityType Name="YeuCauNhap">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VatLieu_id" Type="int" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="NguoiYeuCau" Type="int" />
+    <Property Name="NgayYeuCau" Type="date" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="YeuCauXuat">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VatLieu_id" Type="int" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="NguoiYeuCau" Type="int" />
+    <Property Name="NgayYeuCau" Type="date" />
+  </EntityType>
+  <Association Name="FK__BDT_DichV__BDT_i__5441852A">
+    <End Role="BuoiDieuTri" Type="Self.BuoiDieuTri" Multiplicity="1" />
+    <End Role="BDT_DichVu" Type="Self.BDT_DichVu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuoiDieuTri">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BDT_DichVu">
+        <PropertyRef Name="BDT_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BDT_DichV__DichV__5535A963">
+    <End Role="DichVu" Type="Self.DichVu" Multiplicity="1" />
+    <End Role="BDT_DichVu" Type="Self.BDT_DichVu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DichVu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BDT_DichVu">
+        <PropertyRef Name="DichVu_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BenhNen_B__BenhN__5629CD9C">
+    <End Role="BenhNhan" Type="Self.BenhNhan" Multiplicity="1" />
+    <End Role="BenhNen_BenhNhan" Type="Self.BenhNen_BenhNhan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BenhNhan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BenhNen_BenhNhan">
+        <PropertyRef Name="BenhNhan_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BenhNen_B__BenhN__571DF1D5">
+    <End Role="BenhNen" Type="Self.BenhNen" Multiplicity="1" />
+    <End Role="BenhNen_BenhNhan" Type="Self.BenhNen_BenhNhan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BenhNen">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BenhNen_BenhNhan">
+        <PropertyRef Name="BenhNen_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BenhNhan__NguoiT__5812160E">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="BenhNhan" Type="Self.BenhNhan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BenhNhan">
+        <PropertyRef Name="NguoiTiepNhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BuoiDieuT__BacSi__59063A47">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="BuoiDieuTri" Type="Self.BuoiDieuTri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BuoiDieuTri">
+        <PropertyRef Name="BacSi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BuoiDieuT__BenhN__59FA5E80">
+    <End Role="BenhNhan" Type="Self.BenhNhan" Multiplicity="0..1" />
+    <End Role="BuoiDieuTri" Type="Self.BuoiDieuTri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BenhNhan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="BuoiDieuTri">
+        <PropertyRef Name="BenhNhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CaTruc__NguoiTru__5AEE82B9">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="CaTruc" Type="Self.CaTruc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CaTruc">
+        <PropertyRef Name="NguoiTruc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Chi__KhoanChi__5BE2A6F2">
+    <End Role="Khoanchi" Type="Self.Khoanchi" Multiplicity="0..1" />
+    <End Role="Chi" Type="Self.Chi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Khoanchi">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Chi">
+        <PropertyRef Name="KhoanChi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Chi__NguoiChi__5CD6CB2B">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Chi" Type="Self.Chi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Chi">
+        <PropertyRef Name="NguoiChi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ChiTietDo__Donth__5DCAEF64">
+    <End Role="DonThuoc" Type="Self.DonThuoc" Multiplicity="0..1" />
+    <End Role="ChiTietDonThuoc" Type="Self.ChiTietDonThuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonThuoc">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietDonThuoc">
+        <PropertyRef Name="Donthuoc_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CuocHen__BacSi__5EBF139D">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="CuocHen" Type="Self.CuocHen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CuocHen">
+        <PropertyRef Name="BacSi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CuocHen__BenhNha__5FB337D6">
+    <End Role="BenhNhan" Type="Self.BenhNhan" Multiplicity="0..1" />
+    <End Role="CuocHen" Type="Self.CuocHen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BenhNhan">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CuocHen">
+        <PropertyRef Name="BenhNhan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonGia_Va__NhaCu__60A75C0F">
+    <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
+    <End Role="DonGia_VatLieu" Type="Self.DonGia_VatLieu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhaCungCap">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DonGia_VatLieu">
+        <PropertyRef Name="NhaCungCap_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonGia_Va__VatLi__619B8048">
+    <End Role="VatLieu" Type="Self.VatLieu" Multiplicity="1" />
+    <End Role="DonGia_VatLieu" Type="Self.DonGia_VatLieu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatLieu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DonGia_VatLieu">
+        <PropertyRef Name="VatLieu_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DonThuoc__BuoiDi__628FA481">
+    <End Role="BuoiDieuTri" Type="Self.BuoiDieuTri" Multiplicity="0..1" />
+    <End Role="DonThuoc" Type="Self.DonThuoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuoiDieuTri">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="DonThuoc">
+        <PropertyRef Name="BuoiDieuTri" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HinhAnhDi__BDT_i__6383C8BA">
+    <End Role="BuoiDieuTri" Type="Self.BuoiDieuTri" Multiplicity="0..1" />
+    <End Role="HinhAnhDieuTri" Type="Self.HinhAnhDieuTri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuoiDieuTri">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="HinhAnhDieuTri">
+        <PropertyRef Name="BDT_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__NhapVatLi__VatLi__6477ECF3">
+    <End Role="VatLieu" Type="Self.VatLieu" Multiplicity="0..1" />
+    <End Role="NhapVatLieu" Type="Self.NhapVatLieu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatLieu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="NhapVatLieu">
+        <PropertyRef Name="VatLieu_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Thu__KhoanThu__656C112C">
+    <End Role="Khoanthu" Type="Self.Khoanthu" Multiplicity="0..1" />
+    <End Role="Thu" Type="Self.Thu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Khoanthu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Thu">
+        <PropertyRef Name="KhoanThu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Thu__NguoiDong__66603565">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Thu" Type="Self.Thu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Thu">
+        <PropertyRef Name="NguoiDong" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TraLuong__NguoiD__6754599E">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="TraLuong" Type="Self.TraLuong" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TraLuong">
+        <PropertyRef Name="NguoiDuocTra" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__Chucvu__68487DD7">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Chucvu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VatLieu__NhomVat__693CA210">
+    <End Role="NhomVatLieu" Type="Self.NhomVatLieu" Multiplicity="0..1" />
+    <End Role="VatLieu" Type="Self.VatLieu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhomVatLieu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="VatLieu">
+        <PropertyRef Name="NhomVatLieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__XuatVatLi__VatLi__6A30C649">
+    <End Role="VatLieu" Type="Self.VatLieu" Multiplicity="0..1" />
+    <End Role="XuatVatLieu" Type="Self.XuatVatLieu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatLieu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="XuatVatLieu">
+        <PropertyRef Name="VatLieu_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__YeuCauNha__Nguoi__6B24EA82">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="YeuCauNhap" Type="Self.YeuCauNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="YeuCauNhap">
+        <PropertyRef Name="NguoiYeuCau" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__YeuCauNha__VatLi__6C190EBB">
+    <End Role="VatLieu" Type="Self.VatLieu" Multiplicity="0..1" />
+    <End Role="YeuCauNhap" Type="Self.YeuCauNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatLieu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="YeuCauNhap">
+        <PropertyRef Name="VatLieu_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__YeuCauXua__Nguoi__6D0D32F4">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="YeuCauXuat" Type="Self.YeuCauXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="YeuCauXuat">
+        <PropertyRef Name="NguoiYeuCau" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__YeuCauXua__VatLi__6E01572D">
+    <End Role="VatLieu" Type="Self.VatLieu" Multiplicity="0..1" />
+    <End Role="YeuCauXuat" Type="Self.YeuCauXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatLieu">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="YeuCauXuat">
+        <PropertyRef Name="VatLieu_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_BaoCaoTheoDichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_BDT_HinhAnh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_BenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_BenhNhan_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_BenhNhan_not_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_BenhNhanTiepNhan_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NgayTiepNhan" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_BenhNhanTiepNhan_BDT_have" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NgayTiepNhan" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_BuoiDieutriVaHinhAnh" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+    <Parameter Name="NgayKham" Type="date" Mode="In" />
+    <Parameter Name="ChuanDoan" Type="nvarchar" Mode="In" />
+    <Parameter Name="ChiPhi" Type="int" Mode="In" />
+    <Parameter Name="BacSi" Type="int" Mode="In" />
+    <Parameter Name="BenhNhan" Type="int" Mode="In" />
+    <Parameter Name="GhiChu" Type="nvarchar" Mode="In" />
+    <Parameter Name="Hinh" Type="image" Mode="In" />
+  </Function>
+  <Function Name="sp_CT_BuoiDieuTri" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_DonThuoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_HinhAnhBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_load_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_loadBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_loadDonThuoc_BDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_loadHinhAnhBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_LocBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_NhungCaTruc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="userId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Report" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Sua_BDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DichVu_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SuaBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+    <Parameter Name="idBenhNen" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_TaoBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BDT_id" Type="int" Mode="In" />
+    <Parameter Name="DichVu_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_ThemBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+    <Parameter Name="idBenhNen" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_Thu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dayStart" Type="date" Mode="In" />
+    <Parameter Name="dayEnd" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_TimKiemTen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ten" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_TongTienBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dayStart" Type="date" Mode="In" />
+    <Parameter Name="dayEnd" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_TongTienChi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dayStart" Type="date" Mode="In" />
+    <Parameter Name="dayEnd" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_TongTienDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dayStart" Type="date" Mode="In" />
+    <Parameter Name="dayEnd" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_TongTienNhanVien" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dayStart" Type="date" Mode="In" />
+    <Parameter Name="dayEnd" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_TongTienThu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dayStart" Type="date" Mode="In" />
+    <Parameter Name="dayEnd" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_TongTienVatLieu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="dayStart" Type="date" Mode="In" />
+    <Parameter Name="dayEnd" Type="date" Mode="In" />
+  </Function>
+  <Function Name="sp_XemLuong" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaBDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaBDT_DichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BDT_id" Type="int" Mode="In" />
+    <Parameter Name="DichVu_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaBenhNen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="idBenhNhan" Type="int" Mode="In" />
+    <Parameter Name="idBenhNen" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaBenhNhan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaCTDT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaDichVu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaDonThuoc" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_XoaUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="thuctapModelStoreContainer">
+    <EntitySet Name="BDT_DichVu" EntityType="Self.BDT_DichVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BenhNen" EntityType="Self.BenhNen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BenhNen_BenhNhan" EntityType="Self.BenhNen_BenhNhan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BenhNhan" EntityType="Self.BenhNhan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BuoiDieuTri" EntityType="Self.BuoiDieuTri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CaTruc" EntityType="Self.CaTruc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Chi" EntityType="Self.Chi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChiTietDonThuoc" EntityType="Self.ChiTietDonThuoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CuocHen" EntityType="Self.CuocHen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DichVu" EntityType="Self.DichVu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonGia_VatLieu" EntityType="Self.DonGia_VatLieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonThuoc" EntityType="Self.DonThuoc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HinhAnhDieuTri" EntityType="Self.HinhAnhDieuTri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Khoanchi" EntityType="Self.Khoanchi" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Khoanthu" EntityType="Self.Khoanthu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhaCungCap" EntityType="Self.NhaCungCap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhapVatLieu" EntityType="Self.NhapVatLieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhomVatLieu" EntityType="Self.NhomVatLieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Thu" EntityType="Self.Thu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TraLuong" EntityType="Self.TraLuong" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VatLieu" EntityType="Self.VatLieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="XuatVatLieu" EntityType="Self.XuatVatLieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YeuCauNhap" EntityType="Self.YeuCauNhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YeuCauXuat" EntityType="Self.YeuCauXuat" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BDT_DichV__BDT_i__5441852A" Association="Self.FK__BDT_DichV__BDT_i__5441852A">
+      <End Role="BuoiDieuTri" EntitySet="BuoiDieuTri" />
+      <End Role="BDT_DichVu" EntitySet="BDT_DichVu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BDT_DichV__DichV__5535A963" Association="Self.FK__BDT_DichV__DichV__5535A963">
+      <End Role="DichVu" EntitySet="DichVu" />
+      <End Role="BDT_DichVu" EntitySet="BDT_DichVu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BenhNen_B__BenhN__5629CD9C" Association="Self.FK__BenhNen_B__BenhN__5629CD9C">
+      <End Role="BenhNhan" EntitySet="BenhNhan" />
+      <End Role="BenhNen_BenhNhan" EntitySet="BenhNen_BenhNhan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BenhNen_B__BenhN__571DF1D5" Association="Self.FK__BenhNen_B__BenhN__571DF1D5">
+      <End Role="BenhNen" EntitySet="BenhNen" />
+      <End Role="BenhNen_BenhNhan" EntitySet="BenhNen_BenhNhan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BenhNhan__NguoiT__5812160E" Association="Self.FK__BenhNhan__NguoiT__5812160E">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BenhNhan" EntitySet="BenhNhan" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BuoiDieuT__BacSi__59063A47" Association="Self.FK__BuoiDieuT__BacSi__59063A47">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="BuoiDieuTri" EntitySet="BuoiDieuTri" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BuoiDieuT__BenhN__59FA5E80" Association="Self.FK__BuoiDieuT__BenhN__59FA5E80">
+      <End Role="BenhNhan" EntitySet="BenhNhan" />
+      <End Role="BuoiDieuTri" EntitySet="BuoiDieuTri" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CaTruc__NguoiTru__5AEE82B9" Association="Self.FK__CaTruc__NguoiTru__5AEE82B9">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CaTruc" EntitySet="CaTruc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Chi__KhoanChi__5BE2A6F2" Association="Self.FK__Chi__KhoanChi__5BE2A6F2">
+      <End Role="Khoanchi" EntitySet="Khoanchi" />
+      <End Role="Chi" EntitySet="Chi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Chi__NguoiChi__5CD6CB2B" Association="Self.FK__Chi__NguoiChi__5CD6CB2B">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Chi" EntitySet="Chi" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ChiTietDo__Donth__5DCAEF64" Association="Self.FK__ChiTietDo__Donth__5DCAEF64">
+      <End Role="DonThuoc" EntitySet="DonThuoc" />
+      <End Role="ChiTietDonThuoc" EntitySet="ChiTietDonThuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CuocHen__BacSi__5EBF139D" Association="Self.FK__CuocHen__BacSi__5EBF139D">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="CuocHen" EntitySet="CuocHen" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CuocHen__BenhNha__5FB337D6" Association="Self.FK__CuocHen__BenhNha__5FB337D6">
+      <End Role="BenhNhan" EntitySet="BenhNhan" />
+      <End Role="CuocHen" EntitySet="CuocHen" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonGia_Va__NhaCu__60A75C0F" Association="Self.FK__DonGia_Va__NhaCu__60A75C0F">
+      <End Role="NhaCungCap" EntitySet="NhaCungCap" />
+      <End Role="DonGia_VatLieu" EntitySet="DonGia_VatLieu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonGia_Va__VatLi__619B8048" Association="Self.FK__DonGia_Va__VatLi__619B8048">
+      <End Role="VatLieu" EntitySet="VatLieu" />
+      <End Role="DonGia_VatLieu" EntitySet="DonGia_VatLieu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DonThuoc__BuoiDi__628FA481" Association="Self.FK__DonThuoc__BuoiDi__628FA481">
+      <End Role="BuoiDieuTri" EntitySet="BuoiDieuTri" />
+      <End Role="DonThuoc" EntitySet="DonThuoc" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HinhAnhDi__BDT_i__6383C8BA" Association="Self.FK__HinhAnhDi__BDT_i__6383C8BA">
+      <End Role="BuoiDieuTri" EntitySet="BuoiDieuTri" />
+      <End Role="HinhAnhDieuTri" EntitySet="HinhAnhDieuTri" />
+    </AssociationSet>
+    <AssociationSet Name="FK__NhapVatLi__VatLi__6477ECF3" Association="Self.FK__NhapVatLi__VatLi__6477ECF3">
+      <End Role="VatLieu" EntitySet="VatLieu" />
+      <End Role="NhapVatLieu" EntitySet="NhapVatLieu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Thu__KhoanThu__656C112C" Association="Self.FK__Thu__KhoanThu__656C112C">
+      <End Role="Khoanthu" EntitySet="Khoanthu" />
+      <End Role="Thu" EntitySet="Thu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Thu__NguoiDong__66603565" Association="Self.FK__Thu__NguoiDong__66603565">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Thu" EntitySet="Thu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TraLuong__NguoiD__6754599E" Association="Self.FK__TraLuong__NguoiD__6754599E">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="TraLuong" EntitySet="TraLuong" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__Chucvu__68487DD7" Association="Self.FK__Users__Chucvu__68487DD7">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VatLieu__NhomVat__693CA210" Association="Self.FK__VatLieu__NhomVat__693CA210">
+      <End Role="NhomVatLieu" EntitySet="NhomVatLieu" />
+      <End Role="VatLieu" EntitySet="VatLieu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__XuatVatLi__VatLi__6A30C649" Association="Self.FK__XuatVatLi__VatLi__6A30C649">
+      <End Role="VatLieu" EntitySet="VatLieu" />
+      <End Role="XuatVatLieu" EntitySet="XuatVatLieu" />
+    </AssociationSet>
+    <AssociationSet Name="FK__YeuCauNha__Nguoi__6B24EA82" Association="Self.FK__YeuCauNha__Nguoi__6B24EA82">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="YeuCauNhap" EntitySet="YeuCauNhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK__YeuCauNha__VatLi__6C190EBB" Association="Self.FK__YeuCauNha__VatLi__6C190EBB">
+      <End Role="VatLieu" EntitySet="VatLieu" />
+      <End Role="YeuCauNhap" EntitySet="YeuCauNhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK__YeuCauXua__Nguoi__6D0D32F4" Association="Self.FK__YeuCauXua__Nguoi__6D0D32F4">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="YeuCauXuat" EntitySet="YeuCauXuat" />
+    </AssociationSet>
+    <AssociationSet Name="FK__YeuCauXua__VatLi__6E01572D" Association="Self.FK__YeuCauXua__VatLi__6E01572D">
+      <End Role="VatLieu" EntitySet="VatLieu" />
+      <End Role="YeuCauXuat" EntitySet="YeuCauXuat" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

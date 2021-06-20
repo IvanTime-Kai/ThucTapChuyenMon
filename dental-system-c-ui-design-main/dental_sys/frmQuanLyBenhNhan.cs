@@ -21,6 +21,12 @@ namespace dental_sys
         private int maFile;
         private void frmQuanLyBenhNhan_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'thuctapDataSet.BenhNen' table. You can move, or remove it, as needed.
+            this.benhNenTableAdapter.Fill(this.thuctapDataSet.BenhNen);
+            // TODO: This line of code loads data into the 'thuctapDataSet.BenhNen_BenhNhan' table. You can move, or remove it, as needed.
+            this.benhNen_BenhNhanTableAdapter.Fill(this.thuctapDataSet.BenhNen_BenhNhan);
+            // TODO: This line of code loads data into the 'thuctapDataSet.BenhNhan' table. You can move, or remove it, as needed.
+            this.benhNhanTableAdapter1.Fill(this.thuctapDataSet.BenhNhan);
 
             // TODO: This line of code loads data into the 'thuctapDataSet.DonThuoc' table. You can move, or remove it, as needed.
             this.donThuocTableAdapter.Fill(this.thuctapDataSet.DonThuoc);
@@ -46,18 +52,21 @@ namespace dental_sys
             dgvBenhNen.ReadOnly = true;
             dgvBenhNen.AllowUserToAddRows = false;
             dgvBenhNen.MultiSelect = false;
+            dgvBenhNen.DataSource = null;
 
             dataGridView1.Columns["id"].Visible = false;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.ReadOnly = true;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.MultiSelect = false;
+            dataGridView1.DataSource = null;
 
             dataGridView6.Columns["dt"].Visible = false;
             dataGridView6.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView6.ReadOnly = true;
             dataGridView6.AllowUserToAddRows = false;
             dataGridView6.MultiSelect = false;
+            dataGridView6.DataSource = null;
 
             dgvBuoiDieuTri.Columns["idBDT"].Visible = false;
             dgvBuoiDieuTri.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -66,7 +75,19 @@ namespace dental_sys
             dgvBuoiDieuTri.MultiSelect = false;
 
 
+            dataGridView2.Columns["idBN"].Visible = false;
+            dataGridView2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView2.ReadOnly = true;
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.MultiSelect = false;
+
             //formatDataGridView(dgvBuoiDieuTri);
+
+            //dataGridView3.Columns["idBN"].Visible = false;
+            dataGridView3.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView3.ReadOnly = true;
+            dataGridView3.AllowUserToAddRows = false;
+            dataGridView3.DataSource = null;
 
 
 
@@ -92,7 +113,18 @@ namespace dental_sys
                 txtBenhNhan.Enabled = false;
 
                 txtDonThuoc_BDT.Enabled = false;
-                
+
+                cbGioiTinh.SelectedIndex = 0;
+
+                cbNguoiTiepNhan.DataSource = qlBenhNhan.Users.ToList();
+                cbNguoiTiepNhan.DisplayMember = "Ten";
+                cbNguoiTiepNhan.ValueMember = "id";
+
+                //cbBenhNen.DataSource = qlBenhNhan.BenhNens.ToList();
+                //cbBenhNen.DisplayMember = "BenhNen";
+                //cbBenhNen.ValueMember = "id";
+                //cbBenhNen.SelectedIndex = 0;
+
             }
         }
 
@@ -189,6 +221,10 @@ namespace dental_sys
                 dgvBuoiDieuTri.DataSource = qlBenhNhan.BuoiDieuTris.Where(p => p.BenhNhan == id).ToList();
                 txtBenhNhan.Text = Convert.ToString(id);
 
+                dataGridView3.DataSource = qlBenhNhan.sp_LocBenhNen(id);
+
+                
+
                 //cbBuoiDieuTri.DataSource = qlBenhNhan.BuoiDieuTris.Where(p => p.BenhNhan == id).ToList();
                 //cbBuoiDieuTri.DisplayMember = "id";
                 //cbBuoiDieuTri.ValueMember = "id";
@@ -251,6 +287,7 @@ namespace dental_sys
                         buoiDieuTri.BacSi = int.Parse(cbBacSi.SelectedValue.ToString());
                         buoiDieuTri.BenhNhan = int.Parse(txtBenhNhan.Text);
                         buoiDieuTri.GhiChu = txtGhiChu.Text;
+                        buoiDieuTri.DaThanhToan = false;
 
                         qlBenhNhan.BuoiDieuTris.Add(buoiDieuTri);
                         qlBenhNhan.SaveChanges();
@@ -280,8 +317,6 @@ namespace dental_sys
                 BinaryReader br = new BinaryReader(fs);
                 imgProduct = br.ReadBytes((int)fs.Length);
             }
-
-
             return imgProduct;
         }
 
@@ -320,6 +355,7 @@ namespace dental_sys
                     catch (Exception)
                     {
                         MessageBox.Show("Vui lòng chọn buổi điều trị để thêm hình ảnh");
+                        refreshFormHA_BDT();
                     }
                 }              
             }
@@ -572,7 +608,7 @@ namespace dental_sys
                 {
                     qlBenhNhan.sp_HinhAnhBDT(int.Parse(idHA_BDT));
                     qlBenhNhan.SaveChanges();
-                    loadDataHinhAnhBDT();
+                    idBDT_HinhAnh();
                     MessageBox.Show("Đã xoá thành công");
                     this.idHA_BDT = "";
                 }
@@ -608,7 +644,7 @@ namespace dental_sys
                         qlBenhNhan.SaveChanges();
                     }
                     MessageBox.Show("Sửa thành công");
-                    loadDataHinhAnhBDT();
+                    idBDT_HinhAnh();
                     refreshFormHA_BDT();
 
                     
@@ -689,7 +725,348 @@ namespace dental_sys
             //frmQL_LichHen frmQL_LichHen = new frmQL_LichHen();
             //frmQL_LichHen.Show();
 
+        }
 
+        private bool check_Null_BenhNhan()
+        {
+            if (txtTenBenhNhan.Text.Equals(String.Empty))
+            {
+                return false;
+            }
+            if (txtTuoi.Text.Equals(String.Empty))
+            {
+                return false;
+            }
+            if (txtEmail.Text.Equals(String.Empty))
+            {
+                return false;
+            }
+            if (txtNgheNghiep.Text.Equals(String.Empty))
+            {
+                return false;
+            }
+            if (txtSDT.Text.Equals(String.Empty))
+            {
+                return false;
+            }
+            if (txtDiaChi.Text.Equals(String.Empty))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private void refresh_BenhNhan()
+        {
+            txtTenBenhNhan.Text = "";
+            txtTuoi.Text = "";
+            txtNgheNghiep.Text = "";
+            txtSDT.Text = "";
+            txtEmail.Text = "";
+            txtDiaChi.Text = "";
+            ptbBenhNhan.ImageLocation = "";
+            this.location = "";
+        }
+
+        int idBenhNhan;
+        private void dataGridView2_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                idBenhNhan = int.Parse(dataGridView2.CurrentRow.Cells[0].Value.ToString());
+                txtTenBenhNhan.Text = dataGridView2.CurrentRow.Cells[1].Value.ToString();
+                cbGioiTinh.SelectedItem = dataGridView2.CurrentRow.Cells[2].Value.ToString();
+                txtTuoi.Text = dataGridView2.CurrentRow.Cells[3].Value.ToString();
+                txtNgheNghiep.Text = dataGridView2.CurrentRow.Cells[4].Value.ToString();
+                txtSDT.Text = dataGridView2.CurrentRow.Cells[5].Value.ToString();
+                txtEmail.Text = dataGridView2.CurrentRow.Cells[6].Value.ToString();
+                txtDiaChi.Text = dataGridView2.CurrentRow.Cells[7].Value.ToString();
+                cbNguoiTiepNhan.SelectedValue = int.Parse(dataGridView2.CurrentRow.Cells[9].Value.ToString());
+                dtpNgayTiepNhan.Text = dataGridView2.CurrentRow.Cells[10].Value.ToString();
+                try
+                {
+                    byte[] img = (byte[])dataGridView2.CurrentRow.Cells[8].Value;
+                    MemoryStream ms = new MemoryStream(img);
+                    ptbBenhNhan.Image = Image.FromStream(ms);
+                }
+                catch (Exception)
+                {
+                    ptbBenhNhan.Image = null;
+                }
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void btnChonHinhAnh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog dlg = new OpenFileDialog();
+                dlg.Filter = "JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif|All Files (*.*)|*.*";
+                dlg.Title = "Chọn ảnh sản phẩm";
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    location = dlg.FileName.ToString();
+                    ptbBenhNhan.ImageLocation = location;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Vui lòng load ảnh lên!");
+            }
+        }
+
+        private void load_BenhNhan()
+        {
+            using(thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                dataGridView2.DataSource = qlBenhNhan.BenhNhans.ToList();
+            }
+        }
+
+        private void btnThemBenhNhan_Click(object sender, EventArgs e)
+        {
+            using (thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                if (check_Null_BenhNhan() == false)
+                {
+                    MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                    return;
+                }
+                else
+                {
+                    BenhNhan benhNhan = new BenhNhan();
+                    benhNhan.TenBenhNhan = txtTenBenhNhan.Text;
+                    benhNhan.GioiTinh = cbGioiTinh.SelectedItem.ToString();
+                    try
+                    {
+                        benhNhan.Tuoi = int.Parse(txtTuoi.Text);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Tuổi phải là số");
+                    }
+                    
+                    benhNhan.NgheNghiep = txtNgheNghiep.Text;
+                    benhNhan.LienHe = txtSDT.Text;
+                    benhNhan.Email = txtEmail.Text;
+                    benhNhan.DiaChi = txtDiaChi.Text;
+                    benhNhan.NguoiTiepNhan = int.Parse(cbNguoiTiepNhan.SelectedValue.ToString());
+                    benhNhan.NgayTiepNhan = dtpNgayTiepNhan.Value;
+                    if (getImage() == null)
+                    {
+                        MessageBox.Show("Vui lòng load hình ảnh sản phẩm lên");
+                        return;
+                    }
+                    else
+                    {
+                        benhNhan.AnhChup = getImage();
+                    }
+
+                    qlBenhNhan.BenhNhans.Add(benhNhan);
+                    qlBenhNhan.SaveChanges();
+                    MessageBox.Show("Thêm thành công");
+
+                    load_BenhNhan();
+                    refresh_BenhNhan();
+                    ptbBenhNhan.Image = null;
+                    frmQuanLyBenhNhan_Load(sender, e);
+                }
+            }
+        }
+
+        private void btnXoaBenhNhan_Click(object sender, EventArgs e)
+        {
+            using (thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                if (check_Null_BenhNhan() == false)
+                {
+                    MessageBox.Show("Vui lòng chọn bệnh nhân cần xoá");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        qlBenhNhan.sp_XoaBenhNhan(idBenhNhan);
+                        qlBenhNhan.SaveChanges();
+                        load_BenhNhan();
+                        MessageBox.Show("Xoá thành công");
+                        refresh_BenhNhan();
+                        ptbBenhNhan.Image = null;
+                        frmQuanLyBenhNhan_Load(sender, e);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Không thể xoá những bệnh nhân đang điều trị");
+                        refresh_BenhNhan();
+                        return;
+                    }
+
+                }
+            }
+        }
+
+        private void btnSuaBenhNhan_Click(object sender, EventArgs e)
+        {
+            using (thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                if (check_Null_BenhNhan() == false)
+                {
+                    MessageBox.Show("Vui lòng chọn bệnh nhân cần sửa");
+                    return;
+                }
+                else
+                {
+                    try
+                    {
+                        BenhNhan benhNhan = qlBenhNhan.BenhNhans.FirstOrDefault(p => p.id == idBenhNhan);
+                        if (getImage() == null)
+                        {
+                            benhNhan.TenBenhNhan = txtTenBenhNhan.Text;
+                            benhNhan.GioiTinh = cbGioiTinh.SelectedItem.ToString();
+                            try
+                            {
+                                benhNhan.Tuoi = int.Parse(txtTuoi.Text);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Tuổi phải là số");
+                            }
+
+                            benhNhan.NgheNghiep = txtNgheNghiep.Text;
+                            benhNhan.LienHe = txtSDT.Text;
+                            benhNhan.Email = txtEmail.Text;
+                            benhNhan.DiaChi = txtDiaChi.Text;
+                            benhNhan.NguoiTiepNhan = int.Parse(cbNguoiTiepNhan.SelectedValue.ToString());
+                            benhNhan.NgayTiepNhan = dtpNgayTiepNhan.Value;
+                            qlBenhNhan.SaveChanges();
+                        }
+                        else
+                        {
+                            
+                            benhNhan.TenBenhNhan = txtTenBenhNhan.Text;
+                            benhNhan.GioiTinh = cbGioiTinh.SelectedItem.ToString();
+                            try
+                            {
+                                benhNhan.Tuoi = int.Parse(txtTuoi.Text);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Tuổi phải là số");
+                            }
+
+                            benhNhan.NgheNghiep = txtNgheNghiep.Text;
+                            benhNhan.LienHe = txtSDT.Text;
+                            benhNhan.Email = txtEmail.Text;
+                            benhNhan.DiaChi = txtDiaChi.Text;
+                            benhNhan.NguoiTiepNhan = int.Parse(cbNguoiTiepNhan.SelectedValue.ToString());
+                            benhNhan.NgayTiepNhan = dtpNgayTiepNhan.Value;
+                            benhNhan.AnhChup = getImage();
+                            qlBenhNhan.SaveChanges();
+                        }
+
+
+
+                        load_BenhNhan();
+                        refresh_BenhNhan();
+                        MessageBox.Show("Sửa thành công");
+                        ptbBenhNhan.Image = null;
+                        this.location = "";
+                        //this.idUser = ;
+                        frmQuanLyBenhNhan_Load(sender, e);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
+        }
+
+        private void load_BenhNen()
+        {
+            using(thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                dataGridView3.DataSource = qlBenhNhan.sp_LocBenhNen(int.Parse(txtBenhNhan.Text));
+            }
+        }
+        private void btnThemBN_Click(object sender, EventArgs e)
+        {
+            using(thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                if (txtBenhNhan.Text.Equals(string.Empty))
+                {
+                    MessageBox.Show("Vui lòng chọn bệnh nhân cần thêm");
+                }
+                else
+                {
+                    try
+                    {
+                        qlBenhNhan.sp_ThemBenhNen(int.Parse(txtBenhNhan.Text), int.Parse(cbBenhNen.SelectedValue.ToString()));
+                        MessageBox.Show("Thêm thành công");
+                        load_BenhNen();
+                        dgvBenhNen.DataSource = qlBenhNhan.sp_BenhNen(int.Parse(txtBenhNhan.Text));
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Bệnh nền này đã tồn tại");
+                    }
+                    
+                }
+            }
+        }
+        
+        private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            cbBenhNen.SelectedValue = int.Parse(dataGridView3.CurrentRow.Cells[1].Value.ToString());
+        }
+
+        private void btnXoaBN_Click(object sender, EventArgs e)
+        {
+            using(thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                if (txtBenhNhan.Text.Equals(string.Empty))
+                {
+                    MessageBox.Show("Vui lòng chọn để xoá ");
+                }else
+                {
+                    qlBenhNhan.sp_XoaBenhNen(int.Parse(txtBenhNhan.Text), int.Parse(cbBenhNen.SelectedValue.ToString()));
+                    MessageBox.Show("Xoá thành công");
+                    load_BenhNen();
+                    dgvBenhNen.DataSource = qlBenhNhan.sp_BenhNen(int.Parse(txtBenhNhan.Text));
+                }
+            }
+        }
+
+        private void btnSuaBN_Click(object sender, EventArgs e)
+        {
+            using( thuctapEntities qlBenhNhan = new thuctapEntities())
+            {
+                if (txtBenhNhan.Text.Equals(string.Empty))
+                {
+                    MessageBox.Show("Vui lòng chọn bệnh nhân cần sửa");
+                }
+                else
+                {
+                    try
+                    {
+                        qlBenhNhan.sp_SuaBenhNen(int.Parse(txtBenhNhan.Text), int.Parse(cbBenhNen.SelectedValue.ToString()));
+                        MessageBox.Show("Sửa thành công");
+                        load_BenhNen();
+                        dgvBenhNen.DataSource = qlBenhNhan.sp_BenhNen(int.Parse(txtBenhNhan.Text));
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Bệnh nền này đã tồn tại");
+                    }
+
+                }
+            }
+            
         }
     }
 }

@@ -24,7 +24,6 @@ namespace dental_sys
             InitializeComponent();
             this.donThuocId = donThuocId;
             this.emailKH = emailKH;
-            MessageBox.Show("" + donThuocId);
             this.CenterToScreen();
         }
 

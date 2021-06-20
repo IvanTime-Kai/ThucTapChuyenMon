@@ -404,5 +404,71 @@ namespace dental_sys
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaUser", idParameter);
         }
+    
+        public virtual int sp_XoaBenhNhan(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaBenhNhan", idParameter);
+        }
+    
+        public virtual int sp_ThemBenhNen(Nullable<int> idBenhNhan, Nullable<int> idBenhNen)
+        {
+            var idBenhNhanParameter = idBenhNhan.HasValue ?
+                new ObjectParameter("idBenhNhan", idBenhNhan) :
+                new ObjectParameter("idBenhNhan", typeof(int));
+    
+            var idBenhNenParameter = idBenhNen.HasValue ?
+                new ObjectParameter("idBenhNen", idBenhNen) :
+                new ObjectParameter("idBenhNen", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_ThemBenhNen", idBenhNhanParameter, idBenhNenParameter);
+        }
+    
+        public virtual ObjectResult<sp_LocBenhNen_Result> sp_LocBenhNen(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_LocBenhNen_Result>("sp_LocBenhNen", idParameter);
+        }
+    
+        public virtual int sp_XoaBenhNen(Nullable<int> idBenhNhan, Nullable<int> idBenhNen)
+        {
+            var idBenhNhanParameter = idBenhNhan.HasValue ?
+                new ObjectParameter("idBenhNhan", idBenhNhan) :
+                new ObjectParameter("idBenhNhan", typeof(int));
+    
+            var idBenhNenParameter = idBenhNen.HasValue ?
+                new ObjectParameter("idBenhNen", idBenhNen) :
+                new ObjectParameter("idBenhNen", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_XoaBenhNen", idBenhNhanParameter, idBenhNenParameter);
+        }
+    
+        public virtual int sp_SuaBenhNen(Nullable<int> idBenhNhan, Nullable<int> idBenhNen)
+        {
+            var idBenhNhanParameter = idBenhNhan.HasValue ?
+                new ObjectParameter("idBenhNhan", idBenhNhan) :
+                new ObjectParameter("idBenhNhan", typeof(int));
+    
+            var idBenhNenParameter = idBenhNen.HasValue ?
+                new ObjectParameter("idBenhNen", idBenhNen) :
+                new ObjectParameter("idBenhNen", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_SuaBenhNen", idBenhNhanParameter, idBenhNenParameter);
+        }
+    
+        public virtual ObjectResult<sp_loadBenhNen_Result> sp_loadBenhNen(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_loadBenhNen_Result>("sp_loadBenhNen", idParameter);
+        }
     }
 }

@@ -55,12 +55,25 @@ namespace dental_sys
             byte[] bytes = new byte[1024];
 
             bytes = this.reportViewer1.LocalReport.Render("PDF", null, out mimeType, out encoding, out filenameExtension, out streamids, out warnings);
-            string fileName = @"D:\Aplication\HoaDonBaiTapLon\DichVu_" + maFile + ".pdf";
-            File.WriteAllBytes(fileName, bytes);
-            Process pr = Process.Start(fileName);
-            pr.Close();
+            string directoryPath = Application.StartupPath + "\\DichVu\\";
+            string fileName = "DichVu.pdf";
+            string des = directoryPath + fileName;
 
-            frmMail emailCTDT = new frmMail(this.mailKH, maFile);
+            if (!Directory.Exists(directoryPath))
+                Directory.CreateDirectory(directoryPath);
+
+            try
+            {
+                File.WriteAllBytes(des, bytes);
+                Process pr = Process.Start(des);
+                pr.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            frmMail emailCTDT = new frmMail(this.mailKH, des);
             emailCTDT.send();
         }
     }
