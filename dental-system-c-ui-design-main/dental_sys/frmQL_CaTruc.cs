@@ -5,6 +5,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,9 +29,49 @@ namespace dental_sys
         const string THONG_BAO_CHINH_SUA_KHONG_HOP_LE = "Chỉnh sửa ngày trực và trạng thái không hợp lệ";
         int selectedCaTrucId = 0;
 
+        const string GMAIL_USERNAME = "trungtamnhakhoa74";
+        const string GMAIL_PASSWORD = "trungtamnhakhoa74.pass";
+
         public frmQL_CaTruc()
         {
             InitializeComponent();
+        }
+
+        private static void sendCompletedCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled || e.Error != null)
+            {
+                MessageBox.Show("Gửi email cho bác sĩ không thành công!");
+            }
+            else
+            {
+                MessageBox.Show("Gửi email cho bác sĩ thành công!");
+            }
+        }
+
+        private void sendEmailCaTrucMoi(string email, string tenBacSi, DateTime ngayTruc, string ca)
+        {
+            string smtp = "smtp.gmail.com";
+            NetworkCredential login = new NetworkCredential(GMAIL_USERNAME, GMAIL_PASSWORD); // cung cấp thông tin xác nhận dựa trên mật khẩu
+            SmtpClient client = new SmtpClient(smtp); // cho phép ứng dụng gửi email thông qua phương thức smtp
+            client.Port = 587;
+            client.EnableSsl = true;
+            client.Credentials = login;
+            MailMessage msg; // biểu diễn tin nhắn email cần gửi
+            msg = new MailMessage { From = new MailAddress(GMAIL_USERNAME + smtp.Replace("smtp.", "@"), "Trung Tâm Nha Khoa", Encoding.UTF8) };
+            msg.Subject = "Trung tâm nha khoa nhắc nhở!";
+            msg.BodyEncoding = Encoding.UTF8;
+            msg.IsBodyHtml = true;
+            msg.Priority = MailPriority.Normal;
+            msg.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+            client.SendCompleted += new SendCompletedEventHandler(sendCompletedCallback);
+            msg.To.Clear();
+            string tinNhan = string.Format("<h2>Xin chào {0}!</h2> <p>Bạn có một ca trực mới!</p>", tenBacSi);
+            tinNhan += string.Format("<p> Thời gian:<strong> {0} Ca {1}</strong></p> <p>Xin cảm ơn!</p>", ngayTruc.ToString("dd/MM/yyyy"), ca);
+            msg.Body = tinNhan;
+            msg.To.Add(new MailAddress(email));
+            client.Send(msg);
+            MessageBox.Show("Gửi mail thành công!");
         }
 
         private void resetData()
@@ -324,6 +366,16 @@ namespace dental_sys
 
             loadCaTruc(string.Empty, null, null);
             resetData();
+            con.Close();
+
+            // send email cho bác sĩ
+            con = ConnectProvider.GetConnection(); con.Open();
+            string query = string.Format("select Email from Users where id = {0}", bacSiId);
+            SqlDataReader sqlDataReader; SqlCommand command = new SqlCommand(query, con);
+            sqlDataReader = command.ExecuteReader();
+            sqlDataReader.Read();
+            string email = sqlDataReader.GetString(0);
+            sendEmailCaTrucMoi(email, tenBacSiForm, ngayTrucForm, caForm);
             con.Close();
         }
 

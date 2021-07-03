@@ -151,7 +151,7 @@ namespace dental_sys
             }
         }
 
-        private void BDT_DonThuoc()
+        public void BDT_DonThuoc()
         {
             using (thuctapEntities qlBenhNhan = new thuctapEntities())
             {

@@ -109,7 +109,7 @@ namespace dental_sys
                     qlCTDT.ChiTietDonThuocs.Add(CTDT);
                     qlCTDT.SaveChanges();
 
-                    obj.loadData();
+                    obj.BDT_DonThuoc();
                     dataGridView6.Update();
                     dataGridView6.Refresh();
 
@@ -147,7 +147,7 @@ namespace dental_sys
                     qlCTDH.sp_XoaCTDT(int.Parse(this.idCTHD));
                     qlCTDH.SaveChanges();
                     loadData();
-                    obj.loadData();
+                    obj.BDT_DonThuoc();
                     dataGridView6.Update();
                     dataGridView6.Refresh();
                     MessageBox.Show("Đã xoá thành công");
@@ -190,6 +190,9 @@ namespace dental_sys
 
                         qlCTDT.SaveChanges();
                         loadData();
+                        obj.BDT_DonThuoc();
+                        dataGridView6.Update();
+                        dataGridView6.Refresh();
                         MessageBox.Show("Sửa thành công");
                         refresh();
                     }

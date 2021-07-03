@@ -39,8 +39,6 @@ namespace dental_sys
 
                 cbGioiTinh.SelectedIndex = 0;
 
-                
-
             }
         }
         int idUser;
@@ -86,7 +84,13 @@ namespace dental_sys
                 MessageBox.Show("Vui lòng load ảnh lên!");
             }
         }
-
+        private void load_bandau()
+        {
+            using (thuctapEntities qlNhanSu = new thuctapEntities())
+            {
+                dataGridView1.DataSource = qlNhanSu.Users.ToList();
+            }
+        }
         private void load()
         {
             using(thuctapEntities qlNhanSu = new thuctapEntities())
@@ -96,6 +100,7 @@ namespace dental_sys
                 {
                     if ((Int32)row.Cells[4].Value == role.id)
                     {
+                        //dataGridView1.DataSource = qlNhanSu.Users.ToList();
                         dataGridView1.Rows[row.Index].Visible = false;
                     }
                 }
@@ -159,32 +164,32 @@ namespace dental_sys
                     else
                     {
                         user.AnhChup = getImage();
-                    }
-                    
-                    user.SoDienThoai = txtSDT.Text;
-                    //user.MatKhau = txtPassword.Text;
+                        user.SoDienThoai = txtSDT.Text;
+                        //user.MatKhau = txtPassword.Text;
 
-                    byte[] temp = ASCIIEncoding.ASCII.GetBytes(txtPassword.Text);
-                    byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
+                        byte[] temp = ASCIIEncoding.ASCII.GetBytes(txtPassword.Text);
+                        byte[] hasData = new MD5CryptoServiceProvider().ComputeHash(temp);
 
-                    string hasPass = "";
-                    foreach (byte item in hasData)
-                    {
-                        hasPass += item;
-                    }
+                        string hasPass = "";
+                        foreach (byte item in hasData)
+                        {
+                            hasPass += item;
+                        }
 
-                    user.MatKhau = hasPass;
+                        user.MatKhau = hasPass;
 
-                    user.Email = txtEmail.Text;
-                    user.NgayVaoLam = dtpNgayVaoLam.Value;
+                        user.Email = txtEmail.Text;
+                        user.NgayVaoLam = dtpNgayVaoLam.Value;
 
-                    qlNhanSu.Users.Add(user);
-                    qlNhanSu.SaveChanges();
-                    MessageBox.Show("Thêm thành công");
-
-                    load();
-                    refresh();
-                    picProduct.Image = null;
+                        qlNhanSu.Users.Add(user);
+                        qlNhanSu.SaveChanges();
+                        MessageBox.Show("Thêm thành công");
+                        dataGridView1.DataSource = qlNhanSu.Users.ToList();
+                        load();
+                        refresh();
+                        picProduct.Image = null;
+                        //frmQuanLyNhanSu_Load(sender, e);
+                    }                  
                 }
             }
         }
@@ -204,15 +209,18 @@ namespace dental_sys
                     {
                         qlNhanSu.sp_XoaUser(idUser);
                         qlNhanSu.SaveChanges();
+                        dataGridView1.DataSource = qlNhanSu.Users.ToList();
                         load();
                         MessageBox.Show("Xoá thành công");
                         refresh();
                         picProduct.Image = null;
+                        frmQuanLyNhanSu_Load(sender, e);
                     }
                     catch (Exception)
                     {
                         MessageBox.Show("Không thể xoá những nhân viên đang còn hợp đồng");
                         refresh();
+                        picProduct.Image = null;
                         return;
                     }
                     
@@ -259,11 +267,13 @@ namespace dental_sys
                     
 
                         load();
+                        dataGridView1.DataSource = qlNhanSu.Users.ToList();
                         refresh();
                         MessageBox.Show("Sửa thành công");
                         picProduct.Image = null;
                         this.location = "";
                         //this.idUser = ;
+                        //frmQuanLyNhanSu_Load(sender, e);
                     }
                     catch (Exception)
                     {
